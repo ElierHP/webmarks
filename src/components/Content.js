@@ -6,7 +6,7 @@ import FolderContent from "./FolderContent";
 import LinkContent from "./LinkContent";
 
 function Content() {
-  const appState = useContext(ContentData);
+  const [appState] = useContext(ContentData);
   const dispatch = useContext(ContentMethods);
   return (
     <Container>

@@ -32,7 +32,8 @@ const useStyles = makeStyles(() =>
 
 function Header() {
   const classes = useStyles();
-  const appState = useContext(ContentData);
+  const [appState, initialData] = useContext(ContentData);
+  const dispatch = useContext(ContentMethods);
   return (
     <nav className={classes.root}>
       <AppBar position="static" className={classes.appBar} elevation={0}>
@@ -41,7 +42,7 @@ function Header() {
             <Typography
               variant="h5"
               className={classes.logo}
-              onClick={() => console.log(appState)}
+              onClick={() => dispatch({ type: "home", appState: initialData })}
             >
               WebMarks
             </Typography>

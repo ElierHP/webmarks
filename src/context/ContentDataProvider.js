@@ -62,10 +62,9 @@ export const ContentData = createContext();
 export const ContentMethods = createContext();
 
 export const ContentDataProvider = ({ children }) => {
-  const [initAppState, setinitAppState] = useState(initialData);
-  const [appState, dispatch] = useReducer(contentReducer, initAppState);
+  const [appState, dispatch] = useReducer(contentReducer, initialData);
   return (
-    <ContentData.Provider value={appState}>
+    <ContentData.Provider value={[appState, initialData]}>
       <ContentMethods.Provider value={dispatch}>
         {children}
       </ContentMethods.Provider>
