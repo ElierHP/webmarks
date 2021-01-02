@@ -9,7 +9,6 @@ import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import SimpleMenu from "../components/SimpleMenu";
@@ -33,7 +32,7 @@ const useStyles = makeStyles(() =>
 
 function Header() {
   const classes = useStyles();
-  const [appState, initialData] = useContext(ContentData);
+  const [, data] = useContext(ContentData);
   const dispatch = useContext(ContentMethods);
 
   return (
@@ -44,7 +43,7 @@ function Header() {
             <Typography
               variant="h5"
               className={classes.logo}
-              onClick={() => dispatch({ type: "home", appState: initialData })}
+              onClick={() => dispatch({ type: "home", appState: data })}
             >
               WebMarks
             </Typography>

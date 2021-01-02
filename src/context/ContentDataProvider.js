@@ -1,58 +1,31 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext, useReducer, useState } from "react";
 import contentReducer from "../reducers/contentReducer";
+import { v4 as uuidv4 } from "uuid";
 
 const initialData = {
+  id: uuidv4(),
   folders: [
     {
       title: "Art",
-      links: [],
-      folders: [
-        {
-          title: "Development",
-          links: [
-            {
-              title: "WLOP Art",
-              url: "https://www.artstation.com/wlop",
-              favicon: "",
-              key: 3,
-            },
-          ],
-          folders: [
-            {
-              type: "folder",
-              title: "Reference",
-              links: [],
-              folders: [
-                {
-                  type: "folder",
-                  title: "Models",
-                  links: [],
-                  folders: [],
-                  key: 2,
-                },
-              ],
-              key: 2,
-            },
-          ],
-          key: 2,
-        },
-      ],
-      key: 1,
-    },
-    {
-      type: "folder",
-      title: "Development",
+      id: uuidv4(),
+      key: uuidv4(),
       links: [],
       folders: [],
-      key: 2,
+    },
+    {
+      title: "Development",
+      id: uuidv4(),
+      key: uuidv4(),
+      links: [],
+      folders: [],
     },
   ],
   links: [
     {
       title: "WLOP Art",
       url: "https://www.artstation.com/wlop",
-      favicon: "",
-      key: 3,
+      id: uuidv4(),
+      key: uuidv4(),
     },
   ],
 };
@@ -61,9 +34,11 @@ export const ContentData = createContext();
 export const ContentMethods = createContext();
 
 export const ContentDataProvider = ({ children }) => {
-  const [appState, dispatch] = useReducer(contentReducer, initialData);
+  //Make a new reducer function for [data, dataDispatch] that has all the Crud operations that deal with modifying data.
+  const [data] = useState(initialData);
+  const [appState, dispatch] = useReducer(contentReducer, data);
   return (
-    <ContentData.Provider value={[appState, initialData]}>
+    <ContentData.Provider value={[appState, data]}>
       <ContentMethods.Provider value={dispatch}>
         {children}
       </ContentMethods.Provider>

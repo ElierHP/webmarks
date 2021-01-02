@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ContentMethods } from "../context/ContentDataProvider";
+import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 export default function SimpleMenu() {
   const dispatch = useContext(ContentMethods);
-
+  const [appState, initialVal] = useContext(ContentData);
   //Material UI handlers
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -39,7 +39,7 @@ export default function SimpleMenu() {
   };
 
   const handleFolderSubmit = () => {
-    dispatch({ type: "addFolder", title: folderTitle });
+    dispatch({ type: "addFolder", title: folderTitle, stateId: appState.id });
   };
   //Link Handlers
 
