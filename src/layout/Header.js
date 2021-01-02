@@ -12,6 +12,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import SimpleMenu from "../components/SimpleMenu";
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -34,6 +35,7 @@ function Header() {
   const classes = useStyles();
   const [appState, initialData] = useContext(ContentData);
   const dispatch = useContext(ContentMethods);
+
   return (
     <nav className={classes.root}>
       <AppBar position="static" className={classes.appBar} elevation={0}>
@@ -72,9 +74,7 @@ function Header() {
               </Grid>
             </Grid>
             <Grid item>
-              <IconButton size="small">
-                <AddCircleOutlineIcon className={classes.icon} />
-              </IconButton>
+              <SimpleMenu />
             </Grid>
           </Grid>
         </Container>

@@ -1,4 +1,4 @@
-import React, { useState, createContext, useReducer } from "react";
+import React, { createContext, useReducer } from "react";
 import contentReducer from "../reducers/contentReducer";
 
 const initialData = {
@@ -8,7 +8,6 @@ const initialData = {
       links: [],
       folders: [
         {
-          type: "folder",
           title: "Development",
           links: [
             {
