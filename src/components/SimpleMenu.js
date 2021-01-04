@@ -45,9 +45,9 @@ export default function SimpleMenu() {
       title: folderTitle,
       id: appState.id,
     });
+    handleFolderClose();
   };
 
-  console.log(appState.id);
   //Link Handlers
 
   return (
@@ -74,7 +74,7 @@ export default function SimpleMenu() {
         <MyForm
           id="simple-menu"
           open={Boolean(isNewFolder)}
-          onMouseLeave={handleFolderClose}
+          onSubmit={handleFolderSubmit}
         >
           <TextField
             id="standard"

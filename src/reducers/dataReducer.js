@@ -11,13 +11,9 @@ const dataReducer = (state, action) => {
         links: [],
         folders: [],
       };
-      const newFolders = state.folders.filter((item) => {
-        if (item.parentId === action.id) {
-          return item.folders.push(newFolder);
-        } else {
-          return item;
-        }
-      });
+      const newFolders = state.folders.filter((item) =>
+        item.parentId === action.id ? item.folders.push(newFolder) : item
+      );
 
       return {
         ...state,
