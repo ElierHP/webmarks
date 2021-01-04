@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
@@ -6,10 +6,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import styled from "styled-components";
 
 export default function SimpleMenu() {
-  const dispatch = useContext(ContentMethods);
-  const [appState, initialVal] = useContext(ContentData);
+  const [dispatch, dataDispatch] = useContext(ContentMethods);
+  const [appState, data] = useContext(ContentData);
   //Material UI handlers
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -29,8 +30,8 @@ export default function SimpleMenu() {
     setIsNewFolder(null);
   };
 
-  const handleFolderClick = (event) => {
-    setIsNewFolder(event.currentTarget);
+  const handleFolderClick = () => {
+    setIsNewFolder(!isNewFolder);
     setAnchorEl(null);
   };
 
@@ -39,8 +40,14 @@ export default function SimpleMenu() {
   };
 
   const handleFolderSubmit = () => {
-    dispatch({ type: "addFolder", title: folderTitle, stateId: appState.id });
+    dataDispatch({
+      type: "addFolder",
+      title: folderTitle,
+      id: appState.id,
+    });
   };
+
+  console.log(appState.id);
   //Link Handlers
 
   return (
@@ -63,25 +70,20 @@ export default function SimpleMenu() {
         <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
         <MenuItem onClick={handleClose}>New Link</MenuItem>
       </Menu>
-
       {isNewFolder ? (
-        <Menu
+        <MyForm
           id="simple-menu"
-          anchorEl={isNewFolder}
-          keepMounted
           open={Boolean(isNewFolder)}
-          onClose={handleFolderClose}
+          onMouseLeave={handleFolderClose}
         >
-          <MenuItem>
-            <TextField
-              id="standard"
-              label="Folder Title"
-              defaultValue={folderTitle}
-              onChange={handleTitleChange}
-              multiline
-            />
-          </MenuItem>
-          <MenuItem onClick={handleClose}>
+          <TextField
+            id="standard"
+            label="Folder Title"
+            defaultValue={folderTitle}
+            onChange={handleTitleChange}
+            style={{ marginBottom: "1rem" }}
+          />
+          <div onClick={handleClose}>
             <Button
               variant="contained"
               color="primary"
@@ -89,9 +91,25 @@ export default function SimpleMenu() {
             >
               Submit
             </Button>
-          </MenuItem>
-        </Menu>
+          </div>
+        </MyForm>
       ) : null}
     </>
   );
 }
+
+//CSS
+const MyForm = styled.form`
+  position: fixed;
+  top: 0;
+  right: 0;
+  margin-top: 4.5rem;
+  margin-right: 1rem;
+  background-color: white;
+  padding: 0.5rem 1rem 1.5rem 1rem;
+  z-index: 10;
+  box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 0.3rem;
+`;
+
+const InputField = styled.input``;

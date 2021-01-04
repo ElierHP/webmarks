@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 const contentReducer = (state, action) => {
   switch (action.type) {
     case "home":
-      return { ...action.appState };
+      return action.appState;
     case "folderClick":
       return state.folders !== [] ? action.item : "";
     case "addFolder":

@@ -7,7 +7,7 @@ import LinkContent from "./LinkContent";
 
 function Content() {
   const [appState] = useContext(ContentData);
-  const dispatch = useContext(ContentMethods);
+  const [dispatch] = useContext(ContentMethods);
   return (
     <Container>
       <Grid container>

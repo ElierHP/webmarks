@@ -5,14 +5,6 @@ import IconButton from "@material-ui/core/IconButton";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      padding: "3rem 0 3rem 0",
-    },
-  })
-);
-
 function InitialContent() {
   const classes = useStyles();
   return (
@@ -36,5 +28,13 @@ function InitialContent() {
     </Grid>
   );
 }
+
+const useStyles = makeStyles(() =>
+  createStyles({
+    root: {
+      padding: "3rem 0 3rem 0",
+    },
+  })
+);
 
 export default InitialContent;

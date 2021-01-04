@@ -33,7 +33,7 @@ const useStyles = makeStyles(() =>
 function Header() {
   const classes = useStyles();
   const [, data] = useContext(ContentData);
-  const dispatch = useContext(ContentMethods);
+  const [dispatch] = useContext(ContentMethods);
 
   return (
     <nav className={classes.root}>
@@ -56,7 +56,7 @@ function Header() {
           </ToolBar>
         </Container>
       </AppBar>
-      <Box boxShadow={3} className={classes.secondNav}>
+      <Box boxShadow={3}>
         <Container>
           <Grid
             container
