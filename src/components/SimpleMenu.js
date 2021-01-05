@@ -9,8 +9,8 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import styled from "styled-components";
 
 export default function SimpleMenu() {
-  const [dispatch, dataDispatch] = useContext(ContentMethods);
-  const [appState, data] = useContext(ContentData);
+  const [dispatch] = useContext(ContentMethods);
+  const [data, appState] = useContext(ContentData);
   //Material UI handlers
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -40,10 +40,10 @@ export default function SimpleMenu() {
   };
 
   const handleFolderSubmit = () => {
-    dataDispatch({
+    dispatch({
       type: "addFolder",
       title: folderTitle,
-      id: appState.id,
+      parentId: appState,
     });
     handleFolderClose();
   };

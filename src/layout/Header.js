@@ -32,8 +32,8 @@ const useStyles = makeStyles(() =>
 
 function Header() {
   const classes = useStyles();
-  const [, data] = useContext(ContentData);
-  const [dispatch] = useContext(ContentMethods);
+  const [data] = useContext(ContentData);
+  const [, setAppState] = useContext(ContentMethods);
 
   return (
     <nav className={classes.root}>
@@ -43,11 +43,16 @@ function Header() {
             <Typography
               variant="h5"
               className={classes.logo}
-              onClick={() => dispatch({ type: "home", appState: data })}
+              onClick={() => setAppState(0)}
             >
               WebMarks
             </Typography>
-            <IconButton edge="start" color="inherit" aria-label="menu">
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="menu"
+              onClick={() => console.log(data)}
+            >
               <PersonIcon fontSize="large" />
             </IconButton>
             <IconButton edge="start" color="inherit" aria-label="menu">

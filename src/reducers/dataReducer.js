@@ -4,21 +4,19 @@ const dataReducer = (state, action) => {
   switch (action.type) {
     case "addFolder":
       const newFolder = {
+        type: "folder",
         title: action.title,
         id: uuidv4(),
-        parentId: action.id,
+        parentId: action.parentId,
         key: uuidv4(),
-        links: [],
-        folders: [],
       };
-      const newFolders = state.folders.filter((item) =>
-        item.parentId === action.id ? item.folders.push(newFolder) : item
+      return [...state, newFolder];
+    case "delete":
+      //Filter out the deleted item and all of it's children
+      const newState = state.filter((item) =>
+        item.id === action.id || item.parentId === action.id ? null : item
       );
-
-      return {
-        ...state,
-        folders: newFolders,
-      };
+      return [...newState];
     default:
       return state;
   }

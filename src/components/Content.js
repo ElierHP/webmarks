@@ -6,26 +6,30 @@ import FolderContent from "./FolderContent";
 import LinkContent from "./LinkContent";
 
 function Content() {
-  const [appState] = useContext(ContentData);
-  const [dispatch] = useContext(ContentMethods);
+  const [data, appState] = useContext(ContentData);
+  const [, setAppState] = useContext(ContentMethods);
   return (
     <Container>
       <Grid container>
-        {appState.folders.map((item) => (
-          <FolderContent
-            title={item.title}
-            key={item.key}
-            clickHandler={() => dispatch({ type: "folderClick", item: item })}
-          />
-        ))}
-        {appState.links.map((item) => (
-          <LinkContent
-            title={item.title}
-            url={item.url}
-            key={item.key}
-            clickHandler={() => (window.location = item.url)}
-          />
-        ))}
+        {data
+          .filter((idFilter) => idFilter.parentId === appState)
+          .map((item) =>
+            item.type === "folder" ? (
+              <FolderContent
+                title={item.title}
+                key={item.key}
+                id={item.id}
+                clickHandler={() => setAppState(item.id)}
+              />
+            ) : (
+              <LinkContent
+                title={item.title}
+                url={item.url}
+                key={item.key}
+                clickHandler={() => (window.location = item.url)}
+              />
+            )
+          )}
       </Grid>
     </Container>
   );
