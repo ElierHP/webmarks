@@ -11,24 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
-import SimpleMenu from "../components/SimpleMenu";
-
-const useStyles = makeStyles(() =>
-  createStyles({
-    root: {
-      flexGrow: 1,
-    },
-    appBar: {
-      padding: "0.5rem 0 0.5rem 0",
-    },
-    logo: {
-      flexGrow: 1,
-    },
-    gridContainer: {
-      padding: "0.25rem 2rem 0.25rem 2rem",
-    },
-  })
-);
+import NewItemMenu from "../components/NewItemMenu";
 
 function Header() {
   const classes = useStyles();
@@ -36,10 +19,10 @@ function Header() {
   const [, setAppState] = useContext(ContentMethods);
 
   return (
-    <nav className={classes.root}>
+    <nav>
       <AppBar position="static" className={classes.appBar} elevation={0}>
         <Container>
-          <ToolBar>
+          <ToolBar className={classes.toolBar}>
             <Typography
               variant="h5"
               className={classes.logo}
@@ -47,17 +30,19 @@ function Header() {
             >
               WebMarks
             </Typography>
-            <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={() => console.log(data)}
-            >
-              <PersonIcon fontSize="large" />
-            </IconButton>
-            <IconButton edge="start" color="inherit" aria-label="menu">
-              <SettingsIcon fontSize="large" />
-            </IconButton>
+            <div>
+              <IconButton
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                onClick={() => console.log(data)}
+              >
+                <PersonIcon fontSize="large" />
+              </IconButton>
+              <IconButton edge="start" color="inherit" aria-label="menu">
+                <SettingsIcon fontSize="large" />
+              </IconButton>
+            </div>
           </ToolBar>
         </Container>
       </AppBar>
@@ -78,7 +63,7 @@ function Header() {
               </Grid>
             </Grid>
             <Grid item>
-              <SimpleMenu />
+              <NewItemMenu />
             </Grid>
           </Grid>
         </Container>
@@ -86,5 +71,29 @@ function Header() {
     </nav>
   );
 }
+
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    appBar: {
+      padding: "0.5rem 0 0.5rem 0",
+    },
+    toolBar: {
+      display: "flex",
+      justifyContent: "space-between",
+      [theme.breakpoints.down("xs")]: {
+        padding: "0 0.5rem 0 0.5rem",
+      },
+    },
+    logo: {
+      cursor: "pointer",
+    },
+    gridContainer: {
+      padding: "0.25rem 2rem 0.25rem 2rem",
+      [theme.breakpoints.down("xs")]: {
+        padding: "0.25rem 0.8rem 0.25rem 0.8rem",
+      },
+    },
+  })
+);
 
 export default Header;

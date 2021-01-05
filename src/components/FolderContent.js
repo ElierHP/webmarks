@@ -5,9 +5,12 @@ import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import { ContentMethods } from "../context/ContentDataProvider";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 function FolderContent({ title, clickHandler, id }) {
+  //Styles
+  const classes = useStyles();
   const [dispatch] = useContext(ContentMethods);
   return (
     <>
@@ -16,19 +19,25 @@ function FolderContent({ title, clickHandler, id }) {
         container
         justify="space-between"
         alignItems="center"
-        style={{ cursor: "pointer" }}
+        className={classes.root}
       >
         <Grid item>
           <Grid container alignItems="center" onClick={clickHandler}>
-            <FolderIcon fontSize="large" style={{ marginRight: "0.5rem" }} />
+            <FolderIcon
+              fontSize="large"
+              style={{ marginRight: "0.5rem", color: "#FFA724" }}
+            />
             <Typography variant="h6">{title}</Typography>
           </Grid>
         </Grid>
         <Grid item>
-          <IconButton>
+          <IconButton className={classes.iconButton}>
             <EditIcon />
           </IconButton>
-          <IconButton onClick={() => dispatch({ type: "delete", id: id })}>
+          <IconButton
+            className={classes.iconButton}
+            onClick={() => dispatch({ type: "delete", id: id })}
+          >
             <DeleteIcon />
           </IconButton>
         </Grid>
@@ -36,5 +45,22 @@ function FolderContent({ title, clickHandler, id }) {
     </>
   );
 }
+
+//CSS
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      cursor: "pointer",
+      "&:hover": {
+        backgroundColor: "#EEEFF1",
+      },
+    },
+    iconButton: {
+      [theme.breakpoints.down("xs")]: {
+        padding: "0",
+      },
+    },
+  })
+);
 
 export default FolderContent;

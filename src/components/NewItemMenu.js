@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from "react";
+import React, { useContext, useState } from "react";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
@@ -6,12 +6,18 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import styled from "styled-components";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import CloseIcon from "@material-ui/icons/Close";
 
-export default function SimpleMenu() {
+export default function NewItemMenu() {
+  //Styles
+  const classes = useStyles();
+
+  //Context API
   const [dispatch] = useContext(ContentMethods);
-  const [data, appState] = useContext(ContentData);
-  //Material UI handlers
+  const [, appState] = useContext(ContentData);
+
+  //Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -22,7 +28,7 @@ export default function SimpleMenu() {
     setAnchorEl(null);
   };
 
-  //Folder Handlers
+  //Folder Menu Handlers
   const [isNewFolder, setIsNewFolder] = useState(false);
   const [folderTitle, setFolderTitle] = useState("");
 
@@ -51,10 +57,10 @@ export default function SimpleMenu() {
   //Link Handlers
 
   return (
-    <>
+    <div className={classes.root}>
       <IconButton
         size="small"
-        aria-controls="simple-menu"
+        aria-controls="addnew-menu"
         aria-haspopup="true"
         onClick={handleClick}
       >
@@ -71,8 +77,9 @@ export default function SimpleMenu() {
         <MenuItem onClick={handleClose}>New Link</MenuItem>
       </Menu>
       {isNewFolder ? (
-        <MyForm
-          id="simple-menu"
+        <form
+          className={classes.inputForm}
+          id="new-folder-menu"
           open={Boolean(isNewFolder)}
           onSubmit={handleFolderSubmit}
         >
@@ -92,24 +99,39 @@ export default function SimpleMenu() {
               Submit
             </Button>
           </div>
-        </MyForm>
+          <IconButton className={classes.closeIcon} onClick={handleFolderClose}>
+            <CloseIcon />
+          </IconButton>
+        </form>
       ) : null}
-    </>
+    </div>
   );
 }
 
 //CSS
-const MyForm = styled.form`
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin-top: 4.5rem;
-  margin-right: 1rem;
-  background-color: white;
-  padding: 0.5rem 1rem 1.5rem 1rem;
-  z-index: 10;
-  box-shadow: -3px 3px 15px rgba(0, 0, 0, 0.3);
-  border-radius: 0.3rem;
-`;
-
-const InputField = styled.input``;
+const useStyles = makeStyles((theme) =>
+  createStyles({
+    root: {
+      position: "relative",
+    },
+    inputForm: {
+      position: "absolute",
+      top: -15,
+      right: 0,
+      width: "220px",
+      backgroundColor: "white",
+      padding: "1.5rem 1rem 1.5rem 1rem",
+      zIndex: "10",
+      boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+      borderRadius: "0.3rem",
+      [theme.breakpoints.down("sm")]: {
+        right: -35,
+      },
+    },
+    closeIcon: {
+      position: "absolute",
+      top: 0,
+      right: 0,
+    },
+  })
+);
