@@ -20,8 +20,16 @@ const initialData = [
   {
     type: "link",
     title: "Example Link",
-    url: "https://www.google.com/",
+    url: "https://www.netlify.com/",
     id: 3,
+    parentId: 0,
+    key: uuidv4(),
+  },
+  {
+    type: "link",
+    title: "WLOP",
+    url: "https://www.artstation.com/",
+    id: 5,
     parentId: 0,
     key: uuidv4(),
   },

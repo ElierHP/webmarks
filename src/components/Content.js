@@ -10,7 +10,7 @@ function Content() {
   const [, setAppState] = useContext(ContentMethods);
   return (
     <Container>
-      <Grid container>
+      <Grid container spacing={2} style={{ marginTop: "0.5rem" }}>
         {data
           .filter((idFilter) => idFilter.parentId === appState)
           .map((item) =>
@@ -26,6 +26,7 @@ function Content() {
                 title={item.title}
                 url={item.url}
                 key={item.key}
+                id={item.id}
                 clickHandler={() => (window.location = item.url)}
               />
             )
