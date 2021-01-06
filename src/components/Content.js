@@ -13,8 +13,8 @@ function Content() {
   const [data, appState] = useContext(ContentData);
   const [, setAppState] = useContext(ContentMethods);
   const [directory, setDirectory] = useContext(HeaderContext);
-  const clickHandler = (id, title, parentId) => {
-    setAppState({ parentId: id, id: parentId });
+  const clickHandler = (id, title) => {
+    setAppState(id);
     setDirectory(title);
   };
 
@@ -22,7 +22,7 @@ function Content() {
     <Container>
       <Grid container spacing={2} style={{ marginTop: "0.5rem" }}>
         {data
-          .filter((idFilter) => idFilter.parentId === appState.parentId)
+          .filter((idFilter) => idFilter.parentId === appState)
           .map((item) =>
             item.type === "folder" ? (
               <FolderContent
@@ -30,9 +30,7 @@ function Content() {
                 key={item.key}
                 id={item.id}
                 parentId={item.parentId}
-                clickHandler={() =>
-                  clickHandler(item.id, item.title, item.parentId)
-                }
+                clickHandler={() => clickHandler(item.id, item.title)}
               />
             ) : (
               <LinkContent

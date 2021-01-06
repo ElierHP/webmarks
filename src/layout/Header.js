@@ -25,18 +25,21 @@ function Header() {
   const [directory, setDirectory] = useContext(HeaderContext);
 
   const logoClickHandler = () => {
-    setAppState({ parentId: 0, id: null });
+    setAppState(0);
     setDirectory("Main");
   };
+
+  //Go Back Button
   const prevClickHandler = () => {
-    const currentDir = data.find(
-      (folder) => folder.parentId === appState.parentId
+    //Find parent folder & setAppState to it's parents ID
+    const parentFolder = data.find((folder) => folder.id === appState);
+    parentFolder ? setAppState(parentFolder.parentId) : setAppState(0);
+
+    //Find the new directory title based on parentFolder
+    const newDirectory = data.find(
+      (folder) => parentFolder.parentId === folder.id
     );
-    if (currentDir) {
-      setAppState({ parentId: currentDir.prevId, id: currentDir.parentId });
-    } else {
-      setAppState({ parentId: appState.id, id: appState.parentId });
-    }
+    newDirectory ? setDirectory(newDirectory.title) : setDirectory("Main");
   };
 
   return (
@@ -77,8 +80,17 @@ function Header() {
           >
             <Grid item>
               <Grid container alignItems="center">
-                <ArrowBackIcon onClick={prevClickHandler} />
-                <Typography variant="h6" style={{ marginLeft: "1rem" }}>
+                {directory !== "Main" && (
+                  <IconButton
+                    edge="start"
+                    color="inherit"
+                    aria-label="arrow"
+                    className={classes.arrowButton}
+                  >
+                    <ArrowBackIcon onClick={prevClickHandler} />
+                  </IconButton>
+                )}
+                <Typography variant="h6" className={classes.directoryText}>
                   {directory}
                 </Typography>
               </Grid>
@@ -113,6 +125,13 @@ const useStyles = makeStyles((theme) =>
       [theme.breakpoints.down("xs")]: {
         padding: "0.25rem 0.8rem 0.25rem 0.8rem",
       },
+    },
+    arrowButton: {
+      padding: "3px",
+    },
+    directoryText: {
+      marginLeft: "1rem",
+      userSelect: "none",
     },
   })
 );

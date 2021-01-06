@@ -29,7 +29,9 @@ function FolderContent({ title, clickHandler, id, parentId }) {
               fontSize="large"
               style={{ marginRight: "0.5rem", color: "#FFA724" }}
             />
-            <Typography variant="h6">{title}</Typography>
+            <Typography variant="h6" style={{ userSelect: "none" }}>
+              {title}
+            </Typography>
           </Grid>
         </Grid>
         <Grid item>

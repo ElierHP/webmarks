@@ -26,13 +26,15 @@ const initialData = [
     title: "Example Link",
     url: "https://www.netlify.com/",
     id: 3,
+    parentId: 0,
     key: uuidv4(),
   },
   {
     type: "link",
     title: "WLOP",
     url: "https://www.artstation.com/",
-    id: 5,
+    id: 10,
+    parentId: 0,
     key: uuidv4(),
   },
   {
@@ -55,7 +57,7 @@ const initialData = [
   },
   {
     type: "folder",
-    title: "Hentai",
+    title: "Rooster",
     id: 8,
     parentId: 5,
     prevId: 1,
@@ -70,7 +72,7 @@ export const HeaderContext = createContext();
 
 export const ContentDataProvider = ({ children }) => {
   const [data, dispatch] = useReducer(dataReducer, initialData);
-  const [appState, setAppState] = useState({ parentId: 0, id: null });
+  const [appState, setAppState] = useState(0);
   const [directory, setDirectory] = useState("Main");
 
   return (
