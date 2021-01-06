@@ -8,21 +8,24 @@ const initialData = [
     title: "Folder Example",
     id: 1,
     parentId: 0,
+    prevId: 0,
     key: uuidv4(),
+    prevDirTitle: "Main",
   },
   {
     type: "folder",
     title: "Second Folder",
     id: 2,
     parentId: 0,
+    prevId: 0,
     key: uuidv4(),
+    prevDirTitle: "Main",
   },
   {
     type: "link",
     title: "Example Link",
     url: "https://www.netlify.com/",
     id: 3,
-    parentId: 0,
     key: uuidv4(),
   },
   {
@@ -30,7 +33,6 @@ const initialData = [
     title: "WLOP",
     url: "https://www.artstation.com/",
     id: 5,
-    parentId: 0,
     key: uuidv4(),
   },
   {
@@ -38,21 +40,46 @@ const initialData = [
     title: "Sub Folder",
     id: 4,
     parentId: 1,
+    prevId: 0,
+    key: uuidv4(),
+    prevDirTitle: "Main",
+  },
+  {
+    type: "folder",
+    title: "Second Sub Folder",
+    id: 5,
+    parentId: 1,
+    prevId: 0,
+    key: uuidv4(),
+    prevDirTitle: "Main",
+  },
+  {
+    type: "folder",
+    title: "Hentai",
+    id: 8,
+    parentId: 5,
+    prevId: 1,
+    prevDirTitle: "Folder Example",
     key: uuidv4(),
   },
 ];
 
 export const ContentData = createContext();
 export const ContentMethods = createContext();
+export const HeaderContext = createContext();
 
 export const ContentDataProvider = ({ children }) => {
   const [data, dispatch] = useReducer(dataReducer, initialData);
-  const [appState, setAppState] = useState(0);
+  const [appState, setAppState] = useState({ parentId: 0, id: null });
+  const [directory, setDirectory] = useState("Main");
+
   return (
-    <ContentData.Provider value={[data, appState]}>
-      <ContentMethods.Provider value={[dispatch, setAppState]}>
-        {children}
-      </ContentMethods.Provider>
-    </ContentData.Provider>
+    <HeaderContext.Provider value={[directory, setDirectory]}>
+      <ContentData.Provider value={[data, appState]}>
+        <ContentMethods.Provider value={[dispatch, setAppState]}>
+          {children}
+        </ContentMethods.Provider>
+      </ContentData.Provider>
+    </HeaderContext.Provider>
   );
 };

@@ -5,13 +5,15 @@ import Typography from "@material-ui/core/Typography";
 import FolderIcon from "@material-ui/icons/Folder";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { ContentMethods } from "../context/ContentDataProvider";
+import { ContentMethods, ContentData } from "../context/ContentDataProvider";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
-function FolderContent({ title, clickHandler, id }) {
+function FolderContent({ title, clickHandler, id, parentId }) {
   //Styles
   const classes = useStyles();
-  const [dispatch] = useContext(ContentMethods);
+  const [data, appState] = useContext(ContentData);
+  const [dispatch, setAppState] = useContext(ContentMethods);
+
   return (
     <>
       <Grid

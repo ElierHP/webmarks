@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
@@ -10,13 +10,34 @@ import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import {
+  ContentData,
+  ContentMethods,
+  HeaderContext,
+} from "../context/ContentDataProvider";
 import NewItemMenu from "../components/NewItemMenu";
+import { SkipPrevious } from "@material-ui/icons";
 
 function Header() {
   const classes = useStyles();
-  const [data] = useContext(ContentData);
+  const [data, appState] = useContext(ContentData);
   const [, setAppState] = useContext(ContentMethods);
+  const [directory, setDirectory] = useContext(HeaderContext);
+
+  const logoClickHandler = () => {
+    setAppState({ parentId: 0, id: null });
+    setDirectory("Main");
+  };
+  const prevClickHandler = () => {
+    const currentDir = data.find(
+      (folder) => folder.parentId === appState.parentId
+    );
+    if (currentDir) {
+      setAppState({ parentId: currentDir.prevId, id: currentDir.parentId });
+    } else {
+      setAppState({ parentId: appState.id, id: appState.parentId });
+    }
+  };
 
   return (
     <nav>
@@ -26,7 +47,7 @@ function Header() {
             <Typography
               variant="h5"
               className={classes.logo}
-              onClick={() => setAppState(0)}
+              onClick={logoClickHandler}
             >
               WebMarks
             </Typography>
@@ -35,7 +56,7 @@ function Header() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                onClick={() => console.log(data)}
+                onClick={() => console.log(appState)}
               >
                 <PersonIcon fontSize="large" />
               </IconButton>
@@ -56,9 +77,9 @@ function Header() {
           >
             <Grid item>
               <Grid container alignItems="center">
-                <ArrowBackIcon onClick={() => console.log("clicked")} />
+                <ArrowBackIcon onClick={prevClickHandler} />
                 <Typography variant="h6" style={{ marginLeft: "1rem" }}>
-                  Main
+                  {directory}
                 </Typography>
               </Grid>
             </Grid>
