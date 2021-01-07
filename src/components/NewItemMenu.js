@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import { ContentData } from "../context/ContentDataProvider";
+import useNewItemState from "../hooks/useNewItemState";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -14,7 +15,6 @@ export default function NewItemMenu() {
   const classes = useStyles();
 
   //Context API
-  const [dispatch] = useContext(ContentMethods);
   const [, appState] = useContext(ContentData);
 
   //Material UI Menu handlers
@@ -29,32 +29,26 @@ export default function NewItemMenu() {
   };
 
   //Folder Menu Handlers
-  const [isNewFolder, setIsNewFolder] = useState(false);
-  const [folderTitle, setFolderTitle] = useState("");
+  const [
+    isNewFolder,
+    handleFolderClick,
+    handleFolderClose,
+    handleTitleChange,
+    folderTitle,
+    handleFolderSubmit,
+  ] = useNewItemState({ setAnchorEl, parentId: appState, itemType: "folder" });
 
-  const handleFolderClose = () => {
-    setIsNewFolder(null);
-  };
-
-  const handleFolderClick = () => {
-    setIsNewFolder(!isNewFolder);
-    setAnchorEl(null);
-  };
-
-  const handleTitleChange = (e) => {
-    setFolderTitle(e.target.value);
-  };
-
-  const handleFolderSubmit = () => {
-    dispatch({
-      type: "addFolder",
-      title: folderTitle,
-      parentId: appState,
-    });
-    handleFolderClose();
-  };
-
-  //Link Handlers
+  //Link Menu Handlers
+  const [
+    isNewLink,
+    handleLinkClick,
+    handleLinkClose,
+    handleLinkTitleChange,
+    linkTitle,
+    handleLinkSubmit,
+    itemUrl,
+    handleUrlChange,
+  ] = useNewItemState({ setAnchorEl, parentId: appState, itemType: "link" });
 
   return (
     <div className={classes.root}>
@@ -67,14 +61,14 @@ export default function NewItemMenu() {
         <AddCircleOutlineIcon />
       </IconButton>
       <Menu
-        id="simple-menu"
+        id="add-new-simple-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
         <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
-        <MenuItem onClick={handleClose}>New Link</MenuItem>
+        <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
       </Menu>
       {isNewFolder ? (
         <form
@@ -100,6 +94,42 @@ export default function NewItemMenu() {
             </Button>
           </div>
           <IconButton className={classes.closeIcon} onClick={handleFolderClose}>
+            <CloseIcon />
+          </IconButton>
+        </form>
+      ) : null}
+      {isNewLink ? (
+        <form
+          className={classes.inputForm}
+          id="new-link-menu"
+          open={Boolean(isNewLink)}
+          onSubmit={handleLinkSubmit}
+        >
+          <TextField
+            id="standard"
+            label="Link Title"
+            defaultValue={linkTitle}
+            onChange={handleLinkTitleChange}
+            className={classes.menuInput}
+          />
+          <TextField
+            id="standard"
+            label="URL"
+            defaultValue={itemUrl}
+            onChange={handleUrlChange}
+            className={classes.menuInput}
+          />
+          <div onClick={handleClose}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleLinkSubmit}
+              className={classes.menuBtn}
+            >
+              Submit
+            </Button>
+          </div>
+          <IconButton className={classes.closeIcon} onClick={handleLinkClose}>
             <CloseIcon />
           </IconButton>
         </form>
@@ -132,6 +162,12 @@ const useStyles = makeStyles((theme) =>
       position: "absolute",
       top: 0,
       right: 0,
+    },
+    menuInput: {
+      marginBottom: "1rem",
+    },
+    menuBtn: {
+      marginTop: "1rem",
     },
   })
 );

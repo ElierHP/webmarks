@@ -2,15 +2,16 @@ import { v4 as uuidv4 } from "uuid";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
-    case "addFolder":
-      const newFolder = {
-        type: "folder",
+    case "addNewItem":
+      const addNewItem = {
+        type: action.itemType,
         title: action.title,
+        url: action.url,
         id: uuidv4(),
         parentId: action.parentId,
         key: uuidv4(),
       };
-      return [...state, newFolder];
+      return [...state, addNewItem];
     case "delete":
       //Filter out the deleted item and all of it's children
       const newState = state.filter((item) =>

@@ -35,7 +35,11 @@ function LinkContent({ title, url, clickHandler, id }) {
             </Typography>
           </Grid>
           <Grid>
-            <Typography variant="body2" className={classes.bodyText}>
+            <Typography
+              variant="body2"
+              color="primary"
+              className={classes.bodyText}
+            >
               {url}
             </Typography>
           </Grid>
