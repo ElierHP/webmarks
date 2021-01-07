@@ -16,15 +16,9 @@ function FolderContent({ title, clickHandler, id, parentId }) {
 
   return (
     <>
-      <Grid
-        item
-        container
-        justify="space-between"
-        alignItems="center"
-        className={classes.root}
-      >
-        <Grid item>
-          <Grid container alignItems="center" onClick={clickHandler}>
+      <Grid item container alignItems="center" className={classes.root}>
+        <Grid item onClick={clickHandler} className={classes.folderContainer}>
+          <Grid container alignItems="center">
             <FolderIcon
               fontSize="large"
               style={{ marginRight: "0.5rem", color: "#FFA724" }}
@@ -58,6 +52,9 @@ const useStyles = makeStyles((theme) =>
       "&:hover": {
         backgroundColor: "#EEEFF1",
       },
+    },
+    folderContainer: {
+      flexGrow: 1,
     },
     iconButton: {
       [theme.breakpoints.down("xs")]: {
