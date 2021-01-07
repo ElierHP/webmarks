@@ -58,7 +58,7 @@ function Header() {
                 edge="start"
                 color="inherit"
                 aria-label="menu"
-                onClick={() => console.log(appState)}
+                onClick={() => console.log(data)}
               >
                 <PersonIcon fontSize="large" />
               </IconButton>

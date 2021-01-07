@@ -6,6 +6,7 @@ const initialData = [
   {
     type: "folder",
     title: "Folder Example",
+    url: null,
     id: 1,
     parentId: 0,
     key: uuidv4(),
@@ -13,6 +14,7 @@ const initialData = [
   {
     type: "folder",
     title: "Second Folder",
+    url: null,
     id: 2,
     parentId: 0,
     key: uuidv4(),
@@ -28,6 +30,7 @@ const initialData = [
   {
     type: "folder",
     title: "Sub Folder",
+    url: null,
     id: 4,
     parentId: 1,
     key: uuidv4(),

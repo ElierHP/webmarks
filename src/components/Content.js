@@ -27,6 +27,7 @@ function Content() {
             item.type === "folder" ? (
               <FolderContent
                 title={item.title}
+                url={item.url}
                 key={item.key}
                 id={item.id}
                 parentId={item.parentId}

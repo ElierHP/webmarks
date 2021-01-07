@@ -80,7 +80,7 @@ export default function NewItemMenu() {
           onSubmit={handleFolderSubmit}
         >
           <TextField
-            id="standard"
+            id="folder-input"
             label="Folder Title"
             defaultValue={folderTitle}
             onChange={handleTitleChange}
@@ -108,14 +108,14 @@ export default function NewItemMenu() {
           onSubmit={handleLinkSubmit}
         >
           <TextField
-            id="link-title"
+            id="link-input"
             label="Link Title"
             defaultValue={linkTitle}
             onChange={handleLinkTitleChange}
             className={classes.menuInput}
           />
           <TextField
-            id="link-url"
+            id="link-url-input"
             label="URL"
             defaultValue={itemUrl}
             onChange={handleUrlChange}

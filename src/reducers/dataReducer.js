@@ -14,10 +14,15 @@ const dataReducer = (state, action) => {
       return [...state, addNewItem];
     case "delete":
       //Filter out the deleted item and all of it's children
-      const newState = state.filter((item) =>
-        item.id === action.id || item.parentId === action.id ? null : item
+      return state.filter(
+        (item) => item.id !== action.id && item.parentId !== action.id
       );
-      return [...newState];
+    case "edit":
+      return state.map((item) =>
+        item.id === action.id
+          ? { ...item, title: action.newTitle, url: action.url }
+          : item
+      );
     default:
       return state;
   }

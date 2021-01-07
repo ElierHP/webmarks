@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ContentMethods } from "../context/ContentDataProvider";
 
-export default ({ setAnchorEl, parentId, itemType, url }) => {
+export default ({ setAnchorEl, parentId, itemType }) => {
   const [isNewItem, setIsNewItem] = useState(false);
   const [itemTitle, setItemTitle] = useState("");
   const [itemUrl, setItemUrl] = useState("");
@@ -29,7 +29,11 @@ export default ({ setAnchorEl, parentId, itemType, url }) => {
       parentId: parentId,
     });
     handleClose();
+    //Reset Values
+    setItemTitle("");
+    setItemUrl("");
   };
+
   return [
     isNewItem,
     handleClick,
