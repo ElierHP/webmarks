@@ -70,7 +70,9 @@ export default function NewItemMenu() {
         <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
         <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
       </Menu>
-      {isNewFolder ? (
+
+      {/* New Folder Menu */}
+      {isNewFolder && (
         <form
           className={classes.inputForm}
           id="new-folder-menu"
@@ -95,8 +97,10 @@ export default function NewItemMenu() {
             <CloseIcon />
           </IconButton>
         </form>
-      ) : null}
-      {isNewLink ? (
+      )}
+
+      {/* New Link Menu */}
+      {isNewLink && (
         <form
           className={classes.inputForm}
           id="new-link-menu"
@@ -129,7 +133,7 @@ export default function NewItemMenu() {
             <CloseIcon />
           </IconButton>
         </form>
-      ) : null}
+      )}
     </div>
   );
 }

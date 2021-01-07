@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import PersonIcon from "@material-ui/icons/Person";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
@@ -16,7 +16,6 @@ import {
   HeaderContext,
 } from "../context/ContentDataProvider";
 import NewItemMenu from "../components/NewItemMenu";
-import { SkipPrevious } from "@material-ui/icons";
 
 function Header() {
   const classes = useStyles();
