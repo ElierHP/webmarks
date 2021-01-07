@@ -84,15 +84,13 @@ export default function NewItemMenu() {
             onChange={handleTitleChange}
             style={{ marginBottom: "1rem" }}
           />
-          <div onClick={handleClose}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleFolderSubmit}
-            >
-              Submit
-            </Button>
-          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleFolderSubmit}
+          >
+            Submit
+          </Button>
           <IconButton className={classes.closeIcon} onClick={handleFolderClose}>
             <CloseIcon />
           </IconButton>
@@ -106,29 +104,27 @@ export default function NewItemMenu() {
           onSubmit={handleLinkSubmit}
         >
           <TextField
-            id="standard"
+            id="link-title"
             label="Link Title"
             defaultValue={linkTitle}
             onChange={handleLinkTitleChange}
             className={classes.menuInput}
           />
           <TextField
-            id="standard"
+            id="link-url"
             label="URL"
             defaultValue={itemUrl}
             onChange={handleUrlChange}
             className={classes.menuInput}
           />
-          <div onClick={handleClose}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleLinkSubmit}
-              className={classes.menuBtn}
-            >
-              Submit
-            </Button>
-          </div>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={handleLinkSubmit}
+            className={classes.menuBtn}
+          >
+            Submit
+          </Button>
           <IconButton className={classes.closeIcon} onClick={handleLinkClose}>
             <CloseIcon />
           </IconButton>
@@ -155,7 +151,7 @@ const useStyles = makeStyles((theme) =>
       boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
       borderRadius: "0.3rem",
       [theme.breakpoints.down("sm")]: {
-        right: -35,
+        right: -15,
       },
     },
     closeIcon: {

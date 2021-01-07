@@ -86,8 +86,9 @@ function Header() {
                     color="inherit"
                     aria-label="arrow"
                     className={classes.arrowButton}
+                    onClick={prevClickHandler}
                   >
-                    <ArrowBackIcon onClick={prevClickHandler} />
+                    <ArrowBackIcon />
                   </IconButton>
                 )}
                 <Typography variant="h6" className={classes.directoryText}>
