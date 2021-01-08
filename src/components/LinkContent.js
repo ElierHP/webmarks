@@ -31,9 +31,7 @@ function LinkContent({ title, url, clickHandler, id }) {
       },
       linksText: {
         marginLeft: "1rem",
-        [theme.breakpoints.down("xs")]: {
-          // display: "none",
-        },
+        [theme.breakpoints.down("xs")]: {},
       },
       links: {
         textDecoration: "none",
@@ -142,7 +140,6 @@ function LinkContent({ title, url, clickHandler, id }) {
       <Grid item>
         {!isEditing ? (
           <>
-            {" "}
             <IconButton
               className={classes.iconButton}
               onClick={() => setIsEditing(true)}

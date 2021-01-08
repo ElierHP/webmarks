@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ContentMethods } from "../context/ContentDataProvider";
 
-export default ({ setAnchorEl, parentId, itemType }) => {
+const useNewItemState = ({ setAnchorEl, parentId, itemType }) => {
   const [isNewItem, setIsNewItem] = useState(false);
   const [itemTitle, setItemTitle] = useState("");
   const [itemUrl, setItemUrl] = useState("");
@@ -20,7 +20,8 @@ export default ({ setAnchorEl, parentId, itemType }) => {
   const handleUrlChange = (e) => {
     setItemUrl(e.target.value);
   };
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     dispatch({
       type: "addNewItem",
       url: itemUrl,
@@ -45,3 +46,5 @@ export default ({ setAnchorEl, parentId, itemType }) => {
     handleUrlChange,
   ];
 };
+
+export default useNewItemState;

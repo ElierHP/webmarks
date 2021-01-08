@@ -26,6 +26,7 @@ function Header() {
       },
       toolBar: {
         display: "flex",
+        padding: "0",
         justifyContent: "space-between",
         [theme.breakpoints.down("xs")]: {
           padding: "0 0.5rem 0 0.5rem",
@@ -35,7 +36,7 @@ function Header() {
         cursor: "pointer",
       },
       gridContainer: {
-        padding: "0.25rem 2rem 0.25rem 2rem",
+        padding: "0.25rem 0.5rem 0.25rem 1rem",
         [theme.breakpoints.down("xs")]: {
           padding: "0.25rem 0.8rem 0.25rem 0.8rem",
         },
@@ -128,7 +129,6 @@ function Header() {
             <Grid item>
               <Grid container alignItems="center">
                 <IconButton
-                  color="inherit"
                   aria-label="a-z-sort-icon"
                   className={classes.alphabetIcon}
                   onClick={() => dispatch({ type: "sort" })}

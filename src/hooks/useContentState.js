@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ContentMethods } from "../context/ContentDataProvider";
 
-export default ({ title, id, url }) => {
+const useContentState = ({ title, id, url }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [titleValue, setTitleValue] = useState(title);
   const [urlValue, setUrlValue] = useState(url);
@@ -44,3 +44,5 @@ export default ({ title, id, url }) => {
     handleCloseIcon,
   ];
 };
+
+export default useContentState;

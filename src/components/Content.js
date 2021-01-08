@@ -11,7 +11,7 @@ import LinkContent from "./LinkContent";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 function Content() {
-  const [data, appState] = useContext(ContentData);
+  const [, appState] = useContext(ContentData);
   const [, setAppState] = useContext(ContentMethods);
   const [, setDirectory] = useContext(HeaderContext);
   const clickHandler = (id, title) => {
@@ -24,6 +24,7 @@ function Content() {
     createStyles({
       root: {
         minHeight: `calc(100vh - 165px)`,
+        paddingBottom: "1rem",
         [theme.breakpoints.down("xs")]: {
           minHeight: `calc(100vh - 156.7812px)`,
         },
@@ -36,7 +37,7 @@ function Content() {
   return (
     <Container className={classes.root}>
       <Grid container spacing={2} style={{ marginTop: "0.5rem" }}>
-        {data
+        {JSON.parse(localStorage.getItem("data"))
           .filter((idFilter) => idFilter.parentId === appState)
           .map((item) =>
             item.type === "folder" ? (

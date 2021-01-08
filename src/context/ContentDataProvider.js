@@ -37,14 +37,18 @@ const initialData = [
   },
 ];
 
+const storageData = JSON.parse(localStorage.getItem("data")) || initialData;
+
 export const ContentData = createContext();
 export const ContentMethods = createContext();
 export const HeaderContext = createContext();
 
 export const ContentDataProvider = ({ children }) => {
-  const [data, dispatch] = useReducer(dataReducer, initialData);
+  const [data, dispatch] = useReducer(dataReducer, storageData);
   const [appState, setAppState] = useState(0);
   const [directory, setDirectory] = useState("Main");
+
+  localStorage.setItem("data", JSON.stringify(data));
 
   return (
     <HeaderContext.Provider value={[directory, setDirectory]}>
