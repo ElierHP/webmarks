@@ -8,18 +8,33 @@ import {
 } from "../context/ContentDataProvider";
 import FolderContent from "./FolderContent";
 import LinkContent from "./LinkContent";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 function Content() {
   const [data, appState] = useContext(ContentData);
   const [, setAppState] = useContext(ContentMethods);
-  const [directory, setDirectory] = useContext(HeaderContext);
+  const [, setDirectory] = useContext(HeaderContext);
   const clickHandler = (id, title) => {
     setAppState(id);
     setDirectory(title);
   };
 
+  //Styles
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      root: {
+        minHeight: `calc(100vh - 165px)`,
+        [theme.breakpoints.down("xs")]: {
+          minHeight: `calc(100vh - 156.7812px)`,
+        },
+      },
+    })
+  );
+  const classes = useStyles();
+  //Style End
+
   return (
-    <Container style={{ height: `calc(100vh - 152px)` }}>
+    <Container className={classes.root}>
       <Grid container spacing={2} style={{ marginTop: "0.5rem" }}>
         {data
           .filter((idFilter) => idFilter.parentId === appState)

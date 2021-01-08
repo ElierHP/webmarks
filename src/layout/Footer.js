@@ -4,14 +4,9 @@ import Appbar from "@material-ui/core/Appbar";
 import Typography from "@material-ui/core/Typography";
 
 function Footer() {
-  const style = {
-    position: "absolute",
-    width: "100%",
-    bottom: 0,
-  };
   return (
-    <footer style={style}>
-      <Appbar position="static" style={{ padding: "0.25rem" }} elevation={0}>
+    <footer>
+      <Appbar position="static" style={{ padding: "0.4rem" }} elevation={0}>
         <Container>
           <Typography align="center">Copyright @2020</Typography>
         </Container>

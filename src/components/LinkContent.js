@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import useContentState from "../hooks/useContentState";
 import { ContentMethods } from "../context/ContentDataProvider";
 import Grid from "@material-ui/core/Grid";

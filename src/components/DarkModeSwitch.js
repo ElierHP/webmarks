@@ -21,19 +21,11 @@ export default function SwitchLabels() {
             Dark Mode
           </Typography>
         </Box>
-        <IconButton>
+        <IconButton onClick={handleClick}>
           {isDarkMode ? (
-            <Brightness7Icon
-              color="secondary"
-              onClick={handleClick}
-              fontSize="large"
-            />
+            <Brightness7Icon color="secondary" fontSize="large" />
           ) : (
-            <Brightness4Icon
-              color="secondary"
-              onClick={handleClick}
-              fontSize="large"
-            />
+            <Brightness4Icon color="secondary" fontSize="large" />
           )}
         </IconButton>
       </Grid>
