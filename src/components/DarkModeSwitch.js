@@ -21,7 +21,7 @@ export default function SwitchLabels() {
             Dark Mode
           </Typography>
         </Box>
-        <IconButton onClick={handleClick}>
+        <IconButton onClick={handleClick} style={{ padding: "0.5rem" }}>
           {isDarkMode ? (
             <Brightness7Icon color="secondary" fontSize="large" />
           ) : (

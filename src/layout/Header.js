@@ -15,9 +15,47 @@ import {
 } from "../context/ContentDataProvider";
 import NewItemMenu from "../components/NewItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
+import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 
 function Header() {
+  //Styles
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      appBar: {
+        padding: "0.5rem 0 0.5rem 0",
+      },
+      toolBar: {
+        display: "flex",
+        justifyContent: "space-between",
+        [theme.breakpoints.down("xs")]: {
+          padding: "0 0.5rem 0 0.5rem",
+        },
+      },
+      logo: {
+        cursor: "pointer",
+      },
+      gridContainer: {
+        padding: "0.25rem 2rem 0.25rem 2rem",
+        [theme.breakpoints.down("xs")]: {
+          padding: "0.25rem 0.8rem 0.25rem 0.8rem",
+        },
+      },
+      arrowButton: {
+        padding: "3px",
+      },
+      directoryText: {
+        marginLeft: "1rem",
+        userSelect: "none",
+      },
+      alphabetIcon: {
+        padding: "0.2rem",
+        marginRight: "0.5rem",
+      },
+    })
+  );
   const classes = useStyles();
+  //Styles
+
   const [data, appState] = useContext(ContentData);
   const [, setAppState] = useContext(ContentMethods);
   const [directory, setDirectory] = useContext(HeaderContext);
@@ -88,7 +126,16 @@ function Header() {
               </Grid>
             </Grid>
             <Grid item>
-              <NewItemMenu />
+              <Grid container alignItems="center">
+                <IconButton
+                  color="inherit"
+                  aria-label="a-z-sort-icon"
+                  className={classes.alphabetIcon}
+                >
+                  <SortByAlphaIcon />
+                </IconButton>
+                <NewItemMenu />
+              </Grid>
             </Grid>
           </Grid>
         </Container>
@@ -96,36 +143,5 @@ function Header() {
     </nav>
   );
 }
-
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    appBar: {
-      padding: "0.5rem 0 0.5rem 0",
-    },
-    toolBar: {
-      display: "flex",
-      justifyContent: "space-between",
-      [theme.breakpoints.down("xs")]: {
-        padding: "0 0.5rem 0 0.5rem",
-      },
-    },
-    logo: {
-      cursor: "pointer",
-    },
-    gridContainer: {
-      padding: "0.25rem 2rem 0.25rem 2rem",
-      [theme.breakpoints.down("xs")]: {
-        padding: "0.25rem 0.8rem 0.25rem 0.8rem",
-      },
-    },
-    arrowButton: {
-      padding: "3px",
-    },
-    directoryText: {
-      marginLeft: "1rem",
-      userSelect: "none",
-    },
-  })
-);
 
 export default Header;

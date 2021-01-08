@@ -18,6 +18,7 @@ export default function NewItemMenu() {
     createStyles({
       root: {
         position: "relative",
+        marginRight: "0.5rem",
       },
       inputForm: {
         position: "absolute",
@@ -43,6 +44,9 @@ export default function NewItemMenu() {
       },
       menuBtn: {
         marginTop: "1rem",
+      },
+      addIcon: {
+        padding: "0.2rem",
       },
     })
   );
@@ -92,6 +96,7 @@ export default function NewItemMenu() {
         aria-controls="addnew-menu"
         aria-haspopup="true"
         onClick={handleClick}
+        className={classes.addIcon}
       >
         <AddCircleOutlineIcon />
       </IconButton>
