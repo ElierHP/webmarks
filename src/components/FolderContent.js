@@ -11,10 +11,44 @@ import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 import { ContentMethods } from "../context/ContentDataProvider";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { DarkModeContext } from "../context/DarkModeProvider";
+import { green } from "@material-ui/core/colors";
 
 function FolderContent({ title, clickHandler, id, url }) {
   //Styles
+  const [isDarkMode] = useContext(DarkModeContext);
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      root: {
+        cursor: "pointer",
+        "&:hover": {
+          backgroundColor: isDarkMode ? "#2b3034" : "#EEEFF1",
+        },
+      },
+      folderContainer: {
+        flexGrow: 1,
+      },
+      iconButton: {
+        [theme.breakpoints.down("xs")]: {
+          padding: "0",
+        },
+      },
+      folderIcon: {
+        marginRight: "0.5rem",
+        marginLeft: "1rem",
+        color: "#FFA724",
+        [theme.breakpoints.down("xs")]: {
+          marginLeft: "0",
+        },
+      },
+      successIcon: {
+        color: green[600],
+      },
+    })
+  );
   const classes = useStyles();
+  //Style End
+
   const [dispatch] = useContext(ContentMethods);
   const [
     isEditing,
@@ -33,10 +67,7 @@ function FolderContent({ title, clickHandler, id, url }) {
           className={classes.folderContainer}
         >
           <Grid container alignItems="center">
-            <FolderIcon
-              fontSize="large"
-              style={{ marginRight: "0.5rem", color: "#FFA724" }}
-            />
+            <FolderIcon fontSize="large" className={classes.folderIcon} />
             {!isEditing ? (
               <Typography variant="h6" style={{ userSelect: "none" }}>
                 {title}
@@ -76,7 +107,7 @@ function FolderContent({ title, clickHandler, id, url }) {
                 className={classes.iconButton}
                 onClick={handleCheckIcon}
               >
-                <DoneIcon color="secondary" />
+                <DoneIcon className={classes.successIcon} />
               </IconButton>
               <IconButton
                 className={classes.iconButton}
@@ -91,25 +122,5 @@ function FolderContent({ title, clickHandler, id, url }) {
     </>
   );
 }
-
-//CSS
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      cursor: "pointer",
-      "&:hover": {
-        backgroundColor: "#EEEFF1",
-      },
-    },
-    folderContainer: {
-      flexGrow: 1,
-    },
-    iconButton: {
-      [theme.breakpoints.down("xs")]: {
-        padding: "0",
-      },
-    },
-  })
-);
 
 export default FolderContent;

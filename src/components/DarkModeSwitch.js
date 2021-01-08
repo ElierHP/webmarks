@@ -1,29 +1,42 @@
 import React, { useContext } from "react";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
 import { DarkModeContext } from "../context/DarkModeProvider";
+import Brightness4Icon from "@material-ui/icons/Brightness4";
+import Brightness7Icon from "@material-ui/icons/Brightness7";
 
 export default function SwitchLabels() {
   const [isDarkMode, setIsDarkMode] = useContext(DarkModeContext);
-  const [state, setState] = React.useState({
-    checkedA: false,
-  });
-
-  const handleChange = (event) => {
+  const handleClick = () => {
     setIsDarkMode(!isDarkMode);
-    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   return (
-    <FormControlLabel
-      control={
-        <Switch
-          checked={state.checkedA}
-          onChange={handleChange}
-          name="checkedA"
-        />
-      }
-      label="Dark Mode"
-    />
+    <div>
+      <Grid container alignItems="center">
+        <Box display={{ xs: "none", sm: "block" }}>
+          <Typography color="secondary" variant="body2">
+            Dark Mode
+          </Typography>
+        </Box>
+        <IconButton>
+          {isDarkMode ? (
+            <Brightness7Icon
+              color="secondary"
+              onClick={handleClick}
+              fontSize="large"
+            />
+          ) : (
+            <Brightness4Icon
+              color="secondary"
+              onClick={handleClick}
+              fontSize="large"
+            />
+          )}
+        </IconButton>
+      </Grid>
+    </div>
   );
 }

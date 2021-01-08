@@ -9,10 +9,45 @@ import IconButton from "@material-ui/core/IconButton";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
+import { DarkModeContext } from "../context/DarkModeProvider";
 
 export default function NewItemMenu() {
   //Styles
+  const [isDarkMode] = useContext(DarkModeContext);
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      root: {
+        position: "relative",
+      },
+      inputForm: {
+        position: "absolute",
+        top: -15,
+        right: 0,
+        width: "220px",
+        backgroundColor: isDarkMode ? "#424242" : "white",
+        padding: "1.5rem 1rem 1.5rem 1rem",
+        zIndex: "10",
+        boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+        borderRadius: "0.3rem",
+        [theme.breakpoints.down("sm")]: {
+          right: -15,
+        },
+      },
+      closeIcon: {
+        position: "absolute",
+        top: 0,
+        right: 0,
+      },
+      menuInput: {
+        marginBottom: "1rem",
+      },
+      menuBtn: {
+        marginTop: "1rem",
+      },
+    })
+  );
   const classes = useStyles();
+  //Styles End
 
   //Context API
   const [, appState] = useContext(ContentData);
@@ -85,6 +120,7 @@ export default function NewItemMenu() {
             defaultValue={folderTitle}
             onChange={handleTitleChange}
             style={{ marginBottom: "1rem" }}
+            color={isDarkMode ? "secondary" : "primary"}
           />
           <Button
             variant="contained"
@@ -113,6 +149,7 @@ export default function NewItemMenu() {
             defaultValue={linkTitle}
             onChange={handleLinkTitleChange}
             className={classes.menuInput}
+            color={isDarkMode ? "secondary" : "primary"}
           />
           <TextField
             id="link-url-input"
@@ -120,6 +157,7 @@ export default function NewItemMenu() {
             defaultValue={itemUrl}
             onChange={handleUrlChange}
             className={classes.menuInput}
+            color={isDarkMode ? "secondary" : "primary"}
           />
           <Button
             variant="contained"
@@ -137,37 +175,3 @@ export default function NewItemMenu() {
     </div>
   );
 }
-
-//CSS
-const useStyles = makeStyles((theme) =>
-  createStyles({
-    root: {
-      position: "relative",
-    },
-    inputForm: {
-      position: "absolute",
-      top: -15,
-      right: 0,
-      width: "220px",
-      backgroundColor: "white",
-      padding: "1.5rem 1rem 1.5rem 1rem",
-      zIndex: "10",
-      boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-      borderRadius: "0.3rem",
-      [theme.breakpoints.down("sm")]: {
-        right: -15,
-      },
-    },
-    closeIcon: {
-      position: "absolute",
-      top: 0,
-      right: 0,
-    },
-    menuInput: {
-      marginBottom: "1rem",
-    },
-    menuBtn: {
-      marginTop: "1rem",
-    },
-  })
-);

@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import PersonIcon from "@material-ui/icons/Person";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
 import ToolBar from "@material-ui/core/ToolBar";
@@ -8,7 +7,6 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import { createStyles, makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import SettingsIcon from "@material-ui/icons/Settings";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import {
   ContentData,
@@ -59,20 +57,7 @@ function Header() {
             >
               WebMarks
             </Typography>
-            <div>
-              {/* <IconButton
-                edge="start"
-                color="inherit"
-                aria-label="menu"
-                onClick={() => console.log(data)}
-              >
-                <PersonIcon fontSize="large" />
-              </IconButton> */}
-              <DarkModeSwitch />
-              {/* <IconButton edge="start" color="inherit" aria-label="menu">
-                <SettingsIcon fontSize="large" />
-              </IconButton> */}
-            </div>
+            <DarkModeSwitch />
           </ToolBar>
         </Container>
       </AppBar>
