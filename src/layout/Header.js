@@ -16,6 +16,7 @@ import {
   HeaderContext,
 } from "../context/ContentDataProvider";
 import NewItemMenu from "../components/NewItemMenu";
+import DarkModeSwitch from "../components/DarkModeSwitch";
 
 function Header() {
   const classes = useStyles();
@@ -43,7 +44,12 @@ function Header() {
 
   return (
     <nav>
-      <AppBar position="static" className={classes.appBar} elevation={0}>
+      <AppBar
+        position="static"
+        className={classes.appBar}
+        elevation={0}
+        color="primary"
+      >
         <Container>
           <ToolBar className={classes.toolBar}>
             <Typography
@@ -54,17 +60,18 @@ function Header() {
               WebMarks
             </Typography>
             <div>
-              <IconButton
+              {/* <IconButton
                 edge="start"
                 color="inherit"
                 aria-label="menu"
                 onClick={() => console.log(data)}
               >
                 <PersonIcon fontSize="large" />
-              </IconButton>
-              <IconButton edge="start" color="inherit" aria-label="menu">
+              </IconButton> */}
+              <DarkModeSwitch />
+              {/* <IconButton edge="start" color="inherit" aria-label="menu">
                 <SettingsIcon fontSize="large" />
-              </IconButton>
+              </IconButton> */}
             </div>
           </ToolBar>
         </Container>

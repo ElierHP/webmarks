@@ -1,6 +1,11 @@
 import MainApp from "./pages/MainApp";
+import { DarkModeProvider } from "./context/DarkModeProvider";
 function App() {
-  return <MainApp />;
+  return (
+    <DarkModeProvider>
+      <MainApp />
+    </DarkModeProvider>
+  );
 }
 
 export default App;
