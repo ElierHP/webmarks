@@ -26,17 +26,18 @@ function LinkContent({ title, url, clickHandler, id }) {
           backgroundColor: isDarkMode ? "#2b3034" : "#EEEFF1",
         },
       },
-      bodyText: {
-        color: isDarkMode ? blue[200] : blue[600],
+      urlContainer: {
+        overflow: "hidden",
+      },
+      linksText: {
         marginLeft: "1rem",
         [theme.breakpoints.down("xs")]: {
-          display: "none",
+          // display: "none",
         },
       },
-      titleSpan: {
-        [theme.breakpoints.down("xs")]: {
-          display: "none",
-        },
+      links: {
+        textDecoration: "none",
+        color: isDarkMode ? blue[200] : blue[600],
       },
       favicon: {
         marginRight: "0.5rem",
@@ -101,8 +102,7 @@ function LinkContent({ title, url, clickHandler, id }) {
           <Grid item>
             {!isEditing ? (
               <Typography variant="body1" className={classes.title}>
-                {title}
-                <span className={classes.titleSpan}>:</span>
+                {`${title} : `}
               </Typography>
             ) : (
               <form onSubmit={handleSubmit}>
@@ -117,10 +117,12 @@ function LinkContent({ title, url, clickHandler, id }) {
               </form>
             )}
           </Grid>
-          <Grid item>
+          <Grid item className={classes.urlContainer}>
             {!isEditing ? (
-              <Typography variant="body2" className={classes.bodyText}>
-                {url}
+              <Typography variant="body2" className={classes.linksText}>
+                <a className={classes.links} href={url}>
+                  {url}
+                </a>
               </Typography>
             ) : (
               <form onSubmit={handleSubmit}>

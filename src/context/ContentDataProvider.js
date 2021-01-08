@@ -22,7 +22,7 @@ const initialData = [
   {
     type: "link",
     title: "Example Link",
-    url: "https://www.google.com/",
+    url: "https://www.google.com",
     id: 3,
     parentId: 0,
     key: uuidv4(),
