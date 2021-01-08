@@ -57,7 +57,7 @@ function Header() {
   //Styles
 
   const [data, appState] = useContext(ContentData);
-  const [, setAppState] = useContext(ContentMethods);
+  const [dispatch, setAppState] = useContext(ContentMethods);
   const [directory, setDirectory] = useContext(HeaderContext);
 
   const logoClickHandler = () => {
@@ -131,6 +131,7 @@ function Header() {
                   color="inherit"
                   aria-label="a-z-sort-icon"
                   className={classes.alphabetIcon}
+                  onClick={() => dispatch({ type: "sort" })}
                 >
                   <SortByAlphaIcon />
                 </IconButton>

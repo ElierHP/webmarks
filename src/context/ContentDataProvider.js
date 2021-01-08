@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialData = [
   {
-    type: "folder",
-    title: "Folder Example",
-    url: null,
-    id: 1,
+    type: "link",
+    title: "Example Link",
+    url: "https://www.google.com/",
+    id: 3,
     parentId: 0,
     key: uuidv4(),
   },
@@ -20,10 +20,10 @@ const initialData = [
     key: uuidv4(),
   },
   {
-    type: "link",
-    title: "Example Link",
-    url: "https://www.google.com/",
-    id: 3,
+    type: "folder",
+    title: "Folder Example",
+    url: null,
+    id: 1,
     parentId: 0,
     key: uuidv4(),
   },
