@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@material-ui/core/Container";
-import Appbar from "@material-ui/core/Appbar";
+import AppBar from "@material-ui/core/Appbar";
 import Typography from "@material-ui/core/Typography";
 
 function Footer() {
