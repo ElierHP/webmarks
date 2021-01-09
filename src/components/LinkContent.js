@@ -110,6 +110,7 @@ function LinkContent({ title, url, clickHandler, id }) {
                   className={classes.titleInput}
                   defaultValue={title}
                   onChange={handleChange}
+                  color={isDarkMode ? "secondary" : "primary"}
                   autoFocus
                 />
               </form>
@@ -130,6 +131,7 @@ function LinkContent({ title, url, clickHandler, id }) {
                   label="URL"
                   defaultValue={urlValue}
                   onChange={handleUrlChange}
+                  color={isDarkMode ? "secondary" : "primary"}
                   autoFocus
                 />
               </form>

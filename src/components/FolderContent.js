@@ -79,6 +79,7 @@ function FolderContent({ title, clickHandler, id, url }) {
                   label="Folder Title"
                   defaultValue={title}
                   onChange={handleChange}
+                  color={isDarkMode ? "secondary" : "primary"}
                   autoFocus
                 />
               </form>
