@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Container from "@material-ui/core/Container";
 import AppBar from "@material-ui/core/AppBar";
-import ToolBar from "@material-ui/core/ToolBar";
+import Toolbar from "@material-ui/core/Toolbar";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
@@ -88,7 +88,7 @@ function Header() {
         color="primary"
       >
         <Container>
-          <ToolBar className={classes.toolBar}>
+          <Toolbar className={classes.toolBar}>
             <Typography
               variant="h5"
               className={classes.logo}
@@ -97,7 +97,7 @@ function Header() {
               WebMarks
             </Typography>
             <DarkModeSwitch />
-          </ToolBar>
+          </Toolbar>
         </Container>
       </AppBar>
       <Box boxShadow={3}>
