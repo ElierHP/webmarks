@@ -6,8 +6,25 @@ import Grid from "@material-ui/core/Grid";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 export default function SwitchLabels() {
+  //Styles
+  const useStyles = makeStyles((theme) =>
+    createStyles({
+      root: {
+        [theme.breakpoints.down("xs")]: {
+          display: "none",
+        },
+      },
+      iconButton: {
+        padding: "0.5rem",
+      },
+    })
+  );
+  const classes = useStyles();
+  //Style End
+
   const [isDarkMode, setIsDarkMode] = useContext(DarkModeContext);
   const handleClick = () => {
     setIsDarkMode(!isDarkMode);
@@ -16,12 +33,12 @@ export default function SwitchLabels() {
   return (
     <div>
       <Grid container alignItems="center">
-        <Box display={{ xs: "none", sm: "block" }}>
+        <Box className={classes.root}>
           <Typography color="secondary" variant="body2">
             Dark Mode
           </Typography>
         </Box>
-        <IconButton onClick={handleClick} style={{ padding: "0.5rem" }}>
+        <IconButton onClick={handleClick} className={classes.iconButton}>
           {isDarkMode ? (
             <Brightness7Icon color="secondary" fontSize="large" />
           ) : (

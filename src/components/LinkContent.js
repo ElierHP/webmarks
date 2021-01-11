@@ -10,8 +10,8 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
-import { green, blue } from "@material-ui/core/colors";
 import { DarkModeContext } from "../context/DarkModeProvider";
+import palette from "../css/palette";
 
 function LinkContent({ title, url, clickHandler, id }) {
   //Styles
@@ -23,7 +23,9 @@ function LinkContent({ title, url, clickHandler, id }) {
         cursor: "pointer",
         borderRadius: "0.2rem",
         "&:hover": {
-          backgroundColor: isDarkMode ? "#2b3034" : "#EEEFF1",
+          backgroundColor: isDarkMode
+            ? palette.colors.primary
+            : palette.colors.hover,
         },
       },
       urlContainer: {
@@ -35,7 +37,9 @@ function LinkContent({ title, url, clickHandler, id }) {
       },
       links: {
         textDecoration: "none",
-        color: isDarkMode ? blue[200] : blue[600],
+        color: isDarkMode
+          ? palette.darkThemeColors.links
+          : palette.colors.links,
       },
       favicon: {
         marginRight: "0.5rem",
@@ -51,7 +55,7 @@ function LinkContent({ title, url, clickHandler, id }) {
         },
       },
       successIcon: {
-        color: green[600],
+        color: palette.colors.success,
       },
       titleInput: {
         width: "80%",

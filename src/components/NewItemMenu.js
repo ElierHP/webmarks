@@ -10,6 +10,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import { DarkModeContext } from "../context/DarkModeProvider";
+import palette from "../css/palette";
 
 export default function NewItemMenu() {
   //Styles
@@ -25,7 +26,9 @@ export default function NewItemMenu() {
         top: -15,
         right: 0,
         width: "220px",
-        backgroundColor: isDarkMode ? "#424242" : "white",
+        backgroundColor: isDarkMode
+          ? palette.darkThemeColors.secondary
+          : palette.colors.secondary,
         padding: "1.5rem 1rem 1.5rem 1rem",
         zIndex: "10",
         boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",

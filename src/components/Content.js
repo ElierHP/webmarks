@@ -29,6 +29,9 @@ function Content() {
           minHeight: `calc(100vh - 156.7812px)`,
         },
       },
+      gridContainer: {
+        marginTop: "0.5rem",
+      },
     })
   );
   const classes = useStyles();
@@ -36,7 +39,7 @@ function Content() {
 
   return (
     <Container className={classes.root}>
-      <Grid container spacing={2} style={{ marginTop: "0.5rem" }}>
+      <Grid container spacing={2} className={classes.gridContainer}>
         {JSON.parse(localStorage.getItem("data"))
           .filter((idFilter) => idFilter.parentId === appState)
           .map((item) =>

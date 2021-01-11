@@ -12,7 +12,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { ContentMethods } from "../context/ContentDataProvider";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import { green } from "@material-ui/core/colors";
+import palette from "../css/palette";
 
 function FolderContent({ title, clickHandler, id, url }) {
   //Styles
@@ -22,7 +22,9 @@ function FolderContent({ title, clickHandler, id, url }) {
       root: {
         cursor: "pointer",
         "&:hover": {
-          backgroundColor: isDarkMode ? "#2b3034" : "#EEEFF1",
+          backgroundColor: isDarkMode
+            ? palette.colors.primary
+            : palette.colors.hover,
         },
       },
       folderContainer: {
@@ -36,13 +38,16 @@ function FolderContent({ title, clickHandler, id, url }) {
       folderIcon: {
         marginRight: "0.5rem",
         marginLeft: "1rem",
-        color: "#FFA724",
+        color: palette.colors.folderIcon,
         [theme.breakpoints.down("xs")]: {
           marginLeft: "0",
         },
       },
       successIcon: {
-        color: green[600],
+        color: palette.colors.success,
+      },
+      title: {
+        userSelect: "none",
       },
     })
   );
@@ -69,7 +74,7 @@ function FolderContent({ title, clickHandler, id, url }) {
           <Grid container alignItems="center">
             <FolderIcon fontSize="large" className={classes.folderIcon} />
             {!isEditing ? (
-              <Typography variant="h6" style={{ userSelect: "none" }}>
+              <Typography variant="h6" className={classes.title}>
                 {title}
               </Typography>
             ) : (
