@@ -11,17 +11,13 @@ export const ContentDataProvider = ({ children }) => {
   useEffect(() => {
     async function fetchData() {
       //fetch folder data
-      const folders = await axios
-        .get("http://localhost:5000/folders")
-        .catch((err) => console.log(err));
+      const folders = await axios.get("http://localhost:5000/folders");
       //fetch link data
-      const links = await axios
-        .get("http://localhost:5000/links")
-        .catch((err) => console.log(err));
+      const links = await axios.get("http://localhost:5000/links");
       //load them onto the state
       dispatch({ type: "load", data: [...folders.data, ...links.data] });
     }
-    fetchData();
+    fetchData().catch((err) => console.log(err));
   }, []);
 
   const [data, dispatch] = useReducer(dataReducer, []);

@@ -62,7 +62,7 @@ function Header() {
   const [directory, setDirectory] = useContext(HeaderContext);
 
   const logoClickHandler = () => {
-    setAppState(0);
+    setAppState("0");
     setDirectory("Main");
   };
 
