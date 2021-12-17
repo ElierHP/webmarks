@@ -6,8 +6,8 @@ import {
   ContentMethods,
   HeaderContext,
 } from "../context/ContentDataProvider";
-import FolderContent from "./FolderContent";
-import LinkContent from "./LinkContent";
+import Folder from "./Folder";
+import Link from "./Link";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 
 function Content() {
@@ -44,7 +44,7 @@ function Content() {
           .filter((idFilter) => idFilter.parentId === appState)
           .map((item) =>
             item.type === "folder" ? (
-              <FolderContent
+              <Folder
                 title={item.title}
                 url={item.url}
                 key={item.key}
@@ -53,7 +53,7 @@ function Content() {
                 clickHandler={() => clickHandler(item.id, item.title)}
               />
             ) : (
-              <LinkContent
+              <Link
                 title={item.title}
                 url={item.url}
                 key={item.key}
