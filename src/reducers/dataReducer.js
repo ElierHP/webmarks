@@ -2,6 +2,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const dataReducer = (state, action) => {
   switch (action.type) {
+    case "load":
+      return [...action.data];
     case "addNewItem":
       const addNewItem = {
         type: action.itemType,

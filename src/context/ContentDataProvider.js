@@ -1,54 +1,32 @@
-import React, { createContext, useReducer, useState } from "react";
+import React, { createContext, useReducer, useState, useEffect } from "react";
 import dataReducer from "../reducers/dataReducer";
-import { v4 as uuidv4 } from "uuid";
-
-const initialData = [
-  {
-    type: "folder",
-    title: "Folder Example",
-    url: null,
-    id: 1,
-    parentId: 0,
-    key: uuidv4(),
-  },
-  {
-    type: "folder",
-    title: "Second Folder",
-    url: null,
-    id: 2,
-    parentId: 0,
-    key: uuidv4(),
-  },
-  {
-    type: "link",
-    title: "Example Link",
-    url: "https://www.google.com",
-    id: 3,
-    parentId: 0,
-    key: uuidv4(),
-  },
-  {
-    type: "folder",
-    title: "Sub Folder",
-    url: null,
-    id: 4,
-    parentId: 1,
-    key: uuidv4(),
-  },
-];
-
-const storageData = JSON.parse(localStorage.getItem("data")) || initialData;
+import axios from "axios";
 
 export const ContentData = createContext();
 export const ContentMethods = createContext();
 export const HeaderContext = createContext();
 
 export const ContentDataProvider = ({ children }) => {
-  const [data, dispatch] = useReducer(dataReducer, storageData);
-  const [appState, setAppState] = useState(0);
-  const [directory, setDirectory] = useState("Main");
+  //Fetch server data
+  useEffect(() => {
+    async function fetchData() {
+      //fetch folder data
+      const folders = await axios
+        .get("http://localhost:5000/folders")
+        .catch((err) => console.log(err));
+      //fetch link data
+      const links = await axios
+        .get("http://localhost:5000/links")
+        .catch((err) => console.log(err));
+      //load them onto the state
+      dispatch({ type: "load", data: [...folders.data, ...links.data] });
+    }
+    fetchData();
+  }, []);
 
-  localStorage.setItem("data", JSON.stringify(data));
+  const [data, dispatch] = useReducer(dataReducer, []);
+  const [appState, setAppState] = useState("0");
+  const [directory, setDirectory] = useState("Main");
 
   return (
     <HeaderContext.Provider value={[directory, setDirectory]}>

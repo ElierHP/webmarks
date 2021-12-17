@@ -69,12 +69,13 @@ function Header() {
   //Go Back Button
   const prevClickHandler = () => {
     //Find parent folder & setAppState to it's parents ID
-    const parentFolder = data.find((folder) => folder.id === appState);
-    parentFolder ? setAppState(parentFolder.parentId) : setAppState(0);
+    const parentFolder = data.find((folder) => folder._id === appState);
+    console.log(parentFolder);
+    parentFolder ? setAppState(parentFolder.parent_id) : setAppState(0);
 
     //Find the new directory title based on parentFolder
     const newDirectory = data.find(
-      (folder) => parentFolder.parentId === folder.id
+      (folder) => parentFolder.parent_id === folder._id
     );
     newDirectory ? setDirectory(newDirectory.title) : setDirectory("Main");
   };
