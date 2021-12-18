@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import useContentState from "../hooks/useContentState";
+import useEdit from "../hooks/useEdit";
 import { ContentMethods } from "../context/ContentDataProvider";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -12,7 +12,6 @@ import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
-import axios from "axios";
 
 function LinkContent({ title, url, clickHandler, _id }) {
   //Styles
@@ -74,28 +73,18 @@ function LinkContent({ title, url, clickHandler, _id }) {
   const classes = useStyles();
   //Styles End
 
-  const [dispatch] = useContext(ContentMethods);
+  const params = "links";
   const [
     isEditing,
     setIsEditing,
     handleChange,
-    handleSubmit,
-    handleCheckIcon,
+    handleDelete,
+    handleEdit,
     handleUrlChange,
     urlValue,
     handleCloseIcon,
-  ] = useContentState({ title, _id, url });
+  ] = useEdit({ title, _id, url, params });
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete("http://localhost:5000/links/delete", {
-        data: { _id },
-      });
-      dispatch({ type: "delete", _id });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <Grid
       item
@@ -119,7 +108,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
                 {`${title} : `}
               </Typography>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleEdit}>
                 <TextField
                   id="link-title-input"
                   label="Link Title"
@@ -140,7 +129,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
                 </a>
               </Typography>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleEdit}>
                 <TextField
                   className={classes.urlInput}
                   id="link-url-input"
@@ -170,10 +159,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
           </>
         ) : (
           <>
-            <IconButton
-              className={classes.iconButton}
-              onClick={handleCheckIcon}
-            >
+            <IconButton className={classes.iconButton} onClick={handleEdit}>
               <DoneIcon className={classes.successIcon} />
             </IconButton>
             <IconButton

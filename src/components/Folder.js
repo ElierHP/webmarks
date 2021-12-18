@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import useContentState from "../hooks/useContentState";
+import useEdit from "../hooks/useEdit";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
@@ -13,7 +13,6 @@ import { ContentMethods } from "../context/ContentDataProvider";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
-import axios from "axios";
 
 function FolderContent({ title, clickHandler, _id, url }) {
   //Styles
@@ -55,20 +54,10 @@ function FolderContent({ title, clickHandler, _id, url }) {
   const classes = useStyles();
   //Style End
 
-  const [dispatch] = useContext(ContentMethods);
-  const [isEditing, setIsEditing, handleChange, handleSubmit, handleCheckIcon] =
-    useContentState({ title, _id, url });
+  const params = "folders";
+  const [isEditing, setIsEditing, handleChange, handleDelete, handleEdit] =
+    useEdit({ title, _id, params });
 
-  const handleDelete = async () => {
-    try {
-      await axios.delete("http://localhost:5000/folders/delete", {
-        data: { _id },
-      });
-      dispatch({ type: "delete", _id });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   return (
     <>
       <Grid item container alignItems="center" className={classes.root}>
@@ -84,7 +73,7 @@ function FolderContent({ title, clickHandler, _id, url }) {
                 {title}
               </Typography>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleEdit}>
                 <TextField
                   id="folder-title-input"
                   label="Folder Title"
@@ -112,10 +101,7 @@ function FolderContent({ title, clickHandler, _id, url }) {
             </>
           ) : (
             <>
-              <IconButton
-                className={classes.iconButton}
-                onClick={handleCheckIcon}
-              >
+              <IconButton className={classes.iconButton} onClick={handleEdit}>
                 <DoneIcon className={classes.successIcon} />
               </IconButton>
               <IconButton
