@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { ContentMethods } from "../context/ContentDataProvider";
 
-const useContentState = ({ title, id, url }) => {
+const useContentState = ({ title, _id, url }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [titleValue, setTitleValue] = useState(title);
   const [urlValue, setUrlValue] = useState(url);
@@ -13,12 +13,12 @@ const useContentState = ({ title, id, url }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch({ type: "edit", id: id, newTitle: titleValue, url: urlValue });
+    dispatch({ type: "edit", _id: _id, newTitle: titleValue, url: urlValue });
     setIsEditing(false);
   };
 
   const handleCheckIcon = () => {
-    dispatch({ type: "edit", id: id, newTitle: titleValue, url: urlValue });
+    dispatch({ type: "edit", _id: _id, newTitle: titleValue, url: urlValue });
     setIsEditing(false);
   };
 
@@ -28,7 +28,7 @@ const useContentState = ({ title, id, url }) => {
 
   const handleCloseIcon = () => {
     setIsEditing(false);
-    //Rest values back to default
+    //Reset values back to default
     setTitleValue(title);
     setUrlValue(url);
   };

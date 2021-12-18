@@ -1,11 +1,9 @@
-import { useState, useContext } from "react";
-import { ContentMethods } from "../context/ContentDataProvider";
+import { useState } from "react";
 
-const useNewItemState = ({ setAnchorEl, parentId, itemType }) => {
+const useItemMenu = ({ setAnchorEl }) => {
   const [isNewItem, setIsNewItem] = useState(false);
   const [itemTitle, setItemTitle] = useState("");
   const [itemUrl, setItemUrl] = useState("");
-  const [dispatch] = useContext(ContentMethods);
 
   const handleClick = () => {
     setIsNewItem(!isNewItem);
@@ -20,20 +18,6 @@ const useNewItemState = ({ setAnchorEl, parentId, itemType }) => {
   const handleUrlChange = (e) => {
     setItemUrl(e.target.value);
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({
-      type: "addNewItem",
-      url: itemUrl,
-      itemType: itemType,
-      title: itemTitle,
-      parentId: parentId,
-    });
-    handleClose();
-    //Reset Values
-    setItemTitle("");
-    setItemUrl("");
-  };
 
   return [
     isNewItem,
@@ -41,10 +25,10 @@ const useNewItemState = ({ setAnchorEl, parentId, itemType }) => {
     handleClose,
     handleChange,
     itemTitle,
-    handleSubmit,
+    setItemTitle,
     itemUrl,
     handleUrlChange,
   ];
 };
 
-export default useNewItemState;
+export default useItemMenu;

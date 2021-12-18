@@ -49,7 +49,7 @@ function Content() {
                 title={item.title}
                 url={item.url}
                 key={uuidv4()}
-                id={item._id}
+                _id={item._id}
                 parent_id={item.parent_id}
                 clickHandler={() => clickHandler(item._id, item.title)}
               />
@@ -58,7 +58,7 @@ function Content() {
                 title={item.title}
                 url={item.url}
                 key={uuidv4()}
-                id={item._id}
+                _id={item._id}
                 clickHandler={() => (window.location = item.url)}
               />
             )

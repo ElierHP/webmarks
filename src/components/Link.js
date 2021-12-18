@@ -12,8 +12,9 @@ import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
+import axios from "axios";
 
-function LinkContent({ title, url, clickHandler, id }) {
+function LinkContent({ title, url, clickHandler, _id }) {
   //Styles
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
@@ -83,7 +84,18 @@ function LinkContent({ title, url, clickHandler, id }) {
     handleUrlChange,
     urlValue,
     handleCloseIcon,
-  ] = useContentState({ title, id, url });
+  ] = useContentState({ title, _id, url });
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete("http://localhost:5000/links/delete", {
+        data: { _id },
+      });
+      dispatch({ type: "delete", _id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Grid
       item
@@ -152,10 +164,7 @@ function LinkContent({ title, url, clickHandler, id }) {
             >
               <EditIcon />
             </IconButton>
-            <IconButton
-              className={classes.iconButton}
-              onClick={() => dispatch({ type: "delete", id: id })}
-            >
+            <IconButton className={classes.iconButton} onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </>

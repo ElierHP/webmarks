@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
-import { ContentData } from "../context/ContentDataProvider";
-import useNewItemState from "../hooks/useNewItemState";
+import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import useItemMenu from "../hooks/useItemMenu";
 import TextField from "@material-ui/core/TextField";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -11,8 +11,9 @@ import { makeStyles, createStyles } from "@material-ui/core/styles";
 import CloseIcon from "@material-ui/icons/Close";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
+import axios from "axios";
 
-export default function NewItemMenu() {
+export default function ItemMenu() {
   //Styles
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
@@ -58,6 +59,7 @@ export default function NewItemMenu() {
 
   //Context API
   const [, appState] = useContext(ContentData);
+  const [dispatch] = useContext(ContentMethods);
 
   //Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
@@ -77,8 +79,29 @@ export default function NewItemMenu() {
     handleFolderClose,
     handleTitleChange,
     folderTitle,
-    handleFolderSubmit,
-  ] = useNewItemState({ setAnchorEl, parentId: appState, itemType: "folder" });
+    setFolderTitle,
+  ] = useItemMenu({ setAnchorEl });
+
+  const handleFolderSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/folders/new", {
+        title: folderTitle,
+        parent_id: appState,
+      });
+      dispatch({
+        type: "newFolder",
+        _id: res.data._id,
+        dataType: res.data.type,
+        title: res.data.title,
+        parent_id: res.data.parent_id,
+      });
+      handleFolderClose();
+      setFolderTitle("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   //Link Menu Handlers
   const [
@@ -87,10 +110,33 @@ export default function NewItemMenu() {
     handleLinkClose,
     handleLinkTitleChange,
     linkTitle,
-    handleLinkSubmit,
-    itemUrl,
+    setLinkTitle,
+    linkUrl,
     handleUrlChange,
-  ] = useNewItemState({ setAnchorEl, parentId: appState, itemType: "link" });
+  ] = useItemMenu({ setAnchorEl });
+
+  const handleLinkSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:5000/links/new", {
+        title: linkTitle,
+        parent_id: appState,
+        url: linkUrl,
+      });
+      dispatch({
+        type: "newLink",
+        _id: res.data._id,
+        dataType: res.data.type,
+        title: res.data.title,
+        parent_id: res.data.parent_id,
+        url: res.data.url,
+      });
+      handleLinkClose();
+      setLinkTitle("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className={classes.root}>
@@ -162,7 +208,7 @@ export default function NewItemMenu() {
           <TextField
             id="link-url-input"
             label="URL"
-            defaultValue={itemUrl}
+            defaultValue={linkUrl}
             onChange={handleUrlChange}
             className={classes.menuInput}
             color={isDarkMode ? "secondary" : "primary"}

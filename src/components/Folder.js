@@ -13,8 +13,9 @@ import { ContentMethods } from "../context/ContentDataProvider";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
+import axios from "axios";
 
-function FolderContent({ title, clickHandler, id, url }) {
+function FolderContent({ title, clickHandler, _id, url }) {
   //Styles
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
@@ -55,14 +56,19 @@ function FolderContent({ title, clickHandler, id, url }) {
   //Style End
 
   const [dispatch] = useContext(ContentMethods);
-  const [
-    isEditing,
-    setIsEditing,
-    handleChange,
-    handleSubmit,
-    handleCheckIcon,
-  ] = useContentState({ title, id, url });
+  const [isEditing, setIsEditing, handleChange, handleSubmit, handleCheckIcon] =
+    useContentState({ title, _id, url });
 
+  const handleDelete = async () => {
+    try {
+      await axios.delete("http://localhost:5000/folders/delete", {
+        data: { _id },
+      });
+      dispatch({ type: "delete", _id });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <Grid item container alignItems="center" className={classes.root}>
@@ -100,10 +106,7 @@ function FolderContent({ title, clickHandler, id, url }) {
               >
                 <EditIcon />
               </IconButton>
-              <IconButton
-                className={classes.iconButton}
-                onClick={() => dispatch({ type: "delete", id: id })}
-              >
+              <IconButton className={classes.iconButton} onClick={handleDelete}>
                 <DeleteIcon />
               </IconButton>
             </>

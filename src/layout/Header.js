@@ -13,7 +13,7 @@ import {
   ContentMethods,
   HeaderContext,
 } from "../context/ContentDataProvider";
-import NewItemMenu from "../components/NewItemMenu";
+import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
 
@@ -136,7 +136,7 @@ function Header() {
                 >
                   <SortByAlphaIcon />
                 </IconButton>
-                <NewItemMenu />
+                <ItemMenu />
               </Grid>
             </Grid>
           </Grid>
