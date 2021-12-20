@@ -1,6 +1,4 @@
 import React, { useContext } from "react";
-import Grid from "@mui/material/Grid";
-import Container from "@mui/material/Container";
 import {
   ContentData,
   ContentMethods,
@@ -8,8 +6,9 @@ import {
 } from "../context/ContentDataProvider";
 import Folder from "./Folder";
 import Link from "./Link";
-import { makeStyles, createStyles } from "@mui/styles";
 import { v4 as uuidv4 } from "uuid";
+import { makeStyles, createStyles } from "@mui/styles";
+import { Grid, Container } from "@mui/material";
 
 function Content() {
   const [data, appState] = useContext(ContentData);

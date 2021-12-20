@@ -1,17 +1,14 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import { DarkModeContext } from "../context/DarkModeProvider";
+import palette from "../css/palette";
+import { Grid, IconButton, Typography, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import { makeStyles, createStyles } from "@mui/styles";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
 
 function FolderContent({ title, clickHandler, _id, url }) {
   //Styles

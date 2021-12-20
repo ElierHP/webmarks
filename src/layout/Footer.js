@@ -1,7 +1,5 @@
 import React from "react";
-import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
-import Typography from "@mui/material/Typography";
+import { Container, AppBar, Typography } from "@mui/material";
 
 function Footer() {
   return (

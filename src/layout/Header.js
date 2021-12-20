@@ -1,13 +1,4 @@
 import React, { useContext } from "react";
-import Container from "@mui/material/Container";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import IconButton from "@mui/material/IconButton";
-import { createStyles, makeStyles } from "@mui/styles";
-import Typography from "@mui/material/Typography";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
   ContentData,
   ContentMethods,
@@ -15,6 +6,17 @@ import {
 } from "../context/ContentDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
+import {
+  Container,
+  AppBar,
+  Toolbar,
+  Box,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import { createStyles, makeStyles } from "@mui/styles";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function Header() {

@@ -1,17 +1,13 @@
 import React, { useContext, useState } from "react";
 import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import useItemMenu from "../hooks/useItemMenu";
-import TextField from "@mui/material/TextField";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
+import { DarkModeContext } from "../context/DarkModeProvider";
+import axios from "axios";
+import palette from "../css/palette";
+import { TextField, Menu, MenuItem, Button, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { makeStyles, createStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
-import axios from "axios";
 
 export default function ItemMenu() {
   //Styles

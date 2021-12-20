@@ -1,16 +1,13 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
+import { DarkModeContext } from "../context/DarkModeProvider";
+import palette from "../css/palette";
+import { Grid, Typography, TextField, IconButton } from "@mui/material";
 import { makeStyles, createStyles } from "@mui/styles";
-import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
 
 function LinkContent({ title, url, clickHandler, _id }) {
   //Styles
