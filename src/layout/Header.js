@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
-import Container from "@material-ui/core/Container";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import { createStyles, makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
+import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import { createStyles, makeStyles } from "@mui/styles";
+import Typography from "@mui/material/Typography";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
   ContentData,
   ContentMethods,
@@ -15,7 +15,7 @@ import {
 } from "../context/ContentDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
-import SortByAlphaIcon from "@material-ui/icons/SortByAlpha";
+import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function Header() {
   //Styles
@@ -37,6 +37,8 @@ function Header() {
       },
       gridContainer: {
         padding: "0.25rem 0.5rem 0.25rem 1rem",
+        display: "flex",
+        justifyContent: "space-between",
         [theme.breakpoints.down("xs")]: {
           padding: "0.25rem 0.8rem 0.25rem 0.8rem",
         },
@@ -103,12 +105,7 @@ function Header() {
       </AppBar>
       <Box boxShadow={3}>
         <Container>
-          <Grid
-            container
-            className={classes.gridContainer}
-            justify="space-between"
-            alignItems="center"
-          >
+          <Grid container className={classes.gridContainer} alignItems="center">
             <Grid item>
               <Grid container alignItems="center">
                 {directory !== "Main" && (

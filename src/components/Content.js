@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import Grid from "@mui/material/Grid";
+import Container from "@mui/material/Container";
 import {
   ContentData,
   ContentMethods,
@@ -8,7 +8,7 @@ import {
 } from "../context/ContentDataProvider";
 import Folder from "./Folder";
 import Link from "./Link";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles } from "@mui/styles";
 import { v4 as uuidv4 } from "uuid";
 
 function Content() {

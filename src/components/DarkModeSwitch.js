@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
-import Grid from "@material-ui/core/Grid";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import Brightness4Icon from "@material-ui/icons/Brightness4";
-import Brightness7Icon from "@material-ui/icons/Brightness7";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import { makeStyles, createStyles } from "@mui/styles";
 
 export default function SwitchLabels() {
   //Styles

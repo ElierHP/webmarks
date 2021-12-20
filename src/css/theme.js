@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@mui/material/styles";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import { ThemeProvider } from "@material-ui/core/styles";
+import { ThemeProvider } from "@mui/material/styles";
 import palette from "./palette";
 
 function Dashboard({ children }) {
   const [isDarkMode] = useContext(DarkModeContext);
-  const theme = createMuiTheme({
+  const theme = createTheme({
     palette: {
       type: isDarkMode ? "dark" : "light",
       primary: {

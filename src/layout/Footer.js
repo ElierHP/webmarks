@@ -1,7 +1,7 @@
 import React from "react";
-import Container from "@material-ui/core/Container";
-import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
+import Container from "@mui/material/Container";
+import AppBar from "@mui/material/AppBar";
+import Typography from "@mui/material/Typography";
 
 function Footer() {
   return (

@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
-import { ContentMethods } from "../context/ContentDataProvider";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import { makeStyles, createStyles } from "@material-ui/core/styles";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import DoneIcon from "@material-ui/icons/Done";
-import CloseIcon from "@material-ui/icons/Close";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
+import { makeStyles, createStyles } from "@mui/styles";
+import IconButton from "@mui/material/IconButton";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DoneIcon from "@mui/icons-material/Done";
+import CloseIcon from "@mui/icons-material/Close";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import palette from "../css/palette";
 
