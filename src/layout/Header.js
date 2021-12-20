@@ -6,6 +6,7 @@ import {
 } from "../context/ContentDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
+import palette from "../css/palette";
 import {
   Container,
   AppBar,
@@ -47,6 +48,9 @@ function Header() {
       },
       arrowButton: {
         padding: "3px",
+        "&:hover": {
+          backgroundColor: palette.colors.hoverIcon,
+        },
       },
       directoryText: {
         marginLeft: "1rem",
@@ -55,6 +59,9 @@ function Header() {
       alphabetIcon: {
         padding: "0.2rem",
         marginRight: "0.5rem",
+        "&:hover": {
+          backgroundColor: palette.colors.hoverIcon,
+        },
       },
     })
   );

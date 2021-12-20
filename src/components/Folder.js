@@ -17,10 +17,10 @@ function FolderContent({ title, clickHandler, _id, url }) {
     createStyles({
       root: {
         cursor: "pointer",
+        padding: "1rem !important",
+        borderRadius: "0.2rem",
         "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.colors.primary
-            : palette.colors.hover,
+          backgroundColor: palette.colors.hover,
         },
       },
       folderContainer: {
@@ -29,6 +29,9 @@ function FolderContent({ title, clickHandler, _id, url }) {
       iconButton: {
         [theme.breakpoints.down("xs")]: {
           padding: "0",
+        },
+        "&:hover": {
+          backgroundColor: palette.colors.hoverIcon,
         },
       },
       folderIcon: {

@@ -47,6 +47,9 @@ export default function ItemMenu() {
       },
       addIcon: {
         padding: "0.2rem",
+        "&:hover": {
+          backgroundColor: palette.colors.hoverIcon,
+        },
       },
     })
   );
