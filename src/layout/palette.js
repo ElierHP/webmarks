@@ -1,6 +1,6 @@
-export default {
+const palette = {
   colors: {
-    primary: "#2b3034",
+    primary: "#1e88e5",
     secondary: "#FFFFFF",
     links: "#2b3034",
     hover: "#EAEAEA",
@@ -9,8 +9,11 @@ export default {
     success: "#43a047",
   },
   darkThemeColors: {
-    primary: "#1e88e5",
-    secondary: "#424242",
+    primary: "#2b3034",
     links: "#90caf9",
+    hover: "#414243",
+    hoverIcon: "#416287",
   },
 };
+
+export default palette;

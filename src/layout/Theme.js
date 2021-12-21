@@ -4,15 +4,15 @@ import { DarkModeContext } from "../context/DarkModeProvider";
 import { ThemeProvider } from "@mui/material/styles";
 import palette from "./palette";
 
-function Dashboard({ children }) {
+function Theme({ children }) {
   const [isDarkMode] = useContext(DarkModeContext);
   const theme = createTheme({
     palette: {
-      type: isDarkMode ? "dark" : "light",
+      mode: isDarkMode ? "dark" : "light",
       primary: {
         main: isDarkMode
-          ? palette.colors.primary
-          : palette.darkThemeColors.primary,
+          ? palette.darkThemeColors.primary
+          : palette.colors.primary,
       },
       secondary: {
         main: palette.colors.secondary,
@@ -22,4 +22,4 @@ function Dashboard({ children }) {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 }
 
-export default Dashboard;
+export default Theme;

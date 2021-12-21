@@ -3,7 +3,7 @@ import { ContentData, ContentMethods } from "../context/ContentDataProvider";
 import useItemMenu from "../hooks/useItemMenu";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import axios from "axios";
-import palette from "../css/palette";
+import palette from "../layout/palette";
 import { TextField, Menu, MenuItem, Button, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { makeStyles, createStyles } from "@mui/styles";
@@ -20,7 +20,9 @@ export default function ItemMenu() {
       },
       iconButton: {
         "&:hover": {
-          backgroundColor: palette.colors.hover,
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hoverIcon
+            : palette.colors.hoverIcon,
         },
       },
       inputForm: {
@@ -50,7 +52,9 @@ export default function ItemMenu() {
       addIcon: {
         padding: "0.2rem",
         "&:hover": {
-          backgroundColor: palette.colors.hoverIcon,
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hoverIcon
+            : palette.colors.hoverIcon,
         },
       },
     })

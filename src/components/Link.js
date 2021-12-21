@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
+import palette from "../layout/palette";
 import { Grid, Typography, TextField, IconButton } from "@mui/material";
 import { makeStyles, createStyles } from "@mui/styles";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,12 +20,9 @@ function LinkContent({ title, url, clickHandler, _id }) {
         borderRadius: "0.2rem",
         "&:hover": {
           backgroundColor: isDarkMode
-            ? palette.colors.primary
+            ? palette.darkThemeColors.hover
             : palette.colors.hover,
         },
-      },
-      urlContainer: {
-        overflow: "hidden",
       },
       linksText: {
         marginLeft: "1rem",
@@ -49,6 +46,11 @@ function LinkContent({ title, url, clickHandler, _id }) {
         [theme.breakpoints.down("xs")]: {
           padding: "0",
         },
+        "&:hover": {
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hoverIcon
+            : palette.colors.hoverIcon,
+        },
       },
       successIcon: {
         color: palette.colors.success,
@@ -57,11 +59,8 @@ function LinkContent({ title, url, clickHandler, _id }) {
         width: "80%",
       },
       urlInput: {
-        [theme.breakpoints.up("md")]: {
-          width: "400px",
-        },
         [theme.breakpoints.up("lg")]: {
-          width: "600px",
+          minWidth: "400px",
         },
       },
     })
@@ -86,7 +85,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
       item
       container
       alignItems="center"
-      justify="space-between"
+      justifyContent="space-between"
       className={classes.root}
     >
       <Grid item xs={9} onClick={() => !isEditing && clickHandler()}>
@@ -108,6 +107,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
                 <TextField
                   id="link-title-input"
                   label="Link Title"
+                  variant="standard"
                   className={classes.titleInput}
                   defaultValue={title}
                   onChange={handleChange}
@@ -117,7 +117,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
               </form>
             )}
           </Grid>
-          <Grid item className={classes.urlContainer}>
+          <Grid item>
             {!isEditing ? (
               <Typography variant="body2" className={classes.linksText}>
                 <a className={classes.links} href={url}>
@@ -130,6 +130,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   className={classes.urlInput}
                   id="link-url-input"
                   label="URL"
+                  variant="standard"
                   defaultValue={urlValue}
                   onChange={handleUrlChange}
                   color={isDarkMode ? "secondary" : "primary"}

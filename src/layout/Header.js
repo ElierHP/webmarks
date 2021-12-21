@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { DarkModeContext } from "../context/DarkModeProvider";
 import {
   ContentData,
   ContentMethods,
@@ -6,7 +7,7 @@ import {
 } from "../context/ContentDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
-import palette from "../css/palette";
+import palette from "./palette";
 import {
   Container,
   AppBar,
@@ -22,6 +23,7 @@ import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function Header() {
   //Styles
+  const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
       appBar: {
@@ -60,7 +62,9 @@ function Header() {
         padding: "0.2rem",
         marginRight: "0.5rem",
         "&:hover": {
-          backgroundColor: palette.colors.hoverIcon,
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hoverIcon
+            : palette.colors.hoverIcon,
         },
       },
     })

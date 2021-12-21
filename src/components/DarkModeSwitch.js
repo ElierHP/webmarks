@@ -4,9 +4,11 @@ import { IconButton, Typography, Box, Grid } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { makeStyles, createStyles } from "@mui/styles";
+import palette from "../layout/palette";
 
 export default function SwitchLabels() {
   //Styles
+  const [isDarkMode, setIsDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
       root: {
@@ -16,13 +18,15 @@ export default function SwitchLabels() {
       },
       iconButton: {
         padding: "0.5rem",
+        "&:hover": {
+          backgroundColor: isDarkMode && palette.darkThemeColors.hoverIcon,
+        },
       },
     })
   );
   const classes = useStyles();
   //Style End
 
-  const [isDarkMode, setIsDarkMode] = useContext(DarkModeContext);
   const handleClick = () => {
     setIsDarkMode(!isDarkMode);
   };

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
+import palette from "../layout/palette";
 import { Grid, IconButton, Typography, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,7 +20,9 @@ function FolderContent({ title, clickHandler, _id, url }) {
         padding: "1rem !important",
         borderRadius: "0.2rem",
         "&:hover": {
-          backgroundColor: palette.colors.hover,
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hover
+            : palette.colors.hover,
         },
       },
       folderContainer: {
@@ -31,7 +33,9 @@ function FolderContent({ title, clickHandler, _id, url }) {
           padding: "0",
         },
         "&:hover": {
-          backgroundColor: palette.colors.hoverIcon,
+          backgroundColor: isDarkMode
+            ? palette.darkThemeColors.hoverIcon
+            : palette.colors.hoverIcon,
         },
       },
       folderIcon: {
@@ -76,6 +80,7 @@ function FolderContent({ title, clickHandler, _id, url }) {
                 <TextField
                   id="folder-title-input"
                   label="Folder Title"
+                  variant="standard"
                   defaultValue={title}
                   onChange={handleChange}
                   color={isDarkMode ? "secondary" : "primary"}

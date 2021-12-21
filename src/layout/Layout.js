@@ -1,20 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import Paper from "@mui/material/Paper";
 import Header from "./Header";
 import Footer from "./Footer";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../css/palette";
 
 function Layout({ children }) {
-  const [isDarkMode] = useContext(DarkModeContext);
   return (
-    <Paper
-      style={{
-        backgroundColor: isDarkMode
-          ? palette.colors.primary
-          : palette.colors.secondary,
-      }}
-    >
+    <Paper>
       <Header />
       {children}
       <Footer />
