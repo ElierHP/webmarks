@@ -18,6 +18,11 @@ export default function ItemMenu() {
         position: "relative",
         marginRight: "0.5rem",
       },
+      iconButton: {
+        "&:hover": {
+          backgroundColor: palette.colors.hover,
+        },
+      },
       inputForm: {
         position: "absolute",
         top: -15,
@@ -26,7 +31,7 @@ export default function ItemMenu() {
         backgroundColor: isDarkMode
           ? palette.darkThemeColors.secondary
           : palette.colors.secondary,
-        padding: "1.5rem 1rem 1.5rem 1rem",
+        padding: "2.5rem 1.2rem 1.5rem 1.2rem",
         zIndex: "10",
         boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
         borderRadius: "0.3rem",
@@ -41,9 +46,6 @@ export default function ItemMenu() {
       },
       menuInput: {
         marginBottom: "1rem",
-      },
-      menuBtn: {
-        marginTop: "1rem",
       },
       addIcon: {
         padding: "0.2rem",
@@ -155,8 +157,12 @@ export default function ItemMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
-        <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
+        <MenuItem onClick={handleFolderClick} className={classes.iconButton}>
+          New Folder
+        </MenuItem>
+        <MenuItem onClick={handleLinkClick} className={classes.iconButton}>
+          New Link
+        </MenuItem>
       </Menu>
 
       {/* New Folder Menu */}
@@ -216,7 +222,6 @@ export default function ItemMenu() {
             variant="contained"
             color="primary"
             onClick={handleLinkSubmit}
-            className={classes.menuBtn}
           >
             Submit
           </Button>
