@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import palette from "../layout/palette";
+import { palette } from "../layout/Theme";
 import { Grid, Typography, TextField, IconButton } from "@mui/material";
 import { makeStyles, createStyles } from "@mui/styles";
 import EditIcon from "@mui/icons-material/Edit";

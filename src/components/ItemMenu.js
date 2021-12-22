@@ -3,7 +3,7 @@ import { AppData, AppState } from "../context/AppDataProvider";
 import useItemMenu from "../hooks/useItemMenu";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import axios from "axios";
-import palette from "../layout/palette";
+import { palette } from "../layout/Theme";
 import { TextField, Menu, MenuItem, Button, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { makeStyles, createStyles } from "@mui/styles";
@@ -31,7 +31,7 @@ export default function ItemMenu() {
         right: 0,
         width: "220px",
         backgroundColor: isDarkMode
-          ? palette.darkThemeColors.secondary
+          ? palette.darkThemeColors.primary
           : palette.colors.secondary,
         padding: "2.5rem 1.2rem 1.5rem 1.2rem",
         zIndex: "10",

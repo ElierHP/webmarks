@@ -4,7 +4,7 @@ import { IconButton, Typography, Box, Grid } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { makeStyles, createStyles } from "@mui/styles";
-import palette from "../layout/palette";
+import { palette } from "../layout/Theme";
 
 export default function SwitchLabels() {
   //Styles

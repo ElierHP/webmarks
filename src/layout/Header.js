@@ -3,7 +3,7 @@ import { DarkModeContext } from "../context/DarkModeProvider";
 import { AppData, AppState } from "../context/AppDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
-import palette from "./palette";
+import { palette } from "./Theme";
 import {
   Container,
   AppBar,
