@@ -1,10 +1,6 @@
 import React, { useContext } from "react";
 import { DarkModeContext } from "../context/DarkModeProvider";
-import {
-  ContentData,
-  ContentMethods,
-  HeaderContext,
-} from "../context/ContentDataProvider";
+import { AppData, AppState } from "../context/AppDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import palette from "./palette";
@@ -72,9 +68,8 @@ function Header() {
   const classes = useStyles();
   //Styles
 
-  const [data, appState] = useContext(ContentData);
-  const [dispatch, setAppState] = useContext(ContentMethods);
-  const [directory, setDirectory] = useContext(HeaderContext);
+  const [data, dispatch] = useContext(AppData);
+  const [appState, setAppState, directory, setDirectory] = useContext(AppState);
 
   const logoClickHandler = () => {
     setAppState("0");

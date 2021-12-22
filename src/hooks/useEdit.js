@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
-import { ContentMethods } from "../context/ContentDataProvider";
+import { AppData } from "../context/AppDataProvider";
 import axios from "axios";
 
 const useEdit = ({ title, _id, url, params }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [titleValue, setTitleValue] = useState(title);
   const [urlValue, setUrlValue] = useState(url);
-  const [dispatch] = useContext(ContentMethods);
+  const [, dispatch] = useContext(AppData);
 
   const handleChange = (e) => {
     setTitleValue(e.target.value);

@@ -1,23 +1,26 @@
-import Index from "./pages";
+import { Home } from "./pages/index";
 import { DarkModeProvider } from "./context/DarkModeProvider";
 import { Routes, Route } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import Theme from "./layout/Theme";
-import { ContentDataProvider } from "./context/ContentDataProvider";
+import { AppDataProvider } from "./context/AppDataProvider";
+import Layout from "./layout/Layout";
 
 function App() {
   return (
-    <DarkModeProvider>
-      <Theme>
-        <CssBaseline>
-          <ContentDataProvider>
-            <Routes>
-              <Route path="/" element={<Index />} />
-            </Routes>
-          </ContentDataProvider>
-        </CssBaseline>
-      </Theme>
-    </DarkModeProvider>
+    <AppDataProvider>
+      <DarkModeProvider>
+        <Theme>
+          <CssBaseline>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+              </Routes>
+            </Layout>
+          </CssBaseline>
+        </Theme>
+      </DarkModeProvider>
+    </AppDataProvider>
   );
 }
 

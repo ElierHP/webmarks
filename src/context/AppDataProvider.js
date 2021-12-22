@@ -2,11 +2,10 @@ import React, { createContext, useReducer, useState, useEffect } from "react";
 import dataReducer from "../reducers/dataReducer";
 import axios from "axios";
 
-export const ContentData = createContext();
-export const ContentMethods = createContext();
-export const HeaderContext = createContext();
+export const AppData = createContext();
+export const AppState = createContext();
 
-export const ContentDataProvider = ({ children }) => {
+export const AppDataProvider = ({ children }) => {
   //Fetch server data
   useEffect(() => {
     async function fetchData() {
@@ -25,12 +24,12 @@ export const ContentDataProvider = ({ children }) => {
   const [directory, setDirectory] = useState("Main");
 
   return (
-    <HeaderContext.Provider value={[directory, setDirectory]}>
-      <ContentData.Provider value={[data, appState]}>
-        <ContentMethods.Provider value={[dispatch, setAppState]}>
-          {children}
-        </ContentMethods.Provider>
-      </ContentData.Provider>
-    </HeaderContext.Provider>
+    <AppData.Provider value={[data, dispatch]}>
+      <AppState.Provider
+        value={[appState, setAppState, directory, setDirectory]}
+      >
+        {children}
+      </AppState.Provider>
+    </AppData.Provider>
   );
 };

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { ContentData, ContentMethods } from "../context/ContentDataProvider";
+import { AppData, AppState } from "../context/AppDataProvider";
 import useItemMenu from "../hooks/useItemMenu";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import axios from "axios";
@@ -63,8 +63,8 @@ export default function ItemMenu() {
   //Styles End
 
   //Context API
-  const [, appState] = useContext(ContentData);
-  const [dispatch] = useContext(ContentMethods);
+  const [, dispatch] = useContext(AppData);
+  const [appState] = useContext(AppState);
 
   //Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
