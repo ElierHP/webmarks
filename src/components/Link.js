@@ -1,73 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import useEdit from "../hooks/useEdit";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import { palette } from "../layout/Theme";
-import { Grid, Typography, TextField, IconButton } from "@mui/material";
-import { makeStyles, createStyles } from "@mui/styles";
+import { Grid, Typography, TextField, IconButton, Link } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
 function LinkContent({ title, url, clickHandler, _id }) {
-  //Styles
-  const [isDarkMode] = useContext(DarkModeContext);
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      // root: {
-      //   padding: "0.4rem 1rem 0.4rem 1rem",
-      //   cursor: "pointer",
-      //   borderRadius: "0.2rem",
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hover
-      //       : palette.colors.hover,
-      //   },
-      // },
-      // linksText: {
-      //   marginLeft: "1rem",
-      //   [theme.breakpoints.down("xs")]: {},
-      // },
-      // links: {
-      //   textDecoration: "none",
-      //   color: isDarkMode
-      //     ? palette.darkThemeColors.links
-      //     : palette.colors.links,
-      // },
-      // favicon: {
-      //   marginRight: "0.5rem",
-      //   marginLeft: "1.4rem",
-      //   marginTop: "0.2rem",
-      //   [theme.breakpoints.down("xs")]: {
-      //     marginLeft: "0.3rem",
-      //   },
-      // },
-      // iconButton: {
-      //   [theme.breakpoints.down("xs")]: {
-      //     padding: "0",
-      //   },
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hoverIcon
-      //       : palette.colors.hoverIcon,
-      //   },
-      // },
-      // successIcon: {
-      //   color: palette.colors.success,
-      // },
-      // titleInput: {
-      //   width: "80%",
-      // },
-      // urlInput: {
-      //   [theme.breakpoints.up("lg")]: {
-      //     minWidth: "400px",
-      //   },
-      // },
-    })
-  );
-  const classes = useStyles();
-  //Styles End
-
   const params = "links";
   const [
     isEditing,
@@ -86,32 +25,37 @@ function LinkContent({ title, url, clickHandler, _id }) {
       container
       alignItems="center"
       justifyContent="space-between"
-      className={classes.root}
+      sx={{
+        padding: "0.4rem 1rem 0.4rem 1rem",
+        cursor: "pointer",
+        borderRadius: "0.2rem",
+      }}
     >
       <Grid item xs={9} onClick={() => !isEditing && clickHandler()}>
         <Grid container alignItems="center">
           <Grid item>
             <img
               src={`https://www.google.com/s2/favicons?domain_url=${url}`}
-              className={classes.favicon}
+              style={{
+                marginRight: "0.5rem",
+                marginLeft: "1.4rem",
+                marginTop: "0.2rem",
+              }}
               alt="external site's favicon"
             />
           </Grid>
           <Grid item>
             {!isEditing ? (
-              <Typography variant="body1" className={classes.title}>
-                {`${title} : `}
-              </Typography>
+              <Typography variant="body1">{`${title} : `}</Typography>
             ) : (
               <form onSubmit={handleEdit}>
                 <TextField
                   id="link-title-input"
                   label="Link Title"
                   variant="standard"
-                  className={classes.titleInput}
                   defaultValue={title}
                   onChange={handleChange}
-                  color={isDarkMode ? "secondary" : "primary"}
+                  color="primary"
                   autoFocus
                 />
               </form>
@@ -119,21 +63,20 @@ function LinkContent({ title, url, clickHandler, _id }) {
           </Grid>
           <Grid item>
             {!isEditing ? (
-              <Typography variant="body2" className={classes.linksText}>
-                <a className={classes.links} href={url}>
+              <Typography variant="body2" sx={{ marginLeft: "1rem" }}>
+                <Link href={url} underline="none" color="primary">
                   {url}
-                </a>
+                </Link>
               </Typography>
             ) : (
               <form onSubmit={handleEdit}>
                 <TextField
-                  className={classes.urlInput}
                   id="link-url-input"
                   label="URL"
                   variant="standard"
                   defaultValue={urlValue}
                   onChange={handleUrlChange}
-                  color={isDarkMode ? "secondary" : "primary"}
+                  color="primary"
                   autoFocus
                 />
               </form>
@@ -144,26 +87,20 @@ function LinkContent({ title, url, clickHandler, _id }) {
       <Grid item>
         {!isEditing ? (
           <>
-            <IconButton
-              className={classes.iconButton}
-              onClick={() => setIsEditing(true)}
-            >
+            <IconButton onClick={() => setIsEditing(true)}>
               <EditIcon />
             </IconButton>
-            <IconButton className={classes.iconButton} onClick={handleDelete}>
+            <IconButton onClick={handleDelete}>
               <DeleteIcon />
             </IconButton>
           </>
         ) : (
           <>
-            <IconButton className={classes.iconButton} onClick={handleEdit}>
-              <DoneIcon className={classes.successIcon} />
+            <IconButton color="success" onClick={handleEdit}>
+              <DoneIcon />
             </IconButton>
-            <IconButton
-              className={classes.iconButton}
-              onClick={handleCloseIcon}
-            >
-              <CloseIcon color="error" />
+            <IconButton color="error" onClick={handleCloseIcon}>
+              <CloseIcon />
             </IconButton>
           </>
         )}

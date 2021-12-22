@@ -1,14 +1,14 @@
 import React from "react";
-import { Container, AppBar, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 function Footer() {
   return (
     <footer>
-      <AppBar position="static" style={{ padding: "0.4rem" }} elevation={0}>
-        <Container>
-          <Typography align="center">Copyright @2020</Typography>
-        </Container>
-      </AppBar>
+      <Box sx={{ backgroundColor: "primary.main", padding: "0.4rem" }}>
+        <Typography align="center" color="common.white">
+          Copyright @2021
+        </Typography>
+      </Box>
     </footer>
   );
 }

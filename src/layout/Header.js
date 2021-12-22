@@ -85,7 +85,6 @@ function Header() {
                 {directory !== "Main" && (
                   <IconButton
                     edge="start"
-                    color="inherit"
                     aria-label="arrow"
                     sx={{ padding: "3px" }}
                     onClick={prevClickHandler}

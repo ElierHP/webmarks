@@ -19,7 +19,7 @@ function Home() {
       sx={{
         minHeight: {
           xs: `calc(100vh - 156.7812px)`,
-          sm: `calc(100vh - 165px)`,
+          sm: `calc(100vh - 167px)`,
         },
         paddingBottom: "1rem",
       }}

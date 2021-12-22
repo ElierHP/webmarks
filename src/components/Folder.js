@@ -1,78 +1,44 @@
-import React, { useContext } from "react";
+import React from "react";
 import useEdit from "../hooks/useEdit";
-import { DarkModeContext } from "../context/DarkModeProvider";
-import { palette } from "../layout/Theme";
 import { Grid, IconButton, Typography, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
-import { makeStyles, createStyles } from "@mui/styles";
 
-function FolderContent({ title, clickHandler, _id, url }) {
-  //Styles
-  const [isDarkMode] = useContext(DarkModeContext);
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      // root: {
-      //   cursor: "pointer",
-      //   padding: "1rem !important",
-      //   borderRadius: "0.2rem",
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hover
-      //       : palette.colors.hover,
-      //   },
-      // },
-      // folderContainer: {
-      //   flexGrow: 1,
-      // },
-      // iconButton: {
-      //   [theme.breakpoints.down("xs")]: {
-      //     padding: "0",
-      //   },
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hoverIcon
-      //       : palette.colors.hoverIcon,
-      //   },
-      // },
-      // folderIcon: {
-      //   marginRight: "0.5rem",
-      //   marginLeft: "1rem",
-      //   color: palette.colors.folderIcon,
-      //   [theme.breakpoints.down("xs")]: {
-      //     marginLeft: "0",
-      //   },
-      // },
-      // successIcon: {
-      //   color: palette.colors.success,
-      // },
-      // title: {
-      //   userSelect: "none",
-      // },
-    })
-  );
-  const classes = useStyles();
-  //Style End
-
+function FolderContent({ title, clickHandler, _id }) {
   const params = "folders";
   const [isEditing, setIsEditing, handleChange, handleDelete, handleEdit] =
     useEdit({ title, _id, params });
 
   return (
     <>
-      <Grid item container alignItems="center" className={classes.root}>
+      <Grid
+        item
+        container
+        alignItems="center"
+        sx={{
+          cursor: "pointer",
+          padding: "1rem !important",
+          borderRadius: "0.2rem",
+        }}
+      >
         <Grid
           item
           onClick={() => !isEditing && clickHandler()}
-          className={classes.folderContainer}
+          sx={{ flexGrow: 1 }}
         >
           <Grid container alignItems="center">
-            <FolderIcon fontSize="large" className={classes.folderIcon} />
+            <FolderIcon
+              fontSize="large"
+              sx={{
+                marginRight: "0.5rem",
+                marginLeft: "1rem",
+              }}
+            />
             {!isEditing ? (
-              <Typography variant="h6" className={classes.title}>
+              <Typography variant="h6" sx={{ userSelect: "none" }}>
                 {title}
               </Typography>
             ) : (
@@ -83,7 +49,7 @@ function FolderContent({ title, clickHandler, _id, url }) {
                   variant="standard"
                   defaultValue={title}
                   onChange={handleChange}
-                  color={isDarkMode ? "secondary" : "primary"}
+                  color="primary"
                   autoFocus
                 />
               </form>
@@ -93,25 +59,19 @@ function FolderContent({ title, clickHandler, _id, url }) {
         <Grid item>
           {!isEditing ? (
             <>
-              <IconButton
-                className={classes.iconButton}
-                onClick={() => setIsEditing(true)}
-              >
+              <IconButton onClick={() => setIsEditing(true)}>
                 <EditIcon />
               </IconButton>
-              <IconButton className={classes.iconButton} onClick={handleDelete}>
+              <IconButton onClick={handleDelete}>
                 <DeleteIcon />
               </IconButton>
             </>
           ) : (
             <>
-              <IconButton className={classes.iconButton} onClick={handleEdit}>
-                <DoneIcon className={classes.successIcon} />
+              <IconButton color="success" onClick={handleEdit}>
+                <DoneIcon />
               </IconButton>
-              <IconButton
-                className={classes.iconButton}
-                onClick={() => setIsEditing(false)}
-              >
+              <IconButton color="error" onClick={() => setIsEditing(false)}>
                 <CloseIcon color="error" />
               </IconButton>
             </>
