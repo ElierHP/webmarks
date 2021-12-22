@@ -1,15 +1,18 @@
 import React from "react";
-import Paper from "@mui/material/Paper";
 import Header from "./Header";
 import Footer from "./Footer";
+import CssBaseline from "@mui/material/CssBaseline";
+import Theme from "./Theme";
 
 function Layout({ children }) {
   return (
-    <Paper>
-      <Header />
-      {children}
-      <Footer />
-    </Paper>
+    <Theme>
+      <CssBaseline>
+        <Header />
+        {children}
+        <Footer />
+      </CssBaseline>
+    </Theme>
   );
 }
 

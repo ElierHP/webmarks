@@ -15,43 +15,43 @@ function FolderContent({ title, clickHandler, _id, url }) {
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
-      root: {
-        cursor: "pointer",
-        padding: "1rem !important",
-        borderRadius: "0.2rem",
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hover
-            : palette.colors.hover,
-        },
-      },
-      folderContainer: {
-        flexGrow: 1,
-      },
-      iconButton: {
-        [theme.breakpoints.down("xs")]: {
-          padding: "0",
-        },
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hoverIcon
-            : palette.colors.hoverIcon,
-        },
-      },
-      folderIcon: {
-        marginRight: "0.5rem",
-        marginLeft: "1rem",
-        color: palette.colors.folderIcon,
-        [theme.breakpoints.down("xs")]: {
-          marginLeft: "0",
-        },
-      },
-      successIcon: {
-        color: palette.colors.success,
-      },
-      title: {
-        userSelect: "none",
-      },
+      // root: {
+      //   cursor: "pointer",
+      //   padding: "1rem !important",
+      //   borderRadius: "0.2rem",
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hover
+      //       : palette.colors.hover,
+      //   },
+      // },
+      // folderContainer: {
+      //   flexGrow: 1,
+      // },
+      // iconButton: {
+      //   [theme.breakpoints.down("xs")]: {
+      //     padding: "0",
+      //   },
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hoverIcon
+      //       : palette.colors.hoverIcon,
+      //   },
+      // },
+      // folderIcon: {
+      //   marginRight: "0.5rem",
+      //   marginLeft: "1rem",
+      //   color: palette.colors.folderIcon,
+      //   [theme.breakpoints.down("xs")]: {
+      //     marginLeft: "0",
+      //   },
+      // },
+      // successIcon: {
+      //   color: palette.colors.success,
+      // },
+      // title: {
+      //   userSelect: "none",
+      // },
     })
   );
   const classes = useStyles();

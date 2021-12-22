@@ -14,49 +14,49 @@ export default function ItemMenu() {
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
-      root: {
-        position: "relative",
-        marginRight: "0.5rem",
-      },
-      iconButton: {
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hoverIcon
-            : palette.colors.hoverIcon,
-        },
-      },
-      inputForm: {
-        position: "absolute",
-        top: -15,
-        right: 0,
-        width: "220px",
-        backgroundColor: isDarkMode
-          ? palette.darkThemeColors.primary
-          : palette.colors.secondary,
-        padding: "2.5rem 1.2rem 1.5rem 1.2rem",
-        zIndex: "10",
-        boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-        borderRadius: "0.3rem",
-        [theme.breakpoints.down("sm")]: {
-          right: -15,
-        },
-      },
-      closeIcon: {
-        position: "absolute",
-        top: 0,
-        right: 0,
-      },
-      menuInput: {
-        marginBottom: "1rem",
-      },
-      addIcon: {
-        padding: "0.2rem",
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hoverIcon
-            : palette.colors.hoverIcon,
-        },
-      },
+      // root: {
+      //   position: "relative",
+      //   marginRight: "0.5rem",
+      // },
+      // iconButton: {
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hoverIcon
+      //       : palette.colors.hoverIcon,
+      //   },
+      // },
+      // inputForm: {
+      //   position: "absolute",
+      //   top: -15,
+      //   right: 0,
+      //   width: "220px",
+      //   backgroundColor: isDarkMode
+      //     ? palette.darkThemeColors.primary
+      //     : palette.colors.secondary,
+      //   padding: "2.5rem 1.2rem 1.5rem 1.2rem",
+      //   zIndex: "10",
+      //   boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+      //   borderRadius: "0.3rem",
+      //   [theme.breakpoints.down("sm")]: {
+      //     right: -15,
+      //   },
+      // },
+      // closeIcon: {
+      //   position: "absolute",
+      //   top: 0,
+      //   right: 0,
+      // },
+      // menuInput: {
+      //   marginBottom: "1rem",
+      // },
+      // addIcon: {
+      //   padding: "0.2rem",
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hoverIcon
+      //       : palette.colors.hoverIcon,
+      //   },
+      // },
     })
   );
   const classes = useStyles();

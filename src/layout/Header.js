@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import { DarkModeContext } from "../context/DarkModeProvider";
 import { AppData, AppState } from "../context/AppDataProvider";
 import ItemMenu from "../components/ItemMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
-import { palette } from "./Theme";
 import {
   Container,
   AppBar,
@@ -13,61 +11,10 @@ import {
   IconButton,
   Typography,
 } from "@mui/material";
-import { createStyles, makeStyles } from "@mui/styles";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function Header() {
-  //Styles
-  const [isDarkMode] = useContext(DarkModeContext);
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      appBar: {
-        padding: "0.5rem 0 0.5rem 0",
-      },
-      toolBar: {
-        display: "flex",
-        padding: "0",
-        justifyContent: "space-between",
-        [theme.breakpoints.down("xs")]: {
-          padding: "0 0.5rem 0 0.5rem",
-        },
-      },
-      logo: {
-        cursor: "pointer",
-      },
-      gridContainer: {
-        padding: "0.25rem 0.5rem 0.25rem 1rem",
-        display: "flex",
-        justifyContent: "space-between",
-        [theme.breakpoints.down("xs")]: {
-          padding: "0.25rem 0.8rem 0.25rem 0.8rem",
-        },
-      },
-      arrowButton: {
-        padding: "3px",
-        "&:hover": {
-          backgroundColor: palette.colors.hoverIcon,
-        },
-      },
-      directoryText: {
-        marginLeft: "1rem",
-        userSelect: "none",
-      },
-      alphabetIcon: {
-        padding: "0.2rem",
-        marginRight: "0.5rem",
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hoverIcon
-            : palette.colors.hoverIcon,
-        },
-      },
-    })
-  );
-  const classes = useStyles();
-  //Styles
-
   const [data, dispatch] = useContext(AppData);
   const [appState, setAppState, directory, setDirectory] = useContext(AppState);
 
@@ -94,16 +41,25 @@ function Header() {
     <nav>
       <AppBar
         position="static"
-        className={classes.appBar}
         elevation={0}
         color="primary"
+        sx={{
+          padding: "0.5rem 0",
+        }}
       >
         <Container>
-          <Toolbar className={classes.toolBar}>
+          <Toolbar
+            sx={{
+              justifyContent: "space-between",
+              padding: {
+                xs: "0",
+              },
+            }}
+          >
             <Typography
               variant="h5"
-              className={classes.logo}
               onClick={logoClickHandler}
+              sx={{ cursor: "pointer" }}
             >
               WebMarks
             </Typography>
@@ -113,7 +69,17 @@ function Header() {
       </AppBar>
       <Box boxShadow={3}>
         <Container>
-          <Grid container className={classes.gridContainer} alignItems="center">
+          <Grid
+            container
+            justifyContent="space-between"
+            alignItems="center"
+            sx={{
+              padding: {
+                xs: "0.25rem 0.8rem 0.25rem 0.8rem",
+                sm: "0.25rem 0.5rem 0.25rem 1rem",
+              },
+            }}
+          >
             <Grid item>
               <Grid container alignItems="center">
                 {directory !== "Main" && (
@@ -121,13 +87,16 @@ function Header() {
                     edge="start"
                     color="inherit"
                     aria-label="arrow"
-                    className={classes.arrowButton}
+                    sx={{ padding: "3px" }}
                     onClick={prevClickHandler}
                   >
                     <ArrowBackIcon />
                   </IconButton>
                 )}
-                <Typography variant="h6" className={classes.directoryText}>
+                <Typography
+                  variant="h6"
+                  sx={{ marginLeft: "1rem", userSelect: "none" }}
+                >
                   {directory}
                 </Typography>
               </Grid>
@@ -136,7 +105,7 @@ function Header() {
               <Grid container alignItems="center">
                 <IconButton
                   aria-label="a-z-sort-icon"
-                  className={classes.alphabetIcon}
+                  sx={{ padding: "0.2rem", marginRight: "0.5rem" }}
                   onClick={() => dispatch({ type: "sort" })}
                 >
                   <SortByAlphaIcon />

@@ -11,17 +11,17 @@ export default function SwitchLabels() {
   const [isDarkMode, setIsDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
-      root: {
-        [theme.breakpoints.down("xs")]: {
-          display: "none",
-        },
-      },
-      iconButton: {
-        padding: "0.5rem",
-        "&:hover": {
-          backgroundColor: isDarkMode && palette.darkThemeColors.hoverIcon,
-        },
-      },
+      // root: {
+      //   [theme.breakpoints.down("xs")]: {
+      //     display: "none",
+      //   },
+      // },
+      // iconButton: {
+      //   padding: "0.5rem",
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode && palette.darkThemeColors.hoverIcon,
+      //   },
+      // },
     })
   );
   const classes = useStyles();

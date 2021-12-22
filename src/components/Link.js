@@ -14,55 +14,55 @@ function LinkContent({ title, url, clickHandler, _id }) {
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
-      root: {
-        padding: "0.4rem 1rem 0.4rem 1rem",
-        cursor: "pointer",
-        borderRadius: "0.2rem",
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hover
-            : palette.colors.hover,
-        },
-      },
-      linksText: {
-        marginLeft: "1rem",
-        [theme.breakpoints.down("xs")]: {},
-      },
-      links: {
-        textDecoration: "none",
-        color: isDarkMode
-          ? palette.darkThemeColors.links
-          : palette.colors.links,
-      },
-      favicon: {
-        marginRight: "0.5rem",
-        marginLeft: "1.4rem",
-        marginTop: "0.2rem",
-        [theme.breakpoints.down("xs")]: {
-          marginLeft: "0.3rem",
-        },
-      },
-      iconButton: {
-        [theme.breakpoints.down("xs")]: {
-          padding: "0",
-        },
-        "&:hover": {
-          backgroundColor: isDarkMode
-            ? palette.darkThemeColors.hoverIcon
-            : palette.colors.hoverIcon,
-        },
-      },
-      successIcon: {
-        color: palette.colors.success,
-      },
-      titleInput: {
-        width: "80%",
-      },
-      urlInput: {
-        [theme.breakpoints.up("lg")]: {
-          minWidth: "400px",
-        },
-      },
+      // root: {
+      //   padding: "0.4rem 1rem 0.4rem 1rem",
+      //   cursor: "pointer",
+      //   borderRadius: "0.2rem",
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hover
+      //       : palette.colors.hover,
+      //   },
+      // },
+      // linksText: {
+      //   marginLeft: "1rem",
+      //   [theme.breakpoints.down("xs")]: {},
+      // },
+      // links: {
+      //   textDecoration: "none",
+      //   color: isDarkMode
+      //     ? palette.darkThemeColors.links
+      //     : palette.colors.links,
+      // },
+      // favicon: {
+      //   marginRight: "0.5rem",
+      //   marginLeft: "1.4rem",
+      //   marginTop: "0.2rem",
+      //   [theme.breakpoints.down("xs")]: {
+      //     marginLeft: "0.3rem",
+      //   },
+      // },
+      // iconButton: {
+      //   [theme.breakpoints.down("xs")]: {
+      //     padding: "0",
+      //   },
+      //   "&:hover": {
+      //     backgroundColor: isDarkMode
+      //       ? palette.darkThemeColors.hoverIcon
+      //       : palette.colors.hoverIcon,
+      //   },
+      // },
+      // successIcon: {
+      //   color: palette.colors.success,
+      // },
+      // titleInput: {
+      //   width: "80%",
+      // },
+      // urlInput: {
+      //   [theme.breakpoints.up("lg")]: {
+      //     minWidth: "400px",
+      //   },
+      // },
     })
   );
   const classes = useStyles();

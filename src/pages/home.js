@@ -3,7 +3,6 @@ import { AppData, AppState } from "../context/AppDataProvider";
 import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { v4 as uuidv4 } from "uuid";
-import { makeStyles, createStyles } from "@mui/styles";
 import { Grid, Container } from "@mui/material";
 
 function Home() {
@@ -15,27 +14,17 @@ function Home() {
     setDirectory(title);
   };
 
-  //Styles
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      root: {
-        minHeight: `calc(100vh - 165px)`,
-        paddingBottom: "1rem",
-        [theme.breakpoints.down("xs")]: {
-          minHeight: `calc(100vh - 156.7812px)`,
-        },
-      },
-      gridContainer: {
-        marginTop: "0.5rem",
-      },
-    })
-  );
-  const classes = useStyles();
-  //Style End
-
   return (
-    <Container className={classes.root}>
-      <Grid container spacing={2} className={classes.gridContainer}>
+    <Container
+      sx={{
+        minHeight: {
+          xs: `calc(100vh - 156.7812px)`,
+          sm: `calc(100vh - 165px)`,
+        },
+        paddingBottom: "1rem",
+      }}
+    >
+      <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
         {data
           .filter((idFilter) => idFilter.parent_id === appState)
           .map((item) =>
