@@ -30,24 +30,12 @@ function Theme({ children }) {
   const theme = createTheme({
     palette: {
       mode: "light",
-      primary: {
-        main: palette.colors.primary,
-      },
-      secondary: {
-        main: palette.colors.secondary,
-      },
     },
   });
 
   const darkTheme = createTheme({
     palette: {
       mode: "dark",
-      primary: {
-        main: palette.darkThemeColors.primary,
-      },
-      secondary: {
-        main: palette.colors.secondary,
-      },
     },
   });
   return (

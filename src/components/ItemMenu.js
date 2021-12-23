@@ -4,7 +4,15 @@ import useItemMenu from "../hooks/useItemMenu";
 import { DarkModeContext } from "../context/DarkModeProvider";
 import axios from "axios";
 import { palette } from "../layout/Theme";
-import { TextField, Menu, MenuItem, Button, IconButton } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Menu,
+  MenuItem,
+  Button,
+  IconButton,
+  FormControl,
+} from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { makeStyles, createStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
@@ -14,49 +22,9 @@ export default function ItemMenu() {
   const [isDarkMode] = useContext(DarkModeContext);
   const useStyles = makeStyles((theme) =>
     createStyles({
-      // root: {
-      //   position: "relative",
-      //   marginRight: "0.5rem",
-      // },
-      // iconButton: {
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hoverIcon
-      //       : palette.colors.hoverIcon,
-      //   },
-      // },
-      // inputForm: {
-      //   position: "absolute",
-      //   top: -15,
-      //   right: 0,
-      //   width: "220px",
-      //   backgroundColor: isDarkMode
-      //     ? palette.darkThemeColors.primary
-      //     : palette.colors.secondary,
-      //   padding: "2.5rem 1.2rem 1.5rem 1.2rem",
-      //   zIndex: "10",
-      //   boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-      //   borderRadius: "0.3rem",
       //   [theme.breakpoints.down("sm")]: {
       //     right: -15,
       //   },
-      // },
-      // closeIcon: {
-      //   position: "absolute",
-      //   top: 0,
-      //   right: 0,
-      // },
-      // menuInput: {
-      //   marginBottom: "1rem",
-      // },
-      // addIcon: {
-      //   padding: "0.2rem",
-      //   "&:hover": {
-      //     backgroundColor: isDarkMode
-      //       ? palette.darkThemeColors.hoverIcon
-      //       : palette.colors.hoverIcon,
-      //   },
-      // },
     })
   );
   const classes = useStyles();
@@ -144,13 +112,13 @@ export default function ItemMenu() {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{ position: "relative", marginRight: "0.5rem" }}>
       <IconButton
         size="small"
         aria-controls="addnew-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        className={classes.addIcon}
+        sx={{ padding: "0.2rem" }}
       >
         <AddCircleOutlineIcon />
       </IconButton>
@@ -171,11 +139,21 @@ export default function ItemMenu() {
 
       {/* New Folder Menu */}
       {isNewFolder && (
-        <form
-          className={classes.inputForm}
+        <FormControl
           id="new-folder-menu"
           open={Boolean(isNewFolder)}
           onSubmit={handleFolderSubmit}
+          sx={{
+            position: "absolute",
+            top: -15,
+            right: 0,
+            width: "220px",
+            padding: "2.5rem 1.2rem 1.5rem 1.2rem",
+            zIndex: "10",
+            boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+            borderRadius: "0.3rem",
+            backgroundColor: "common.white",
+          }}
         >
           <TextField
             id="folder-input"
@@ -183,7 +161,7 @@ export default function ItemMenu() {
             defaultValue={folderTitle}
             onChange={handleTitleChange}
             style={{ marginBottom: "1rem" }}
-            color={isDarkMode ? "secondary" : "primary"}
+            color="primary"
           />
           <Button
             variant="contained"
@@ -192,35 +170,48 @@ export default function ItemMenu() {
           >
             Submit
           </Button>
-          <IconButton className={classes.closeIcon} onClick={handleFolderClose}>
+          <IconButton
+            onClick={handleFolderClose}
+            sx={{ position: "absolute", top: 0, right: 0 }}
+          >
             <CloseIcon />
           </IconButton>
-        </form>
+        </FormControl>
       )}
 
       {/* New Link Menu */}
       {isNewLink && (
-        <form
-          className={classes.inputForm}
+        <FormControl
           id="new-link-menu"
           open={Boolean(isNewLink)}
           onSubmit={handleLinkSubmit}
+          sx={{
+            position: "absolute",
+            top: -15,
+            right: 0,
+            width: "220px",
+            padding: "2.5rem 1.2rem 1.5rem 1.2rem",
+            zIndex: "10",
+            boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+            borderRadius: "0.3rem",
+            backgroundColor: "common.white",
+          }}
         >
           <TextField
             id="link-input"
             label="Link Title"
             defaultValue={linkTitle}
             onChange={handleLinkTitleChange}
-            className={classes.menuInput}
-            color={isDarkMode ? "secondary" : "primary"}
+            color="primary"
+            sx={{ marginBottom: "1rem" }}
           />
           <TextField
             id="link-url-input"
             label="URL"
             defaultValue={linkUrl}
             onChange={handleUrlChange}
-            className={classes.menuInput}
-            color={isDarkMode ? "secondary" : "primary"}
+            color="primary"
+            sx={{ marginBottom: "1rem" }}
           />
           <Button
             variant="contained"
@@ -229,11 +220,14 @@ export default function ItemMenu() {
           >
             Submit
           </Button>
-          <IconButton className={classes.closeIcon} onClick={handleLinkClose}>
+          <IconButton
+            onClick={handleLinkClose}
+            sx={{ position: "absolute", top: 0, right: 0 }}
+          >
             <CloseIcon />
           </IconButton>
-        </form>
+        </FormControl>
       )}
-    </div>
+    </Box>
   );
 }
