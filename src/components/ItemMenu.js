@@ -135,7 +135,7 @@ export default function ItemMenu() {
             zIndex: "10",
             boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
             borderRadius: "0.3rem",
-            backgroundColor: "common.white",
+            backgroundColor: "secondary.main",
           }}
         >
           <TextField

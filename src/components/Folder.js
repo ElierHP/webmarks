@@ -35,6 +35,7 @@ function FolderContent({ title, clickHandler, _id }) {
               sx={{
                 marginRight: "0.5rem",
                 marginLeft: "1rem",
+                color: "folder.main",
               }}
             />
             {!isEditing ? (

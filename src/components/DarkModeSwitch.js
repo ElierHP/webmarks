@@ -15,7 +15,7 @@ export default function SwitchLabels() {
     <Box>
       <Grid container alignItems="center">
         <Typography
-          color="secondary"
+          color="common.white"
           variant="body2"
           sx={{
             display: {
@@ -28,7 +28,7 @@ export default function SwitchLabels() {
         </Typography>
         <IconButton onClick={handleClick}>
           {isDarkMode ? (
-            <Brightness7Icon color="secondary" fontSize="large" />
+            <Brightness7Icon color="common.white" fontSize="large" />
           ) : (
             <Brightness4Icon color="secondary" fontSize="large" />
           )}

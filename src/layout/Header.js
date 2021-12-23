@@ -45,6 +45,7 @@ function Header() {
         color="primary"
         sx={{
           padding: "0.5rem 0",
+          backgroundColor: "primary.main",
         }}
       >
         <Container>
@@ -67,7 +68,7 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box boxShadow={3}>
+      <Box boxShadow={3} sx={{ backgroundColor: "secondary.main" }}>
         <Container>
           <Grid
             container
