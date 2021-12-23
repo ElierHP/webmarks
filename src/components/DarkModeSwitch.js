@@ -12,7 +12,7 @@ export default function SwitchLabels() {
   };
 
   return (
-    <div>
+    <Box>
       <Grid container alignItems="center">
         <Typography
           color="secondary"
@@ -34,6 +34,6 @@ export default function SwitchLabels() {
           )}
         </IconButton>
       </Grid>
-    </div>
+    </Box>
   );
 }

@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
 import useItemMenu from "../hooks/useItemMenu";
-import { DarkModeContext } from "../context/DarkModeProvider";
 import axios from "axios";
-import { palette } from "../layout/Theme";
 import {
   Box,
   TextField,
@@ -14,23 +12,9 @@ import {
   FormControl,
 } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import { makeStyles, createStyles } from "@mui/styles";
 import CloseIcon from "@mui/icons-material/Close";
 
 export default function ItemMenu() {
-  //Styles
-  const [isDarkMode] = useContext(DarkModeContext);
-  const useStyles = makeStyles((theme) =>
-    createStyles({
-      //   [theme.breakpoints.down("sm")]: {
-      //     right: -15,
-      //   },
-    })
-  );
-  const classes = useStyles();
-  //Styles End
-
-  //Context API
   const [, dispatch] = useContext(AppData);
   const [appState] = useContext(AppState);
 
@@ -129,12 +113,8 @@ export default function ItemMenu() {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleFolderClick} className={classes.iconButton}>
-          New Folder
-        </MenuItem>
-        <MenuItem onClick={handleLinkClick} className={classes.iconButton}>
-          New Link
-        </MenuItem>
+        <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
+        <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
       </Menu>
 
       {/* New Folder Menu */}
@@ -146,7 +126,10 @@ export default function ItemMenu() {
           sx={{
             position: "absolute",
             top: -15,
-            right: 0,
+            right: {
+              xs: -15,
+              sm: 0,
+            },
             width: "220px",
             padding: "2.5rem 1.2rem 1.5rem 1.2rem",
             zIndex: "10",
@@ -188,7 +171,10 @@ export default function ItemMenu() {
           sx={{
             position: "absolute",
             top: -15,
-            right: 0,
+            right: {
+              xs: -15,
+              sm: 0,
+            },
             width: "220px",
             padding: "2.5rem 1.2rem 1.5rem 1.2rem",
             zIndex: "10",
