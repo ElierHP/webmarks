@@ -22,6 +22,9 @@ function FolderContent({ title, clickHandler, _id }) {
           cursor: "pointer",
           padding: "1rem !important",
           borderRadius: "0.2rem",
+          "&:hover": {
+            backgroundColor: "secondary.light",
+          },
         }}
       >
         <Grid
@@ -60,19 +63,49 @@ function FolderContent({ title, clickHandler, _id }) {
         <Grid item>
           {!isEditing ? (
             <>
-              <IconButton onClick={() => setIsEditing(true)}>
+              <IconButton
+                onClick={() => setIsEditing(true)}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "secondary.dark",
+                  },
+                }}
+              >
                 <EditIcon />
               </IconButton>
-              <IconButton onClick={handleDelete}>
+              <IconButton
+                onClick={handleDelete}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "secondary.dark",
+                  },
+                }}
+              >
                 <DeleteIcon />
               </IconButton>
             </>
           ) : (
             <>
-              <IconButton color="success" onClick={handleEdit}>
+              <IconButton
+                color="success"
+                onClick={handleEdit}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "secondary.dark",
+                  },
+                }}
+              >
                 <DoneIcon />
               </IconButton>
-              <IconButton color="error" onClick={() => setIsEditing(false)}>
+              <IconButton
+                color="error"
+                onClick={() => setIsEditing(false)}
+                sx={{
+                  "&:hover": {
+                    backgroundColor: "secondary.dark",
+                  },
+                }}
+              >
                 <CloseIcon color="error" />
               </IconButton>
             </>

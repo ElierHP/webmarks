@@ -102,7 +102,12 @@ export default function ItemMenu() {
         aria-controls="addnew-menu"
         aria-haspopup="true"
         onClick={handleClick}
-        sx={{ padding: "0.2rem" }}
+        sx={{
+          padding: "0.2rem",
+          "&:hover": {
+            backgroundColor: "secondary.light",
+          },
+        }}
       >
         <AddCircleOutlineIcon />
       </IconButton>
@@ -180,7 +185,7 @@ export default function ItemMenu() {
             zIndex: "10",
             boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
             borderRadius: "0.3rem",
-            backgroundColor: "common.white",
+            backgroundColor: "secondary.main",
           }}
         >
           <TextField

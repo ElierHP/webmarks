@@ -87,7 +87,12 @@ function Header() {
                   <IconButton
                     edge="start"
                     aria-label="arrow"
-                    sx={{ padding: "3px" }}
+                    sx={{
+                      padding: "3px",
+                      "&:hover": {
+                        backgroundColor: "secondary.light",
+                      },
+                    }}
                     onClick={prevClickHandler}
                   >
                     <ArrowBackIcon />
@@ -105,7 +110,13 @@ function Header() {
               <Grid container alignItems="center">
                 <IconButton
                   aria-label="a-z-sort-icon"
-                  sx={{ padding: "0.2rem", marginRight: "0.5rem" }}
+                  sx={{
+                    padding: "0.2rem",
+                    marginRight: "0.5rem",
+                    "&:hover": {
+                      backgroundColor: "secondary.light",
+                    },
+                  }}
                   onClick={() => dispatch({ type: "sort" })}
                 >
                   <SortByAlphaIcon />

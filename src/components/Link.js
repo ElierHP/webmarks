@@ -26,9 +26,12 @@ function LinkContent({ title, url, clickHandler, _id }) {
       alignItems="center"
       justifyContent="space-between"
       sx={{
-        padding: "0.4rem 1rem 0.4rem 1rem",
         cursor: "pointer",
         borderRadius: "0.2rem",
+        padding: "1rem",
+        "&:hover": {
+          backgroundColor: "secondary.light",
+        },
       }}
     >
       <Grid item xs={9} onClick={() => !isEditing && clickHandler()}>
@@ -64,7 +67,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
           <Grid item>
             {!isEditing ? (
               <Typography variant="body2" sx={{ marginLeft: "1rem" }}>
-                <Link href={url} underline="none" color="primary">
+                <Link href={url} underline="none" color="primary.light">
                   {url}
                 </Link>
               </Typography>
@@ -87,19 +90,49 @@ function LinkContent({ title, url, clickHandler, _id }) {
       <Grid item>
         {!isEditing ? (
           <>
-            <IconButton onClick={() => setIsEditing(true)}>
+            <IconButton
+              onClick={() => setIsEditing(true)}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "secondary.dark",
+                },
+              }}
+            >
               <EditIcon />
             </IconButton>
-            <IconButton onClick={handleDelete}>
+            <IconButton
+              onClick={handleDelete}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "secondary.dark",
+                },
+              }}
+            >
               <DeleteIcon />
             </IconButton>
           </>
         ) : (
           <>
-            <IconButton color="success" onClick={handleEdit}>
+            <IconButton
+              color="success"
+              onClick={handleEdit}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "secondary.dark",
+                },
+              }}
+            >
               <DoneIcon />
             </IconButton>
-            <IconButton color="error" onClick={handleCloseIcon}>
+            <IconButton
+              color="error"
+              onClick={handleCloseIcon}
+              sx={{
+                "&:hover": {
+                  backgroundColor: "secondary.dark",
+                },
+              }}
+            >
               <CloseIcon />
             </IconButton>
           </>
