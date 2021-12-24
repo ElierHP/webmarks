@@ -37,7 +37,6 @@ const useEdit = ({ title, _id, url, params }) => {
         newTitle: res.data.title,
         url: res.data.url,
       });
-      setIsEditing(false);
     } catch (error) {
       console.log(error);
     }
