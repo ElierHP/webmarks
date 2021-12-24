@@ -49,7 +49,19 @@ function FolderContent({ title, clickHandler, _id }) {
             }}
           />
           {!isEditing ? (
-            <Typography variant="h6" sx={{ userSelect: "none" }}>
+            <Typography
+              variant="h6"
+              sx={{
+                userSelect: "none",
+                maxWidth: {
+                  xs: "120px",
+                  sm: "100%",
+                },
+                textOverflow: "ellipsis",
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+              }}
+            >
               {title}
             </Typography>
           ) : (

@@ -91,7 +91,23 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   },
                 }}
               >
-                <Link href={url} underline="none" color="primary.light">
+                <Link
+                  href={url}
+                  underline="none"
+                  color="primary.light"
+                  sx={{
+                    display: "inline-block",
+                    verticalAlign: "middle",
+                    width: {
+                      xs: "100px",
+                      sm: "300px",
+                      md: "500px",
+                    },
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                  }}
+                >
                   {url}
                 </Link>
               </Typography>
