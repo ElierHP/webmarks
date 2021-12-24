@@ -21,10 +21,14 @@ function Home() {
           xs: `calc(100vh - 156.7812px)`,
           sm: `calc(100vh - 165px)`,
         },
+        padding: {
+          xs: "0",
+          sm: "0 1.5rem 1rem 1.5rem",
+        },
         paddingBottom: "1rem",
       }}
     >
-      <Grid container spacing={2} sx={{ marginTop: "0.5rem" }}>
+      <Grid container sx={{ marginTop: "0.5rem" }}>
         {data
           .filter((idFilter) => idFilter.parent_id === appState)
           .map((item) =>

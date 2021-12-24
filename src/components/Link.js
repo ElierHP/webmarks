@@ -1,6 +1,13 @@
 import React from "react";
 import useEdit from "../hooks/useEdit";
-import { Grid, Typography, TextField, IconButton, Link } from "@mui/material";
+import {
+  Grid,
+  Typography,
+  FormControl,
+  TextField,
+  IconButton,
+  Link,
+} from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
@@ -28,13 +35,16 @@ function LinkContent({ title, url, clickHandler, _id }) {
       sx={{
         cursor: "pointer",
         borderRadius: "0.2rem",
-        padding: "1rem",
+        padding: {
+          xs: "0.5rem 0",
+          sm: "1rem",
+        },
         "&:hover": {
           backgroundColor: "secondary.light",
         },
       }}
     >
-      <Grid item xs={9} onClick={() => !isEditing && clickHandler()}>
+      <Grid item xs={8} onClick={() => !isEditing && clickHandler()}>
         <Grid container alignItems="center">
           <Grid item>
             <img
@@ -51,7 +61,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
             {!isEditing ? (
               <Typography variant="body1">{`${title} : `}</Typography>
             ) : (
-              <form onSubmit={handleEdit}>
+              <FormControl onSubmit={handleEdit}>
                 <TextField
                   id="link-title-input"
                   label="Link Title"
@@ -60,19 +70,33 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   onChange={handleChange}
                   color="primary"
                   autoFocus
+                  sx={{
+                    maxWidth: {
+                      xs: "50px",
+                      sm: "80%",
+                    },
+                  }}
                 />
-              </form>
+              </FormControl>
             )}
           </Grid>
           <Grid item>
             {!isEditing ? (
-              <Typography variant="body2" sx={{ marginLeft: "1rem" }}>
+              <Typography
+                variant="body2"
+                sx={{
+                  marginLeft: {
+                    xs: "0.3rem",
+                    sm: "1rem",
+                  },
+                }}
+              >
                 <Link href={url} underline="none" color="primary.light">
                   {url}
                 </Link>
               </Typography>
             ) : (
-              <form onSubmit={handleEdit}>
+              <FormControl onSubmit={handleEdit}>
                 <TextField
                   id="link-url-input"
                   label="URL"
@@ -81,8 +105,15 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   onChange={handleUrlChange}
                   color="primary"
                   autoFocus
+                  sx={{
+                    width: {
+                      xs: "100px",
+                      sm: "400px",
+                    },
+                    marginLeft: "1rem",
+                  }}
                 />
-              </form>
+              </FormControl>
             )}
           </Grid>
         </Grid>
