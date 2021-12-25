@@ -1,45 +1,50 @@
 import React, { useContext } from "react";
-import { AppData, AppState } from "../context/AppDataProvider";
 import axios from "axios";
+import { AppData, AppState } from "../context/AppDataProvider";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-function NewFolder({
-  isNewFolder,
-  handleFolderClose,
-  handleTitleChange,
-  folderTitle,
-  setFolderTitle,
+function NewLink({
+  isNewLink,
+  handleLinkClose,
+  handleLinkTitleChange,
+  linkTitle,
+  setLinkTitle,
+  linkUrl,
+  handleUrlChange,
 }) {
+  //Context
   const [, dispatch] = useContext(AppData);
   const [appState] = useContext(AppState);
 
   //Submit
-  const handleFolderSubmit = async (e) => {
+  const handleLinkSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/folders/new", {
-        title: folderTitle,
+      const res = await axios.post("http://localhost:5000/links/new", {
+        title: linkTitle,
         parent_id: appState,
+        url: linkUrl,
       });
       dispatch({
-        type: "newFolder",
+        type: "newLink",
         _id: res.data._id,
         dataType: res.data.type,
         title: res.data.title,
         parent_id: res.data.parent_id,
+        url: res.data.url,
       });
-      handleFolderClose();
-      setFolderTitle("");
+      handleLinkClose();
+      setLinkTitle("");
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <FormControl
-      id="new-folder-menu"
-      open={Boolean(isNewFolder)}
-      onSubmit={handleFolderSubmit}
+      id="new-link-menu"
+      open={Boolean(isNewLink)}
+      onSubmit={handleLinkSubmit}
       sx={{
         position: "absolute",
         top: -15,
@@ -56,18 +61,26 @@ function NewFolder({
       }}
     >
       <TextField
-        id="folder-input"
-        label="Folder Title"
-        defaultValue={folderTitle}
-        onChange={handleTitleChange}
-        style={{ marginBottom: "1rem" }}
+        id="link-input"
+        label="Link Title"
+        defaultValue={linkTitle}
+        onChange={handleLinkTitleChange}
         color="primary"
+        sx={{ marginBottom: "1rem" }}
       />
-      <Button variant="contained" color="primary" onClick={handleFolderSubmit}>
+      <TextField
+        id="link-url-input"
+        label="URL"
+        defaultValue={linkUrl}
+        onChange={handleUrlChange}
+        color="primary"
+        sx={{ marginBottom: "1rem" }}
+      />
+      <Button variant="contained" color="primary" onClick={handleLinkSubmit}>
         Submit
       </Button>
       <IconButton
-        onClick={handleFolderClose}
+        onClick={handleLinkClose}
         sx={{ position: "absolute", top: 0, right: 0 }}
       >
         <CloseIcon />
@@ -76,4 +89,4 @@ function NewFolder({
   );
 }
 
-export default NewFolder;
+export default NewLink;
