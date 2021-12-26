@@ -68,7 +68,12 @@ function Header() {
           </Toolbar>
         </Container>
       </AppBar>
-      <Box boxShadow={3} sx={{ backgroundColor: "secondary.main" }}>
+
+      {/* Sub-Navigation */}
+      <Box
+        boxShadow={3}
+        sx={{ backgroundColor: "secondary.main", marginBottom: "0.5rem" }}
+      >
         <Container>
           <Grid
             container
