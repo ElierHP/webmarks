@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
-import ItemMenu from "../components/ItemMenu";
+import NewMenu from "../components/NewMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import {
   Container,
@@ -125,7 +125,7 @@ function Header() {
                 >
                   <SortByAlphaIcon />
                 </IconButton>
-                <ItemMenu />
+                <NewMenu />
               </Grid>
             </Grid>
           </Grid>

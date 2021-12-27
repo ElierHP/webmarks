@@ -83,6 +83,8 @@ function NewFolder({ isNewFolder, handleFolderClose }) {
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>
+
+        {/* Close Icon */}
         <IconButton
           onClick={handleFolderClose}
           sx={{ position: "absolute", top: 0, right: 0 }}

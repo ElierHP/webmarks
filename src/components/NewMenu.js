@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import useItemMenu from "../hooks/useItemMenu";
+import useNewMenu from "../hooks/useNewMenu";
 import NewFolder from "./NewFolder";
 import NewLink from "./NewLink";
 import { Box, Menu, MenuItem, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-export default function ItemMenu() {
+function NewMenu() {
   //Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
@@ -16,21 +16,14 @@ export default function ItemMenu() {
   };
 
   //Folder Menu Handlers
-  const [isNewFolder, handleFolderClick, handleFolderClose] = useItemMenu({
+  const [isNewFolder, handleFolderClick, handleFolderClose] = useNewMenu({
     setAnchorEl,
   });
 
   //Link Menu Handlers
-  const [
-    isNewLink,
-    handleLinkClick,
-    handleLinkClose,
-    handleLinkTitleChange,
-    linkTitle,
-    setLinkTitle,
-    linkUrl,
-    handleUrlChange,
-  ] = useItemMenu({ setAnchorEl });
+  const [isNewLink, handleLinkClick, handleLinkClose] = useNewMenu({
+    setAnchorEl,
+  });
 
   return (
     <Box sx={{ position: "relative", marginRight: "0.5rem" }}>
@@ -74,3 +67,5 @@ export default function ItemMenu() {
     </Box>
   );
 }
+
+export default NewMenu;
