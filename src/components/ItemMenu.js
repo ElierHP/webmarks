@@ -69,15 +69,7 @@ export default function ItemMenu() {
 
       {/* New Link Menu */}
       {isNewLink && (
-        <NewLink
-          isNewLink={isNewLink}
-          handleLinkClose={handleLinkClose}
-          handleLinkTitleChange={handleLinkTitleChange}
-          linkTitle={linkTitle}
-          setLinkTitle={setLinkTitle}
-          linkUrl={linkUrl}
-          handleUrlChange={handleUrlChange}
-        />
+        <NewLink isNewLink={isNewLink} handleLinkClose={handleLinkClose} />
       )}
     </Box>
   );
