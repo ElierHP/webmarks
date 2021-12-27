@@ -41,51 +41,51 @@ function NewLink({
     }
   };
   return (
-    <FormControl
-      id="new-link-menu"
-      open={Boolean(isNewLink)}
-      onSubmit={handleLinkSubmit}
-      sx={{
-        position: "absolute",
-        top: -15,
-        right: {
-          xs: -15,
-          sm: 0,
-        },
-        width: "220px",
-        padding: "2.5rem 1.2rem 1.5rem 1.2rem",
-        zIndex: "10",
-        boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-        borderRadius: "0.3rem",
-        backgroundColor: "secondary.main",
-      }}
-    >
-      <TextField
-        id="link-input"
-        label="Link Title"
-        defaultValue={linkTitle}
-        onChange={handleLinkTitleChange}
-        color="primary"
-        sx={{ marginBottom: "1rem" }}
-      />
-      <TextField
-        id="link-url-input"
-        label="URL"
-        defaultValue={linkUrl}
-        onChange={handleUrlChange}
-        color="primary"
-        sx={{ marginBottom: "1rem" }}
-      />
-      <Button variant="contained" color="primary" onClick={handleLinkSubmit}>
-        Submit
-      </Button>
-      <IconButton
-        onClick={handleLinkClose}
-        sx={{ position: "absolute", top: 0, right: 0 }}
+    <form id="new-link-menu" onSubmit={handleLinkSubmit}>
+      <FormControl
+        open={Boolean(isNewLink)}
+        sx={{
+          position: "absolute",
+          top: -15,
+          right: {
+            xs: -15,
+            sm: 0,
+          },
+          width: "220px",
+          padding: "2.5rem 1.2rem 1.5rem 1.2rem",
+          zIndex: "10",
+          boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+          borderRadius: "0.3rem",
+          backgroundColor: "secondary.main",
+        }}
       >
-        <CloseIcon />
-      </IconButton>
-    </FormControl>
+        <TextField
+          id="link-input"
+          label="Link Title"
+          defaultValue={linkTitle}
+          onChange={handleLinkTitleChange}
+          color="primary"
+          sx={{ marginBottom: "1rem" }}
+        />
+        <TextField
+          id="link-url-input"
+          label="URL"
+          defaultValue={linkUrl}
+          onChange={handleUrlChange}
+          color="primary"
+          sx={{ marginBottom: "1rem" }}
+        />
+        <Button variant="contained" color="primary" type="submit">
+          Submit
+        </Button>
+        <IconButton
+          onClick={handleLinkClose}
+          sx={{ position: "absolute", top: 0, right: 0 }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </FormControl>
+    </form>
   );
 }
 

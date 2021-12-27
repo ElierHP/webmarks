@@ -36,43 +36,44 @@ function NewFolder({
     }
   };
   return (
-    <FormControl
-      id="new-folder-menu"
-      open={Boolean(isNewFolder)}
-      onSubmit={handleFolderSubmit}
-      sx={{
-        position: "absolute",
-        top: -15,
-        right: {
-          xs: -15,
-          sm: 0,
-        },
-        width: "220px",
-        padding: "2.5rem 1.2rem 1.5rem 1.2rem",
-        zIndex: "10",
-        boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-        borderRadius: "0.3rem",
-        backgroundColor: "secondary.main",
-      }}
-    >
-      <TextField
-        id="folder-input"
-        label="Folder Title"
-        defaultValue={folderTitle}
-        onChange={handleTitleChange}
-        style={{ marginBottom: "1rem" }}
-        color="primary"
-      />
-      <Button variant="contained" color="primary" onClick={handleFolderSubmit}>
-        Submit
-      </Button>
-      <IconButton
-        onClick={handleFolderClose}
-        sx={{ position: "absolute", top: 0, right: 0 }}
+    <form id="new-folder-menu" onSubmit={handleFolderSubmit}>
+      <FormControl
+        id="new-folder-menu"
+        open={Boolean(isNewFolder)}
+        sx={{
+          position: "absolute",
+          top: -15,
+          right: {
+            xs: -15,
+            sm: 0,
+          },
+          width: "220px",
+          padding: "2.5rem 1.2rem 1.5rem 1.2rem",
+          zIndex: "10",
+          boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
+          borderRadius: "0.3rem",
+          backgroundColor: "secondary.main",
+        }}
       >
-        <CloseIcon />
-      </IconButton>
-    </FormControl>
+        <TextField
+          id="folder-input"
+          label="Folder Title"
+          defaultValue={folderTitle}
+          onChange={handleTitleChange}
+          style={{ marginBottom: "1rem" }}
+          color="primary"
+        />
+        <Button variant="contained" color="primary" type="submit">
+          Submit
+        </Button>
+        <IconButton
+          onClick={handleFolderClose}
+          sx={{ position: "absolute", top: 0, right: 0 }}
+        >
+          <CloseIcon />
+        </IconButton>
+      </FormControl>
+    </form>
   );
 }
 

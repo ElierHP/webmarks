@@ -27,7 +27,6 @@ function Header() {
   const prevClickHandler = () => {
     //Find parent folder & setAppState to it's parents ID
     const parentFolder = data.find((folder) => folder._id === appState);
-    console.log(parentFolder);
     parentFolder ? setAppState(parentFolder.parent_id) : setAppState(0);
 
     //Find the new directory title based on parentFolder
