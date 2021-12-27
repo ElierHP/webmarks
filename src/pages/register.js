@@ -1,5 +1,9 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../validations/user";
 import {
+  Box,
   Container,
   FormControl,
   TextField,
@@ -8,31 +12,102 @@ import {
 } from "@mui/material";
 
 function Register() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Submitted");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = ({ username, password }) => {
+    console.log(`username: ${username}, password: ${password}`);
   };
   return (
     <Container
-      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+      sx={{
+        display: {
+          xs: "block",
+          sm: "flex",
+        },
+        justifyContent: "center",
+        alignItems: "center",
+      }}
     >
-      <form id="register" onSubmit={handleSubmit}>
-        <FormControl sx={{ padding: "5rem", gap: "2rem", width: "600px" }}>
+      <form id="register" onSubmit={handleSubmit(onSubmit)}>
+        <FormControl
+          sx={{
+            paddingTop: "5rem",
+            gap: "2rem",
+            width: {
+              xs: "100%",
+              sm: "450px",
+            },
+          }}
+        >
+          {/* Title */}
           <Typography variant="h5" align="center">
             Register
           </Typography>
-          <TextField
-            id="username"
-            label="username"
-            variant="outlined"
-            color="primary"
-          />
-          <TextField label="password" variant="outlined" color="primary" />
-          <TextField
-            label="confirm password"
-            variant="outlined"
-            color="primary"
-          />
+
+          {/* Username */}
+          {!errors.username ? (
+            <TextField
+              id="username"
+              label="username"
+              variant="outlined"
+              color="primary"
+              {...register("username")}
+            />
+          ) : (
+            // Error
+            <TextField
+              id="username-error"
+              label="username"
+              error
+              helperText={errors.username.message}
+              {...register("username")}
+            />
+          )}
+
+          {/* Password */}
+          {!errors.password ? (
+            <TextField
+              label="password"
+              variant="outlined"
+              color="primary"
+              {...register("password")}
+            />
+          ) : (
+            // Error
+            <TextField
+              id="password-error"
+              label="password"
+              error
+              helperText={errors.password.message}
+              {...register("password")}
+            />
+          )}
+
+          {/* Confirm Password */}
+          {!errors.confirmPassword ? (
+            <TextField
+              label="confirm password"
+              variant="outlined"
+              color="primary"
+              {...register("confirmPassword")}
+            />
+          ) : (
+            // Error
+            <TextField
+              id="confirmPassword-error"
+              label="confirm password"
+              error
+              helperText={errors.confirmPassword.message}
+              {...register("confirmPassword")}
+            />
+          )}
+
           <Button
             type="submit"
             variant="contained"
