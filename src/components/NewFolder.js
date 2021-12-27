@@ -1,25 +1,29 @@
 import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { schema } from "../validations/folder";
 import axios from "axios";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-function NewFolder({
-  isNewFolder,
-  handleFolderClose,
-  handleTitleChange,
-  folderTitle,
-  setFolderTitle,
-}) {
+function NewFolder({ isNewFolder, handleFolderClose }) {
   const [, dispatch] = useContext(AppData);
   const [appState] = useContext(AppState);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
   //Submit
-  const handleFolderSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async ({ title }) => {
     try {
       const res = await axios.post("http://localhost:5000/folders/new", {
-        title: folderTitle,
+        title: title,
         parent_id: appState,
       });
       dispatch({
@@ -30,16 +34,17 @@ function NewFolder({
         parent_id: res.data.parent_id,
       });
       handleFolderClose();
-      setFolderTitle("");
     } catch (error) {
       console.log(error);
     }
   };
   return (
-    <form id="new-folder-menu" onSubmit={handleFolderSubmit}>
+    <form
+      id="new-folder-menu"
+      open={Boolean(isNewFolder)}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <FormControl
-        id="new-folder-menu"
-        open={Boolean(isNewFolder)}
         sx={{
           position: "absolute",
           top: -15,
@@ -55,14 +60,26 @@ function NewFolder({
           backgroundColor: "secondary.main",
         }}
       >
-        <TextField
-          id="folder-input"
-          label="Folder Title"
-          defaultValue={folderTitle}
-          onChange={handleTitleChange}
-          style={{ marginBottom: "1rem" }}
-          color="primary"
-        />
+        {/* Folder Title */}
+        {!errors.title ? (
+          <TextField
+            id="folder-title"
+            label="Folder Title"
+            sx={{ marginBottom: "1rem" }}
+            color="primary"
+            {...register("title")}
+          />
+        ) : (
+          // Folder Title Error
+          <TextField
+            id="folder-title-error"
+            label="Folder Title"
+            error
+            helperText={errors.title.message}
+            {...register("title")}
+          />
+        )}
+
         <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>

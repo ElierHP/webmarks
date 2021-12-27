@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
 import {
-  Box,
   Container,
   FormControl,
   TextField,
@@ -60,7 +59,7 @@ function Register() {
               {...register("username")}
             />
           ) : (
-            // Error
+            // Username Error
             <TextField
               id="username-error"
               label="username"
@@ -79,7 +78,7 @@ function Register() {
               {...register("password")}
             />
           ) : (
-            // Error
+            // Password Error
             <TextField
               id="password-error"
               label="password"
@@ -98,7 +97,7 @@ function Register() {
               {...register("confirmPassword")}
             />
           ) : (
-            // Error
+            // Confirm Password Error
             <TextField
               id="confirmPassword-error"
               label="confirm password"

@@ -16,14 +16,9 @@ export default function ItemMenu() {
   };
 
   //Folder Menu Handlers
-  const [
-    isNewFolder,
-    handleFolderClick,
-    handleFolderClose,
-    handleTitleChange,
-    folderTitle,
-    setFolderTitle,
-  ] = useItemMenu({ setAnchorEl });
+  const [isNewFolder, handleFolderClick, handleFolderClose] = useItemMenu({
+    setAnchorEl,
+  });
 
   //Link Menu Handlers
   const [
@@ -69,9 +64,6 @@ export default function ItemMenu() {
         <NewFolder
           isNewFolder={isNewFolder}
           handleFolderClose={handleFolderClose}
-          handleTitleChange={handleTitleChange}
-          folderTitle={folderTitle}
-          setFolderTitle={setFolderTitle}
         />
       )}
 
