@@ -8,7 +8,6 @@ import { editSchema } from "../validations/link";
 import {
   Grid,
   Typography,
-  FormControl,
   TextField,
   IconButton,
   Link as MuiLink,
@@ -29,16 +28,7 @@ function Link({ title, url, clickHandler, _id }) {
     resolver: yupResolver(editSchema),
   });
 
-  const [
-    isEditing,
-    setIsEditing,
-    handleChange,
-    handleDelete,
-    ,
-    handleUrlChange,
-    urlValue,
-    handleCloseIcon,
-  ] = useEdit({ title, _id, url });
+  const [isEditing, setIsEditing, handleDelete] = useEdit({ _id });
 
   const handleEdit = async ({ newTitle, newUrl }) => {
     try {
@@ -166,7 +156,7 @@ function Link({ title, url, clickHandler, _id }) {
                     id="link-url"
                     label="URL"
                     variant="standard"
-                    defaultValue={urlValue}
+                    defaultValue={url}
                     color="primary"
                     autoFocus
                     {...register("newUrl")}
@@ -209,7 +199,7 @@ function Link({ title, url, clickHandler, _id }) {
             </IconButton>
             {/* Delete Icon */}
             <IconButton
-              onClick={handleDelete}
+              onClick={() => handleDelete("links")}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",
@@ -236,7 +226,7 @@ function Link({ title, url, clickHandler, _id }) {
             {/* Close Edit Icon */}
             <IconButton
               color="error"
-              onClick={handleCloseIcon}
+              onClick={() => setIsEditing(false)}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",

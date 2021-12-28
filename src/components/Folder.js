@@ -18,14 +18,12 @@ function Folder({ title, clickHandler, _id }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(editSchema),
   });
 
-  const [isEditing, setIsEditing, handleChange, handleDelete] = useEdit({
-    title,
+  const [isEditing, setIsEditing, handleDelete] = useEdit({
     _id,
   });
 
@@ -141,7 +139,7 @@ function Folder({ title, clickHandler, _id }) {
             </IconButton>
             {/* Delete Icon */}
             <IconButton
-              onClick={handleDelete}
+              onClick={() => handleDelete("folders")}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",
