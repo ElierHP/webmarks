@@ -18,6 +18,7 @@ function Folder({ title, clickHandler, _id }) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(editSchema),
@@ -28,6 +29,7 @@ function Folder({ title, clickHandler, _id }) {
     _id,
   });
 
+  console.log(watch("newTitle"));
   const handleEdit = async ({ newTitle }) => {
     try {
       const res = await axios.patch(`http://localhost:5000/folders/edit`, {
@@ -94,21 +96,32 @@ function Folder({ title, clickHandler, _id }) {
           ) : (
             // Edit Folder Title
             <form onSubmit={handleSubmit(handleEdit)}>
-              <TextField
-                id="folder-title-input"
-                label="Folder Title"
-                variant="standard"
-                defaultValue={title}
-                color="primary"
-                autoFocus
-                {...register("newTitle")}
-                sx={{
-                  maxWidth: {
-                    xs: "100px",
-                    sm: "100%",
-                  },
-                }}
-              />
+              {!errors.newTitle ? (
+                <TextField
+                  id="folder-title"
+                  label="Folder Title"
+                  variant="standard"
+                  defaultValue={title}
+                  color="primary"
+                  autoFocus
+                  {...register("newTitle")}
+                  sx={{
+                    maxWidth: {
+                      xs: "100px",
+                      sm: "100%",
+                    },
+                  }}
+                />
+              ) : (
+                <TextField
+                  id="folder-title-error"
+                  variant="standard"
+                  label="Folder Title"
+                  error
+                  helperText={errors.newTitle.message}
+                  {...register("newTitle")}
+                />
+              )}
             </form>
           )}
         </Grid>
