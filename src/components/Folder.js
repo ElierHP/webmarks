@@ -1,23 +1,48 @@
-import React from "react";
+import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
-import {
-  Grid,
-  IconButton,
-  FormControl,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { AppData } from "../context/AppDataProvider";
+import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { editSchema } from "../validations/folder";
+import { Grid, IconButton, Typography, TextField } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
-function FolderContent({ title, clickHandler, _id }) {
-  const params = "folders";
-  const [isEditing, setIsEditing, handleChange, handleDelete, handleEdit] =
-    useEdit({ title, _id, params });
+function Folder({ title, clickHandler, _id }) {
+  const [, dispatch] = useContext(AppData);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(editSchema),
+  });
+
+  const [isEditing, setIsEditing, handleChange, handleDelete] = useEdit({
+    title,
+    _id,
+  });
+
+  const handleEdit = async ({ newTitle }) => {
+    try {
+      const res = await axios.patch(`http://localhost:5000/folders/edit`, {
+        _id: _id,
+        title: newTitle,
+      });
+      dispatch({
+        type: "edit",
+        _id: res.data._id,
+        newTitle: res.data.title,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Grid
       container
@@ -40,6 +65,7 @@ function FolderContent({ title, clickHandler, _id }) {
         sx={{ flexGrow: 1 }}
       >
         <Grid container alignItems="center">
+          {/* Folder Icon */}
           <FolderIcon
             fontSize="large"
             sx={{
@@ -49,6 +75,7 @@ function FolderContent({ title, clickHandler, _id }) {
             }}
           />
           {!isEditing ? (
+            // Folder Title
             <Typography
               variant="h6"
               sx={{
@@ -65,15 +92,16 @@ function FolderContent({ title, clickHandler, _id }) {
               {title}
             </Typography>
           ) : (
-            <FormControl onSubmit={handleEdit}>
+            // Edit Folder Title
+            <form onSubmit={handleSubmit(handleEdit)}>
               <TextField
                 id="folder-title-input"
                 label="Folder Title"
                 variant="standard"
                 defaultValue={title}
-                onChange={handleChange}
                 color="primary"
                 autoFocus
+                {...register("newTitle")}
                 sx={{
                   maxWidth: {
                     xs: "100px",
@@ -81,13 +109,14 @@ function FolderContent({ title, clickHandler, _id }) {
                   },
                 }}
               />
-            </FormControl>
+            </form>
           )}
         </Grid>
       </Grid>
       <Grid item>
         {!isEditing ? (
           <>
+            {/* Edit Icon */}
             <IconButton
               onClick={() => setIsEditing(true)}
               sx={{
@@ -98,6 +127,7 @@ function FolderContent({ title, clickHandler, _id }) {
             >
               <EditIcon />
             </IconButton>
+            {/* Delete Icon */}
             <IconButton
               onClick={handleDelete}
               sx={{
@@ -111,9 +141,10 @@ function FolderContent({ title, clickHandler, _id }) {
           </>
         ) : (
           <>
+            {/* Confirm Edit Icon */}
             <IconButton
               color="success"
-              onClick={handleEdit}
+              onClick={handleSubmit(handleEdit)}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",
@@ -122,6 +153,7 @@ function FolderContent({ title, clickHandler, _id }) {
             >
               <DoneIcon />
             </IconButton>
+            {/* Close Edit Icon */}
             <IconButton
               color="error"
               onClick={() => setIsEditing(false)}
@@ -140,4 +172,4 @@ function FolderContent({ title, clickHandler, _id }) {
   );
 }
 
-export default FolderContent;
+export default Folder;
