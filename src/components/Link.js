@@ -1,30 +1,62 @@
-import React from "react";
+import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
+import { useForm } from "react-hook-form";
+import { AppData } from "../context/AppDataProvider";
+import axios from "axios";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { editSchema } from "../validations/link";
 import {
   Grid,
   Typography,
   FormControl,
   TextField,
   IconButton,
-  Link,
+  Link as MuiLink,
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 
-function LinkContent({ title, url, clickHandler, _id }) {
-  const params = "links";
+function Link({ title, url, clickHandler, _id }) {
+  const [, dispatch] = useContext(AppData);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(editSchema),
+  });
+
   const [
     isEditing,
     setIsEditing,
     handleChange,
     handleDelete,
-    handleEdit,
+    ,
     handleUrlChange,
     urlValue,
     handleCloseIcon,
-  ] = useEdit({ title, _id, url, params });
+  ] = useEdit({ title, _id, url });
+
+  const handleEdit = async ({ newTitle, newUrl }) => {
+    try {
+      const res = await axios.patch(`http://localhost:5000/links/edit`, {
+        _id: _id,
+        title: newTitle,
+        url: newUrl,
+      });
+      dispatch({
+        type: "edit",
+        _id: res.data._id,
+        newTitle: res.data.title,
+        url: res.data.url,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Grid
@@ -46,6 +78,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
     >
       <Grid item xs={8} onClick={() => !isEditing && clickHandler()}>
         <Grid container alignItems="center">
+          {/* Favicons */}
           <Grid item>
             <img
               src={`https://www.google.com/s2/favicons?domain_url=${url}`}
@@ -59,29 +92,43 @@ function LinkContent({ title, url, clickHandler, _id }) {
           </Grid>
           <Grid item>
             {!isEditing ? (
+              // Title
               <Typography variant="body1">{`${title} : `}</Typography>
             ) : (
-              <FormControl onSubmit={handleEdit}>
-                <TextField
-                  id="link-title-input"
-                  label="Link Title"
-                  variant="standard"
-                  defaultValue={title}
-                  onChange={handleChange}
-                  color="primary"
-                  autoFocus
-                  sx={{
-                    maxWidth: {
-                      xs: "50px",
-                      sm: "80%",
-                    },
-                  }}
-                />
-              </FormControl>
+              // Edit Title
+              <form onSubmit={handleSubmit(handleEdit)}>
+                {!errors.newTitle ? (
+                  <TextField
+                    id="link-title"
+                    label="Link Title"
+                    variant="standard"
+                    defaultValue={title}
+                    color="primary"
+                    autoFocus
+                    {...register("newTitle")}
+                    sx={{
+                      maxWidth: {
+                        xs: "50px",
+                        sm: "80%",
+                      },
+                    }}
+                  />
+                ) : (
+                  <TextField
+                    id="link-title-error"
+                    label="Link Title"
+                    variant="standard"
+                    error
+                    helperText={errors.newTitle.message}
+                    {...register("newTitle")}
+                  />
+                )}
+              </form>
             )}
           </Grid>
           <Grid item>
             {!isEditing ? (
+              // URL
               <Typography
                 variant="body2"
                 sx={{
@@ -91,7 +138,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   },
                 }}
               >
-                <Link
+                <MuiLink
                   href={url}
                   underline="none"
                   color="primary.light"
@@ -109,27 +156,39 @@ function LinkContent({ title, url, clickHandler, _id }) {
                   }}
                 >
                   {url}
-                </Link>
+                </MuiLink>
               </Typography>
             ) : (
-              <FormControl onSubmit={handleEdit}>
-                <TextField
-                  id="link-url-input"
-                  label="URL"
-                  variant="standard"
-                  defaultValue={urlValue}
-                  onChange={handleUrlChange}
-                  color="primary"
-                  autoFocus
-                  sx={{
-                    width: {
-                      xs: "100px",
-                      sm: "400px",
-                    },
-                    marginLeft: "1rem",
-                  }}
-                />
-              </FormControl>
+              // Edit URL
+              <form onSubmit={handleSubmit(handleEdit)}>
+                {!errors.newUrl ? (
+                  <TextField
+                    id="link-url"
+                    label="URL"
+                    variant="standard"
+                    defaultValue={urlValue}
+                    color="primary"
+                    autoFocus
+                    {...register("newUrl")}
+                    sx={{
+                      width: {
+                        xs: "100px",
+                        sm: "400px",
+                      },
+                      marginLeft: "1rem",
+                    }}
+                  />
+                ) : (
+                  <TextField
+                    id="link-url"
+                    label="URL"
+                    variant="standard"
+                    error
+                    helperText={errors.newUrl.message}
+                    {...register("newUrl")}
+                  />
+                )}
+              </form>
             )}
           </Grid>
         </Grid>
@@ -137,6 +196,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
       <Grid item>
         {!isEditing ? (
           <>
+            {/* Edit Icon */}
             <IconButton
               onClick={() => setIsEditing(true)}
               sx={{
@@ -147,6 +207,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
             >
               <EditIcon />
             </IconButton>
+            {/* Delete Icon */}
             <IconButton
               onClick={handleDelete}
               sx={{
@@ -160,9 +221,10 @@ function LinkContent({ title, url, clickHandler, _id }) {
           </>
         ) : (
           <>
+            {/* Confirm Edit Icon */}
             <IconButton
               color="success"
-              onClick={handleEdit}
+              onClick={handleSubmit(handleEdit)}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",
@@ -171,6 +233,7 @@ function LinkContent({ title, url, clickHandler, _id }) {
             >
               <DoneIcon />
             </IconButton>
+            {/* Close Edit Icon */}
             <IconButton
               color="error"
               onClick={handleCloseIcon}
@@ -189,4 +252,4 @@ function LinkContent({ title, url, clickHandler, _id }) {
   );
 }
 
-export default LinkContent;
+export default Link;

@@ -29,7 +29,6 @@ function Folder({ title, clickHandler, _id }) {
     _id,
   });
 
-  console.log(watch("newTitle"));
   const handleEdit = async ({ newTitle }) => {
     try {
       const res = await axios.patch(`http://localhost:5000/folders/edit`, {
