@@ -100,7 +100,10 @@ function Login() {
           </Button>
 
           {/* Register Link */}
-          <Link to="/register" style={{ textDecoration: "none" }}>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", marginTop: "-1rem" }}
+          >
             <MuiLink color="primary.light" underline="none">
               Register
             </MuiLink>

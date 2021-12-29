@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
 import NewMenu from "../components/NewMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
+import { Link } from "react-router-dom";
 import {
   Container,
   AppBar,
@@ -10,6 +11,7 @@ import {
   Grid,
   IconButton,
   Typography,
+  Link as MuiLink,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
@@ -56,13 +58,16 @@ function Header() {
               },
             }}
           >
-            <Typography
-              variant="h5"
+            {/* Logo */}
+            <Link
+              to="/"
               onClick={logoClickHandler}
-              sx={{ cursor: "pointer" }}
+              style={{ textDecoration: "none" }}
             >
-              WebMarks
-            </Typography>
+              <MuiLink color="common.white" underline="none" variant="h5">
+                WebMarks
+              </MuiLink>
+            </Link>
             <DarkModeSwitch />
           </Toolbar>
         </Container>

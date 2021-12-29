@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
+import { Link } from "react-router-dom";
+import { Link as MuiLink } from "@mui/material";
 import {
   Container,
   FormControl,
@@ -37,6 +39,7 @@ function Register() {
         <FormControl
           sx={{
             paddingTop: "5rem",
+            paddingBottom: "5rem",
             gap: "2rem",
             width: {
               xs: "100%",
@@ -115,6 +118,16 @@ function Register() {
           >
             Submit
           </Button>
+
+          {/* Login Link */}
+          <Link
+            to="/login"
+            style={{ textDecoration: "none", marginTop: "-1rem" }}
+          >
+            <MuiLink color="primary.light" underline="none">
+              Login
+            </MuiLink>
+          </Link>
         </FormControl>
       </form>
     </Container>
