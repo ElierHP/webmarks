@@ -1,9 +1,8 @@
-import { Home } from "./pages/index";
+import { Home, Register, Login } from "./pages/index";
 import { DarkModeProvider } from "./context/DarkModeProvider";
 import { Routes, Route } from "react-router-dom";
 import { AppDataProvider } from "./context/AppDataProvider";
 import Layout from "./layout/Layout";
-import Register from "./pages/register";
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Layout>
       </DarkModeProvider>
