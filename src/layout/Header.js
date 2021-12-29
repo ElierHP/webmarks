@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function Header() {
   const [data, dispatch] = useContext(AppData);
@@ -68,7 +69,16 @@ function Header() {
                 WebMarks
               </MuiLink>
             </Link>
-            <DarkModeSwitch />
+            {/* Dark Mode Icon */}
+            <Box sx={{ display: "flex" }}>
+              <DarkModeSwitch />
+              {/* User Icon */}
+              <Link to="/login">
+                <IconButton sx={{ color: "common.white" }}>
+                  <AccountCircleIcon fontSize="large" />
+                </IconButton>
+              </Link>
+            </Box>
           </Toolbar>
         </Container>
       </AppBar>
