@@ -1,15 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
+import { User } from "../context/UserProvider";
+import axios from "axios";
 import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { v4 as uuidv4 } from "uuid";
-import { Grid, Container } from "@mui/material";
+import { Grid } from "@mui/material";
 
 function Home() {
+  //Context Providers
   const [data] = useContext(AppData);
   const [appState, setAppState, , setDirectory] = useContext(AppState);
+  const [
+    user,
+    setUser,
+    isLoggedIn,
+    setIsLoggedIn,
+    isLoading,
+    setIsLoading,
+    isError,
+    setIsError,
+  ] = useContext(User);
 
-  const clickHandler = (id, title) => {
+  //Sever Requests
+  useEffect(() => {
+    //Check if user is logged in
+    async function getUser() {
+      setIsLoading(true);
+      setIsError(false);
+      const res = await axios.get("http://localhost:5000/users");
+      if (res.data.user) setUser({ user: res.data.user });
+      setIsLoggedIn(res.data.isLoggedIn);
+    }
+    getUser().catch(setIsError(true));
+    setIsLoading(false);
+  }, []);
+
+  //Click Handlers
+  const folderClickHandler = (id, title) => {
     setAppState(id);
     setDirectory(title);
   };
@@ -26,7 +54,7 @@ function Home() {
               key={uuidv4()}
               _id={item._id}
               parent_id={item.parent_id}
-              clickHandler={() => clickHandler(item._id, item.title)}
+              clickHandler={() => folderClickHandler(item._id, item.title)}
             />
           ) : (
             <Link

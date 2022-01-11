@@ -60,15 +60,17 @@ function Header() {
             }}
           >
             {/* Logo */}
-            <Link
+            <MuiLink
+              component={Link}
               to="/"
               onClick={logoClickHandler}
-              style={{ textDecoration: "none" }}
+              color="common.white"
+              underline="none"
+              variant="h5"
+              sx={{ cursor: "pointer" }}
             >
-              <MuiLink color="common.white" underline="none" variant="h5">
-                WebMarks
-              </MuiLink>
-            </Link>
+              WebMarks
+            </MuiLink>
             {/* Dark Mode Icon */}
             <Box sx={{ display: "flex" }}>
               <DarkModeSwitch />

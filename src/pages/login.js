@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 function Login() {
+  //React hook form
   const {
     register,
     handleSubmit,
@@ -100,14 +101,15 @@ function Login() {
           </Button>
 
           {/* Register Link */}
-          <Link
+          <MuiLink
+            component={Link}
             to="/register"
-            style={{ textDecoration: "none", marginTop: "-1rem" }}
+            color="primary.light"
+            underline="none"
+            sx={{ textDecoration: "none", marginTop: "-1rem" }}
           >
-            <MuiLink color="primary.light" underline="none">
-              Register
-            </MuiLink>
-          </Link>
+            Register
+          </MuiLink>
         </FormControl>
       </form>
     </Container>

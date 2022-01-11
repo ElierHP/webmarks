@@ -120,14 +120,15 @@ function Register() {
           </Button>
 
           {/* Login Link */}
-          <Link
+          <MuiLink
+            component={Link}
             to="/login"
-            style={{ textDecoration: "none", marginTop: "-1rem" }}
+            color="primary.light"
+            underline="none"
+            sx={{ textDecoration: "none", marginTop: "-1rem" }}
           >
-            <MuiLink color="primary.light" underline="none">
-              Login
-            </MuiLink>
-          </Link>
+            Login
+          </MuiLink>
         </FormControl>
       </form>
     </Container>
