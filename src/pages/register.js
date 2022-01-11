@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
+import { User } from "../context/UserProvider";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
@@ -13,6 +15,19 @@ import {
 } from "@mui/material";
 
 function Register() {
+  //User Context
+  const [
+    user,
+    setUser,
+    isLoggedIn,
+    setIsLoggedIn,
+    isLoading,
+    setIsLoading,
+    isError,
+    setIsError,
+  ] = useContext(User);
+
+  //React Hook Form
   const {
     register,
     handleSubmit,
@@ -21,9 +36,28 @@ function Register() {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = ({ username, password }) => {
-    console.log(`username: ${username}, password: ${password}`);
+  const onSubmit = async ({ username, password }) => {
+    try {
+      setIsLoading(true);
+      setIsError(false);
+      const res = await axios.post("http://localhost:5000/users/new", {
+        username,
+        password,
+      });
+      if (res.data.isLoggedIn === true) {
+        setUser({ ...res.data.user });
+        setIsLoggedIn(res.data.isLoggedIn);
+      } else {
+        setIsLoggedIn(res.data.isLoggedIn);
+      }
+    } catch (error) {
+      setIsError(true);
+    }
+    setIsLoading(false);
   };
+
+  if (isError) return <h1>Error, try again!</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
   return (
     <Container
       sx={{

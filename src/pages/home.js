@@ -8,8 +8,11 @@ import { v4 as uuidv4 } from "uuid";
 import { Grid } from "@mui/material";
 
 function Home() {
+  //Axios Config
+  axios.defaults.withCredentials = true;
+
   //Context Providers
-  const [data] = useContext(AppData);
+  const [data, dispatch] = useContext(AppData);
   const [appState, setAppState, , setDirectory] = useContext(AppState);
   const [
     user,
@@ -29,10 +32,12 @@ function Home() {
       setIsLoading(true);
       setIsError(false);
       const res = await axios.get("http://localhost:5000/users");
-      if (res.data.user) setUser({ user: res.data.user });
+      if (res.data.user) {
+        setUser({ ...res.data.user });
+      }
       setIsLoggedIn(res.data.isLoggedIn);
     }
-    getUser().catch(setIsError(true));
+    getUser().catch((err) => setIsError(true));
     setIsLoading(false);
   }, []);
 
@@ -42,6 +47,8 @@ function Home() {
     setDirectory(title);
   };
 
+  if (isError) return <h1>Error, try again!</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
   return (
     <Grid container>
       {data
