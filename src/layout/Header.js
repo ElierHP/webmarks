@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
 import { User } from "../context/UserProvider";
+import UserIcon from "../components/UserIcon";
 import NewMenu from "../components/NewMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import { Link } from "react-router-dom";
@@ -16,13 +17,13 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function Header() {
   const [data, dispatch] = useContext(AppData);
   const [appState, setAppState, directory, setDirectory] = useContext(AppState);
   const [isLoggedIn] = useContext(User);
 
+  //Logo click sends user to home page
   const logoClickHandler = () => {
     setAppState("0");
     setDirectory("Main");
@@ -77,11 +78,7 @@ function Header() {
             <Box sx={{ display: "flex" }}>
               <DarkModeSwitch />
               {/* User Icon */}
-              <Link to="/login">
-                <IconButton sx={{ color: "common.white" }}>
-                  <AccountCircleIcon fontSize="large" />
-                </IconButton>
-              </Link>
+              <UserIcon />
             </Box>
           </Toolbar>
         </Container>
