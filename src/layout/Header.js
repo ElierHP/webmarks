@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
+import { User } from "../context/UserProvider";
 import NewMenu from "../components/NewMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import { Link } from "react-router-dom";
@@ -20,6 +21,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 function Header() {
   const [data, dispatch] = useContext(AppData);
   const [appState, setAppState, directory, setDirectory] = useContext(AppState);
+  const [isLoggedIn] = useContext(User);
 
   const logoClickHandler = () => {
     setAppState("0");
@@ -62,7 +64,7 @@ function Header() {
             {/* Logo */}
             <MuiLink
               component={Link}
-              to="/"
+              to={isLoggedIn && "/"}
               onClick={logoClickHandler}
               color="common.white"
               underline="none"

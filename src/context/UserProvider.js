@@ -11,10 +11,10 @@ export const UserProvider = ({ children }) => {
   return (
     <User.Provider
       value={[
-        user,
-        setUser,
         isLoggedIn,
         setIsLoggedIn,
+        user,
+        setUser,
         isLoading,
         setIsLoading,
         isError,

@@ -17,10 +17,10 @@ import {
 function Login() {
   //User Context
   const [
-    user,
-    setUser,
     isLoggedIn,
     setIsLoggedIn,
+    user,
+    setUser,
     isLoading,
     setIsLoading,
     isError,

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { Link as MuiLink } from "@mui/material";
 import {
   Container,
@@ -17,10 +17,10 @@ import {
 function Register() {
   //User Context
   const [
-    user,
-    setUser,
     isLoggedIn,
     setIsLoggedIn,
+    user,
+    setUser,
     isLoading,
     setIsLoading,
     isError,
@@ -40,11 +40,18 @@ function Register() {
     try {
       setIsLoading(true);
       setIsError(false);
+      //Register new user
       const res = await axios.post("http://localhost:5000/users/new", {
         username,
         password,
       });
-      if (res.data.isLoggedIn === true) {
+      //If register was successful, login the user
+      if (res.data.success === true) {
+        const res = await axios.post("http://localhost:5000/users/login", {
+          username,
+          password,
+        });
+        //Set user state and logged in status
         setUser({ ...res.data.user });
         setIsLoggedIn(res.data.isLoggedIn);
       } else {
@@ -58,6 +65,7 @@ function Register() {
 
   if (isError) return <h1>Error, try again!</h1>;
   if (isLoading) return <h1>Loading...</h1>;
+  if (isLoggedIn) return <Navigate to="/" />;
   return (
     <Container
       sx={{
