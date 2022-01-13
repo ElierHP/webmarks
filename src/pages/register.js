@@ -19,7 +19,7 @@ function Register() {
   const [
     isLoggedIn,
     setIsLoggedIn,
-    user,
+    ,
     setUser,
     isLoading,
     setIsLoading,
@@ -46,7 +46,7 @@ function Register() {
         password,
       });
       //If register was successful, login the user
-      if (res.data.success === true) {
+      if (res.data.success) {
         const res = await axios.post("http://localhost:5000/users/login", {
           username,
           password,
@@ -63,8 +63,6 @@ function Register() {
     setIsLoading(false);
   };
 
-  if (isError) return <h1>Error, try again!</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
   if (isLoggedIn) return <Navigate to="/" />;
   return (
     <Container
@@ -94,6 +92,16 @@ function Register() {
             Register
           </Typography>
 
+          {/* Register Error */}
+          {isError && (
+            <Typography
+              variant="body2"
+              color="error"
+              sx={{ marginBottom: "-1rem" }}
+            >
+              Username already exists.
+            </Typography>
+          )}
           {/* Username */}
           {!errors.username ? (
             <TextField
@@ -158,7 +166,7 @@ function Register() {
             color="primary"
             sx={{ padding: ".8rem" }}
           >
-            Submit
+            {isLoading ? " Loading..." : "Submit"}
           </Button>
 
           {/* Login Link */}
@@ -168,6 +176,7 @@ function Register() {
             color="primary.light"
             underline="none"
             sx={{ textDecoration: "none", marginTop: "-1rem" }}
+            onClick={() => setIsError(false)}
           >
             Login
           </MuiLink>

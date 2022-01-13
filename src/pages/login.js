@@ -19,7 +19,7 @@ function Login() {
   const [
     isLoggedIn,
     setIsLoggedIn,
-    user,
+    ,
     setUser,
     isLoading,
     setIsLoading,
@@ -56,8 +56,6 @@ function Login() {
     setIsLoading(false);
   };
 
-  if (isError) return <h1>Error, try again!</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
   if (isLoggedIn) return <Navigate to="/" />;
   return (
     <Container
@@ -86,6 +84,17 @@ function Login() {
           <Typography variant="h5" align="center">
             Login
           </Typography>
+
+          {/* Login Error */}
+          {isError && (
+            <Typography
+              variant="body2"
+              color="error"
+              sx={{ marginBottom: "-1rem" }}
+            >
+              Username or password is incorrect.
+            </Typography>
+          )}
 
           {/* Username */}
           {!errors.username ? (
@@ -131,7 +140,7 @@ function Login() {
             color="primary"
             sx={{ padding: ".8rem" }}
           >
-            Submit
+            {isLoading ? " Loading..." : "Submit"}
           </Button>
 
           {/* Register Link */}
@@ -141,6 +150,7 @@ function Login() {
             color="primary.light"
             underline="none"
             sx={{ textDecoration: "none", marginTop: "-1rem" }}
+            onClick={() => setIsError(false)}
           >
             Register
           </MuiLink>

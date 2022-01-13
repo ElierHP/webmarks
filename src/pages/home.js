@@ -6,7 +6,7 @@ import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 function Home() {
   //Axios Config
@@ -18,7 +18,7 @@ function Home() {
   const [
     isLoggedIn,
     setIsLoggedIn,
-    user,
+    ,
     setUser,
     isLoading,
     setIsLoading,
@@ -55,12 +55,18 @@ function Home() {
     setDirectory(title);
   };
 
-  if (isError) return <h1>Error, try again!</h1>;
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isError) return <Navigate to="/404" />;
   //Route to /login if user is not logged in
   if (!isLoggedIn) return <Navigate to="/login" />;
   return (
     <Grid container>
+      {/* Loading Data*/}
+      {isLoading && (
+        <Typography variant="h5" sx={{ margin: "auto", paddingTop: "2rem" }}>
+          Loading...
+        </Typography>
+      )}
+      {/* Render App Data */}
       {data
         .filter((idFilter) => idFilter.parent_id === appState)
         .map((item) =>
