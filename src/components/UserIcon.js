@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-export default function SwitchLabels() {
+export default function UserIcon() {
   //User Context
   const [isLoggedIn, setIsLoggedIn] = useContext(User);
 

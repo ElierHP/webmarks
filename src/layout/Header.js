@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
 import { User } from "../context/UserProvider";
 import UserIcon from "../components/UserIcon";
+import SortIcon from "../components/SortIcon";
 import NewMenu from "../components/NewMenu";
 import DarkModeSwitch from "../components/DarkModeSwitch";
 import { Link } from "react-router-dom";
@@ -16,10 +17,9 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function Header() {
-  const [data, dispatch] = useContext(AppData);
+  const [data] = useContext(AppData);
   const [appState, setAppState, directory, setDirectory] = useContext(AppState);
   const [isLoggedIn] = useContext(User);
 
@@ -104,6 +104,7 @@ function Header() {
             <Grid item>
               <Grid container alignItems="center">
                 {directory !== "Main" && (
+                  // Back Icon
                   <IconButton
                     edge="start"
                     aria-label="arrow"
@@ -118,6 +119,7 @@ function Header() {
                     <ArrowBackIcon />
                   </IconButton>
                 )}
+                {/* Current directory title */}
                 <Typography
                   variant="h6"
                   sx={{ marginLeft: "1rem", userSelect: "none" }}
@@ -128,19 +130,8 @@ function Header() {
             </Grid>
             <Grid item>
               <Grid container alignItems="center">
-                <IconButton
-                  aria-label="a-z-sort-icon"
-                  sx={{
-                    padding: "0.2rem",
-                    marginRight: "0.5rem",
-                    "&:hover": {
-                      backgroundColor: "secondary.light",
-                    },
-                  }}
-                  onClick={() => dispatch({ type: "sort" })}
-                >
-                  <SortByAlphaIcon />
-                </IconButton>
+                {/* Sort Icon : sorts folders/links alphabetically*/}
+                <SortIcon />
                 <NewMenu />
               </Grid>
             </Grid>
