@@ -21,6 +21,7 @@ export const sortByName = (state, order) => {
       if (nameA > nameB) return -1;
       return 0;
     }
+    return newArray;
   });
   return newArray;
 };

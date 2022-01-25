@@ -30,7 +30,7 @@ function Home() {
       (err) => setIsError(true)
     );
     setIsLoading(false);
-  }, []);
+  }, [dispatch, setIsError, setIsLoading, setIsLoggedIn, setUser]);
 
   //Click Handlers
   const folderClickHandler = (id, title) => {
