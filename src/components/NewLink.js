@@ -1,11 +1,12 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import { AppData, AppState } from "../context/AppDataProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/link";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { createNewLink } from "../utils/api/link";
+import { Navigate } from "react-router-dom";
 
 function NewLink({ isNewLink, handleLinkClose }) {
   //Context
@@ -23,22 +24,10 @@ function NewLink({ isNewLink, handleLinkClose }) {
   //Submit
   const onSubmit = async ({ title, url }) => {
     try {
-      const res = await axios.post("http://localhost:5000/links/new", {
-        title: title,
-        parent_id: appState,
-        url: url,
-      });
-      dispatch({
-        type: "newLink",
-        _id: res.data._id,
-        dataType: res.data.type,
-        title: res.data.title,
-        parent_id: res.data.parent_id,
-        url: res.data.url,
-      });
+      createNewLink(title, url, appState, dispatch);
       handleLinkClose();
     } catch (error) {
-      console.log(error);
+      return <Navigate to="/404" />;
     }
   };
   return (

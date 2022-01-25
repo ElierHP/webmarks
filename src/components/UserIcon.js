@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import axios from "axios";
 import { User } from "../context/UserProvider";
 import { IconButton, Box, Grid } from "@mui/material";
 import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { userLogout } from "../utils/api/user";
+import { Navigate } from "react-router-dom";
 
 export default function UserIcon() {
   //User Context
@@ -12,8 +13,11 @@ export default function UserIcon() {
 
   //Submit
   const logout = async () => {
-    const res = await axios.post("http://localhost:5000/users/logout");
-    setIsLoggedIn(res.data.isLoggedIn);
+    try {
+      userLogout(setIsLoggedIn);
+    } catch (error) {
+      return <Navigate to="/404" />;
+    }
   };
   return (
     <Box>

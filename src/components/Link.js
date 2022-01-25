@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
 import { useForm } from "react-hook-form";
 import { AppData } from "../context/AppDataProvider";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { editSchema } from "../validations/link";
 import {
@@ -16,6 +15,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import { editLink } from "../utils/api/link";
+import { Navigate } from "react-router-dom";
 
 function Link({ title, url, clickHandler, _id }) {
   const [, dispatch] = useContext(AppData);
@@ -32,19 +33,9 @@ function Link({ title, url, clickHandler, _id }) {
 
   const handleEdit = async ({ newTitle, newUrl }) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/links/edit`, {
-        _id: _id,
-        title: newTitle,
-        url: newUrl,
-      });
-      dispatch({
-        type: "edit",
-        _id: res.data._id,
-        newTitle: res.data.title,
-        url: res.data.url,
-      });
+      editLink(newTitle, newUrl, _id, dispatch);
     } catch (error) {
-      console.log(error);
+      return <Navigate to="/404" />;
     }
   };
 

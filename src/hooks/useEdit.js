@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
-import { deleteFolder } from "../utils/api/folder";
 import { Navigate } from "react-router-dom";
+import { deleteItem } from "../utils/api";
 
 const useEdit = ({ _id }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -9,7 +9,7 @@ const useEdit = ({ _id }) => {
 
   const handleDelete = async (query) => {
     try {
-      deleteFolder(query, _id, dispatch);
+      deleteItem(query, _id, dispatch);
     } catch (error) {
       return <Navigate to="/404" />;
     }

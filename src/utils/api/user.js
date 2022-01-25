@@ -66,3 +66,9 @@ export const getUser = async (
   }
   setIsLoggedIn(res.data.isLoggedIn);
 };
+
+//User logout
+export const userLogout = async (setIsLoggedIn) => {
+  const res = await axios.post(`${baseUrl}/users/logout`);
+  setIsLoggedIn(res.data.isLoggedIn);
+};
