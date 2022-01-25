@@ -1,18 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { AppData, AppState } from "../context/AppDataProvider";
 import { User } from "../context/UserProvider";
-import axios from "axios";
 import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { Grid, Typography } from "@mui/material";
-import { getUser } from "../utils/userApi";
+import { getUser } from "../utils/api/user";
 
 function Home() {
-  //Axios Config
-  axios.defaults.withCredentials = true;
-
   //Context Providers
   const [data, dispatch] = useContext(AppData);
   const [appState, setAppState, , setDirectory] = useContext(AppState);

@@ -1,6 +1,9 @@
 import axios from "axios";
 import { baseUrl } from "./index";
 
+//Axios Config
+axios.defaults.withCredentials = true;
+
 //Login Request
 export const userLogin = async (username, password, setUser, setIsLoggedIn) => {
   const res = await axios.post(`${baseUrl}/users/login`, {

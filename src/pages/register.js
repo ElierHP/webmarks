@@ -12,7 +12,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-import { registerUser } from "../utils/userApi";
+import { registerUser } from "../utils/api/user";
 
 function Register() {
   //User Context

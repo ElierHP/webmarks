@@ -1,10 +1,9 @@
-import { Home, Register, Login } from "./pages/index";
+import { Home, Register, Login, ErrorPage } from "./pages/index";
 import { DarkModeProvider } from "./context/DarkModeProvider";
 import { Routes, Route } from "react-router-dom";
 import { AppDataProvider } from "./context/AppDataProvider";
 import { UserProvider } from "./context/UserProvider";
 import Layout from "./layout/Layout";
-import ErrorPage from "./pages/404";
 
 function App() {
   return (
