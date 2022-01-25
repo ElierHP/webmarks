@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import useEdit from "../hooks/useEdit";
 import { useForm } from "react-hook-form";
 import { AppData } from "../context/AppDataProvider";
-import axios from "axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { editSchema } from "../validations/folder";
 import { Grid, IconButton, Typography, TextField } from "@mui/material";
@@ -11,6 +10,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
+import { editFolder } from "../utils/api/folder";
+import { Navigate } from "react-router-dom";
 
 function Folder({ title, clickHandler, _id }) {
   const [, dispatch] = useContext(AppData);
@@ -29,17 +30,9 @@ function Folder({ title, clickHandler, _id }) {
 
   const handleEdit = async ({ newTitle }) => {
     try {
-      const res = await axios.patch(`http://localhost:5000/folders/edit`, {
-        _id: _id,
-        title: newTitle,
-      });
-      dispatch({
-        type: "edit",
-        _id: res.data._id,
-        newTitle: res.data.title,
-      });
+      editFolder(newTitle, _id, dispatch);
     } catch (error) {
-      console.log(error);
+      return <Navigate to="/404" />;
     }
   };
   return (

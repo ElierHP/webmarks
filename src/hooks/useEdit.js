@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
-import axios from "axios";
+import { deleteFolder } from "../utils/api/folder";
+import { Navigate } from "react-router-dom";
 
 const useEdit = ({ _id }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -8,12 +9,9 @@ const useEdit = ({ _id }) => {
 
   const handleDelete = async (query) => {
     try {
-      const res = await axios.delete(`http://localhost:5000/${query}/delete`, {
-        data: { _id },
-      });
-      dispatch({ type: "delete", _id: res.data._id });
+      deleteFolder(query, _id, dispatch);
     } catch (error) {
-      console.log(error);
+      return <Navigate to="/404" />;
     }
   };
 

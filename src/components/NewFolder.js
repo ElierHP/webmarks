@@ -3,9 +3,10 @@ import { AppData, AppState } from "../context/AppDataProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/folder";
-import axios from "axios";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import { createNewFolder } from "../utils/api/folder";
+import { Navigate } from "react-router-dom";
 
 function NewFolder({ isNewFolder, handleFolderClose }) {
   const [, dispatch] = useContext(AppData);
@@ -22,20 +23,10 @@ function NewFolder({ isNewFolder, handleFolderClose }) {
   //Submit
   const onSubmit = async ({ title }) => {
     try {
-      const res = await axios.post("http://localhost:5000/folders/new", {
-        title: title,
-        parent_id: appState,
-      });
-      dispatch({
-        type: "newFolder",
-        _id: res.data._id,
-        dataType: res.data.type,
-        title: res.data.title,
-        parent_id: res.data.parent_id,
-      });
+      createNewFolder(title, appState, dispatch);
       handleFolderClose();
     } catch (error) {
-      console.log(error);
+      return <Navigate to="/404" />;
     }
   };
   return (
