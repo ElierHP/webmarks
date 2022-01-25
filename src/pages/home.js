@@ -7,6 +7,7 @@ import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { Grid, Typography } from "@mui/material";
+import { getUser } from "../utils/userApi";
 
 function Home() {
   //Axios Config
@@ -29,23 +30,9 @@ function Home() {
   //Sever Requests
   useEffect(() => {
     //Get current User data
-    async function getUser() {
-      setIsLoading(true);
-      setIsError(false);
-      const res = await axios.get("http://localhost:5000/users");
-      //Check if user is logged in
-      if (res.data.user) {
-        setUser({ ...res.data.user });
-        //fetch folder data
-        const folders = await axios.get("http://localhost:5000/folders");
-        //fetch link data
-        const links = await axios.get("http://localhost:5000/links");
-        //load data onto the app
-        dispatch({ type: "load", data: [...folders.data, ...links.data] });
-      }
-      setIsLoggedIn(res.data.isLoggedIn);
-    }
-    getUser().catch((err) => setIsError(true));
+    getUser(setIsLoading, setIsError, setUser, setIsLoggedIn, dispatch).catch(
+      (err) => setIsError(true)
+    );
     setIsLoading(false);
   }, []);
 

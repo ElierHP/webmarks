@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { User } from "../context/UserProvider";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
@@ -13,6 +12,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { registerUser } from "../utils/userApi";
 
 function Register() {
   //User Context
@@ -41,22 +41,7 @@ function Register() {
       setIsLoading(true);
       setIsError(false);
       //Register new user
-      const res = await axios.post("http://localhost:5000/users/new", {
-        username,
-        password,
-      });
-      //If register was successful, login the user
-      if (res.data.success) {
-        const res = await axios.post("http://localhost:5000/users/login", {
-          username,
-          password,
-        });
-        //Set user state and logged in status
-        setUser({ ...res.data.user });
-        setIsLoggedIn(res.data.isLoggedIn);
-      } else {
-        setIsLoggedIn(res.data.isLoggedIn);
-      }
+      registerUser(username, password, setUser, setIsLoggedIn);
     } catch (error) {
       setIsError(true);
     }

@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { User } from "../context/UserProvider";
-import axios from "axios";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/user";
@@ -13,6 +12,7 @@ import {
   Typography,
   Button,
 } from "@mui/material";
+import { userLogin } from "../utils/userApi";
 
 function Login() {
   //User Context
@@ -40,16 +40,7 @@ function Login() {
     try {
       setIsLoading(true);
       setIsError(false);
-      const res = await axios.post("http://localhost:5000/users/login", {
-        username,
-        password,
-      });
-      if (res.data.isLoggedIn === true) {
-        setUser({ ...res.data.user });
-        setIsLoggedIn(res.data.isLoggedIn);
-      } else {
-        setIsLoggedIn(res.data.isLoggedIn);
-      }
+      userLogin(username, password, setUser, setIsLoggedIn);
     } catch (error) {
       setIsError(true);
     }
