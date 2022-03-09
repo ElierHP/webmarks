@@ -1,70 +1,68 @@
-# Getting Started with Create React App
+# Webmarks
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Webmarks](./src/images/webmarks-screenshot.png)
 
-## Available Scripts
+#### Top Technologies
 
-In the project directory, you can run:
+[![React Badge](https://img.shields.io/badge/-React-61DBFB?style=for-the-badge&labelColor=black&logo=react&logoColor=61DBFB)](#)
+[![MaterialUI](https://img.shields.io/badge/-mui-3A71DC?style=for-the-badge&labelColor=black&logo=mui&logoColor=3A71DC)](#)
+[![Node JS](https://img.shields.io/badge/-node.js-49A958?style=for-the-badge&labelColor=black&logo=node.js&logoColor=49A958)](#)
+[![Express](https://img.shields.io/badge/-express-9E55B8?style=for-the-badge&labelColor=black&logo=express&logoColor=9E55B8)](#)
+[![MongoDB](https://img.shields.io/badge/-mongodb-3C7262?style=for-the-badge&labelColor=black&logo=mongodb&logoColor=3C7262)](#)
 
-### `npm start`
+Webmarks is an online file system that allows users to store folders and urls on the web. The Front end for this application was built using React and Material UI.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The project is currently live on the web at : [https://webmarks.com](https://webmarks.netlify.app/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Backend
 
-### `npm test`
+I built the server API using Node with Express and handled the user authentication with Passport.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The backend codebase can be viewed on the github repo below.
 
-### `npm run build`
+:arrow_forward: [Webmarks Backend](https://github.com/ElierHP/webmarks-server)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Installation - Frontend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Download repository
+   ```bash
+   git clone https://github.com/ElierHP/webmarks.git
+   ```
+2. Install packages
+   ```bash
+   npm install
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Installation - Backend
 
-### `npm run eject`
+1. Download repository
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+   ```bash
+   git clone https://github.com/ElierHP/webmarks-server.git
+   ```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+2. Install packages
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+   ```bash
+   npm install
+   ```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+3. Create a .env file
+   ```bash
+   DB_HOST=your-server
+   SESSION_SECRET=your-secret
+   BASE_URL=http://localhost:3000 or server url
+   ```
 
-## Learn More
+## Start Application
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+1. run both front-end & back-end applications
+   ```bash
+   npm start
+   ```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### :mailbox: Reach out to me!
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- :clipboard: [My Resume/CV]()
+- :email: elierporto@gmail.com
+- :page_facing_up: [elierhernandez.netlify.app](https://www.elierhernandez.netlify.app)
