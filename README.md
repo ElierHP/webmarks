@@ -12,15 +12,15 @@
 
 Webmarks is an online file system that allows users to store folders and urls on the web. The Front end for this application was built using React and Material UI.
 
-The project is currently live on the web at : [https://webmarks.com](https://webmarks.netlify.app/)
+The project is currently live on the web at : [https://webmarks.netlify.app](https://webmarks.netlify.app/)
 
 ## Backend
 
 I built the server API using Node with Express and handled the user authentication with Passport.
 
-The backend codebase can be viewed on the github repo below.
+The backend codebase can be viewed on the github repo below. :arrow_down:
 
-:arrow_forward: [Webmarks Backend](https://github.com/ElierHP/webmarks-server)
+:white_square_button: [Webmarks Backend](https://github.com/ElierHP/webmarks-server)
 
 ## Installation - Frontend
 
@@ -56,7 +56,7 @@ The backend codebase can be viewed on the github repo below.
 
 ## Start Application
 
-1. run both front-end & back-end applications
+1. run both frontend & backend applications
    ```bash
    npm start
    ```
