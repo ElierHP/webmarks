@@ -1,6 +1,6 @@
 # Webmarks
 
-![Webmarks](./src/images/webmarks-screenshot.png)
+![Webmarks](./public/webmarks-screenshot.png)
 
 #### Top Technologies
 
