@@ -12,10 +12,10 @@ function App() {
         <DarkModeProvider>
           <Layout>
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/404" element={<ErrorPage />} />
+              <Route path="/*" element={<ErrorPage />} />
+              <Route exact path="/" element={<Home />} />
+              <Route exact path="/register" element={<Register />} />
+              <Route exact path="/login" element={<Login />} />
             </Routes>
           </Layout>
         </DarkModeProvider>

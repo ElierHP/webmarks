@@ -65,7 +65,7 @@ function Header() {
             {/* Logo */}
             <MuiLink
               component={Link}
-              to={isLoggedIn && "/"}
+              to={isLoggedIn ? "/" : "/login"}
               onClick={logoClickHandler}
               color="common.white"
               underline="none"
