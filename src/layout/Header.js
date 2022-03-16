@@ -131,8 +131,9 @@ function Header() {
             <Grid item>
               <Grid container alignItems="center">
                 {/* Sort Icon : sorts folders/links alphabetically*/}
-                <SortIcon />
-                <NewMenu />
+                {isLoggedIn && <SortIcon />}
+                {/* Open New Menu*/}
+                {isLoggedIn && <NewMenu />}
               </Grid>
             </Grid>
           </Grid>
