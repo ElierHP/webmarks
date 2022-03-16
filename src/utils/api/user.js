@@ -5,16 +5,24 @@ import { baseUrl } from "./index";
 axios.defaults.withCredentials = true;
 
 //Login Request
-export const userLogin = async (username, password, setUser, setIsLoggedIn) => {
-  const res = await axios.post(`${baseUrl}/users/login`, {
-    username,
-    password,
-  });
-  if (res.data.isLoggedIn === true) {
+export const userLogin = async (
+  username,
+  password,
+  setUser,
+  setIsLoggedIn,
+  setIsError,
+  setIsLoading
+) => {
+  try {
+    const res = await axios.post(`${baseUrl}/users/login`, {
+      username,
+      password,
+    });
     setUser({ ...res.data.user });
     setIsLoggedIn(res.data.isLoggedIn);
-  } else {
-    setIsLoggedIn(res.data.isLoggedIn);
+  } catch (error) {
+    setIsLoading(false);
+    setIsError(true);
   }
 };
 
@@ -23,23 +31,31 @@ export const registerUser = async (
   username,
   password,
   setUser,
-  setIsLoggedIn
+  setIsLoggedIn,
+  setIsError,
+  setIsLoading
 ) => {
-  const res = await axios.post(`${baseUrl}/users/new`, {
-    username,
-    password,
-  });
-  //If register was successful, login the user
-  if (res.data.success) {
-    const res = await axios.post(`${baseUrl}/users/login`, {
+  try {
+    //Register user
+    const res = await axios.post(`${baseUrl}/users/new`, {
       username,
       password,
     });
-    //Set user state and logged in status
-    setUser({ ...res.data.user });
-    setIsLoggedIn(res.data.isLoggedIn);
-  } else {
-    setIsLoggedIn(res.data.isLoggedIn);
+    //If register was successful, login the user
+    if (res.data.success) {
+      const res = await axios.post(`${baseUrl}/users/login`, {
+        username,
+        password,
+      });
+      //Set user state and logged in status
+      setUser({ ...res.data.user });
+      setIsLoggedIn(res.data.isLoggedIn);
+    } else {
+      setIsLoggedIn(res.data.isLoggedIn);
+    }
+  } catch (error) {
+    setIsLoading(false);
+    setIsError(true);
   }
 };
 

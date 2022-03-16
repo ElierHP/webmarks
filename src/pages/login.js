@@ -37,14 +37,17 @@ function Login() {
   });
 
   const onSubmit = async ({ username, password }) => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      userLogin(username, password, setUser, setIsLoggedIn);
-    } catch (error) {
-      setIsError(true);
-    }
-    setIsLoading(false);
+    setIsLoading(true);
+    setIsError(false);
+    //Logs in the user
+    await userLogin(
+      username,
+      password,
+      setUser,
+      setIsLoggedIn,
+      setIsError,
+      setIsLoading
+    );
   };
 
   if (isLoggedIn) return <Navigate to="/" />;

@@ -37,15 +37,17 @@ function Register() {
   });
 
   const onSubmit = async ({ username, password }) => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      //Register new user
-      registerUser(username, password, setUser, setIsLoggedIn);
-    } catch (error) {
-      setIsError(true);
-    }
-    setIsLoading(false);
+    setIsLoading(true);
+    setIsError(false);
+    //Register new user
+    registerUser(
+      username,
+      password,
+      setUser,
+      setIsLoggedIn,
+      setIsError,
+      setIsLoading
+    );
   };
 
   if (isLoggedIn) return <Navigate to="/" />;

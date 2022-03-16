@@ -25,11 +25,19 @@ function Home() {
 
   //Sever Requests
   useEffect(() => {
-    //Get current User data
-    getUser(setIsLoading, setIsError, setUser, setIsLoggedIn, dispatch).catch(
-      (err) => setIsError(true)
-    );
-    setIsLoading(false);
+    const userAsync = async () => {
+      //Get current User data
+      await getUser(
+        setIsLoading,
+        setIsError,
+        setUser,
+        setIsLoggedIn,
+        dispatch
+      ).catch((err) => setIsError(true));
+      setIsLoading(false);
+    };
+    // Calls getUser() asynchronously
+    userAsync();
   }, [dispatch, setIsError, setIsLoading, setIsLoggedIn, setUser]);
 
   //Click Handlers
@@ -44,36 +52,37 @@ function Home() {
   return (
     <Grid container>
       {/* Loading Data*/}
-      {isLoading && (
+      {isLoading ? (
         <Typography variant="h5" sx={{ margin: "auto", paddingTop: "2rem" }}>
           Loading...
         </Typography>
-      )}
-      {/* Render App Data */}
-      {data
-        .filter((idFilter) => idFilter.parent_id === appState)
-        .map((item) =>
-          item.type === "folder" ? (
-            // Render Folders
-            <Folder
-              title={item.title}
-              url={item.url}
-              key={uuidv4()}
-              _id={item._id}
-              parent_id={item.parent_id}
-              clickHandler={() => folderClickHandler(item._id, item.title)}
-            />
-          ) : (
-            // Render Links
-            <Link
-              title={item.title}
-              url={item.url}
-              key={uuidv4()}
-              _id={item._id}
-              clickHandler={() => (window.location = item.url)}
-            />
+      ) : (
+        // Render Data
+        data
+          .filter((idFilter) => idFilter.parent_id === appState)
+          .map((item) =>
+            item.type === "folder" ? (
+              // Render Folders
+              <Folder
+                title={item.title}
+                url={item.url}
+                key={uuidv4()}
+                _id={item._id}
+                parent_id={item.parent_id}
+                clickHandler={() => folderClickHandler(item._id, item.title)}
+              />
+            ) : (
+              // Render Links
+              <Link
+                title={item.title}
+                url={item.url}
+                key={uuidv4()}
+                _id={item._id}
+                clickHandler={() => (window.location = item.url)}
+              />
+            )
           )
-        )}
+      )}
     </Grid>
   );
 }
