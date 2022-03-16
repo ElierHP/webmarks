@@ -6,7 +6,7 @@ function Footer() {
     <footer>
       <Box sx={{ backgroundColor: "primary.main", padding: "0.4rem" }}>
         <Typography align="center" color="common.white">
-          Copyright @2021
+          All Rights Reserved. Copyright &copy; 2022.
         </Typography>
       </Box>
     </footer>

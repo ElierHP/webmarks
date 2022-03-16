@@ -15,7 +15,7 @@ export const palette = {
   darkThemeColors: {
     primary: "#0E1B26",
     primaryLight: "#95CBFB",
-    secondary: "#51606E",
+    secondary: "#586775",
     secondaryLight: "#707F8D",
     secondaryDark: "#455463",
     folder: "#FFA724",
@@ -54,6 +54,9 @@ function Theme({ children }) {
         main: palette.darkThemeColors.secondary,
         light: palette.darkThemeColors.secondaryLight,
         dark: palette.darkThemeColors.secondaryDark,
+      },
+      info: {
+        main: palette.darkThemeColors.primaryLight,
       },
       folder: {
         main: palette.darkThemeColors.folder,
