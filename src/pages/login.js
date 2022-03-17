@@ -11,8 +11,10 @@ import {
   TextField,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
 import { userLogin } from "../utils/api/user";
+import TestUser from "../components/TestUser";
 
 function Login() {
   //User Context
@@ -138,16 +140,20 @@ function Login() {
           </Button>
 
           {/* Register Link */}
-          <MuiLink
-            component={Link}
-            to="/register"
-            color="primary.light"
-            underline="none"
-            sx={{ textDecoration: "none", marginTop: "-1rem" }}
-            onClick={() => setIsError(false)}
-          >
-            Register
-          </MuiLink>
+          <Box sx={{ display: "flex", gridGap: "3rem" }}>
+            <MuiLink
+              component={Link}
+              to="/register"
+              color="primary.light"
+              underline="none"
+              sx={{ textDecoration: "none", marginTop: "-1rem" }}
+              onClick={() => setIsError(false)}
+            >
+              Register
+            </MuiLink>
+            {/* Login as Test User */}
+            <TestUser />
+          </Box>
         </FormControl>
       </form>
     </Container>

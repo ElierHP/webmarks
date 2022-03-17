@@ -11,8 +11,10 @@ import {
   TextField,
   Typography,
   Button,
+  Box,
 } from "@mui/material";
 import { registerUser } from "../utils/api/user";
+import TestUser from "../components/TestUser";
 
 function Register() {
   //User Context
@@ -157,16 +159,19 @@ function Register() {
           </Button>
 
           {/* Login Link */}
-          <MuiLink
-            component={Link}
-            to="/login"
-            color="primary.light"
-            underline="none"
-            sx={{ textDecoration: "none", marginTop: "-1rem" }}
-            onClick={() => setIsError(false)}
-          >
-            Login
-          </MuiLink>
+          <Box sx={{ display: "flex", gridGap: "3rem" }}>
+            <MuiLink
+              component={Link}
+              to="/login"
+              color="primary.light"
+              underline="none"
+              sx={{ textDecoration: "none", marginTop: "-1rem" }}
+              onClick={() => setIsError(false)}
+            >
+              Login
+            </MuiLink>
+            <TestUser />
+          </Box>
         </FormControl>
       </form>
     </Container>
