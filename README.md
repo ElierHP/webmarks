@@ -63,6 +63,4 @@ The backend codebase can be viewed on the github repo below. :arrow_down:
 
 #### :mailbox: Reach out to me!
 
-- :clipboard: [My Resume/CV]()
 - :email: elierporto@gmail.com
-- :page_facing_up: [elierhernandez.netlify.app](https://www.elierhernandez.netlify.app)
