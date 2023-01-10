@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 
 export default function UserIcon() {
   //User Context
-  const [isLoggedIn, setIsLoggedIn] = useContext(User);
+  const { isLoggedIn, setIsLoggedIn } = useContext(User);
 
   //Submit
   const logout = async () => {

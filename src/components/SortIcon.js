@@ -4,7 +4,7 @@ import { IconButton } from "@mui/material";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
 
 function SortIcon() {
-  const [, dispatch] = useContext(AppData);
+  const { dispatch } = useContext(AppData);
   const [sort, setSort] = useState("asc");
 
   // Sort the folders and links

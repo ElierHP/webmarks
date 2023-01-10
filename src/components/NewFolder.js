@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppData, AppState } from "../context/AppDataProvider";
+import { AppData } from "../context/AppDataProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/folder";
@@ -9,8 +9,7 @@ import { createNewFolder } from "../utils/api/folder";
 import { Navigate } from "react-router-dom";
 
 function NewFolder({ isNewFolder, handleFolderClose }) {
-  const [, dispatch] = useContext(AppData);
-  const [appState] = useContext(AppState);
+  const { dispatch, appState } = useContext(AppData);
 
   const {
     register,

@@ -14,7 +14,7 @@ import { editFolder } from "../utils/api/folder";
 import { Navigate } from "react-router-dom";
 
 function Folder({ title, clickHandler, _id }) {
-  const [, dispatch] = useContext(AppData);
+  const { dispatch } = useContext(AppData);
 
   const {
     register,

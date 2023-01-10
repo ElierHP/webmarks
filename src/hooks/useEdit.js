@@ -5,7 +5,7 @@ import { deleteItem } from "../utils/api";
 
 const useEdit = ({ _id }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [, dispatch] = useContext(AppData);
+  const { dispatch } = useContext(AppData);
 
   const handleDelete = async (query) => {
     try {

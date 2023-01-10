@@ -19,7 +19,7 @@ import { editLink } from "../utils/api/link";
 import { Navigate } from "react-router-dom";
 
 function Link({ title, url, clickHandler, _id }) {
-  const [, dispatch] = useContext(AppData);
+  const { dispatch } = useContext(AppData);
 
   const {
     register,

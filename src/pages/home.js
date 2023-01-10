@@ -10,56 +10,40 @@ import { getUser } from "../utils/api/user";
 
 function Home() {
   //Context Providers
-  const [data, dispatch] = useContext(AppData);
-  const [appState, setAppState, , setDirectory] = useContext(AppState);
-  const [
-    isLoggedIn,
-    setIsLoggedIn,
-    ,
-    setUser,
-    isLoading,
-    setIsLoading,
-    isError,
-    setIsError,
-  ] = useContext(User);
+  const app = useContext(AppData);
+  const user = useContext(User);
 
   //Sever Requests
   useEffect(() => {
     const userAsync = async () => {
       //Get current User data
-      await getUser(
-        setIsLoading,
-        setIsError,
-        setUser,
-        setIsLoggedIn,
-        dispatch
-      ).catch((err) => setIsError(true));
-      setIsLoading(false);
+      await getUser(user, app.dispatch).catch((err) => user.setIsError(true));
+      user.setIsLoading(false);
     };
     // Calls getUser() asynchronously
     userAsync();
-  }, [dispatch, setIsError, setIsLoading, setIsLoggedIn, setUser]);
+  }, []);
 
   //Click Handlers
   const folderClickHandler = (id, title) => {
-    setAppState(id);
-    setDirectory(title);
+    app.setAppState(id);
+    app.setDirectory(title);
   };
 
-  if (isError) return <Navigate to="/404" />;
+  if (user.isError) return <Navigate to="/404" />;
   //Route to /login if user is not logged in
-  if (!isLoggedIn) return <Navigate to="/login" />;
+  if (!user.isLoggedIn) return <Navigate to="/login" />;
   return (
     <Grid container>
       {/* Loading Data*/}
-      {isLoading ? (
+      {user.isLoading ? (
         <Typography variant="h5" sx={{ margin: "auto", paddingTop: "2rem" }}>
           Loading...
         </Typography>
       ) : (
         // Render Data
-        data
-          .filter((idFilter) => idFilter.parent_id === appState)
+        app.data
+          .filter((idFilter) => idFilter.parent_id === app.appState)
           .map((item) =>
             item.type === "folder" ? (
               // Render Folders

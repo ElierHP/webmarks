@@ -6,25 +6,17 @@ import { Link as MuiLink } from "@mui/material";
 
 function TestUser() {
   //User Context
-  const [, setIsLoggedIn, , setUser, , setIsLoading, , setIsError] =
-    useContext(User);
+  const user = useContext(User);
 
   //Login as Test User
   const onSubmit = async ({
     username = "TestUser",
     password = "testuser1234",
   }) => {
-    setIsLoading(true);
-    setIsError(false);
+    user.setIsLoading(true);
+    user.setIsError(false);
     //Logs in the user
-    await userLogin(
-      username,
-      password,
-      setUser,
-      setIsLoggedIn,
-      setIsError,
-      setIsLoading
-    );
+    await userLogin(username, password, user);
   };
   return (
     <MuiLink

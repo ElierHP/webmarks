@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppData, AppState } from "../context/AppDataProvider";
+import { AppData } from "../context/AppDataProvider";
 import { User } from "../context/UserProvider";
 import UserIcon from "../components/UserIcon";
 import SortIcon from "../components/SortIcon";
@@ -19,27 +19,28 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Header() {
-  const [data] = useContext(AppData);
-  const [appState, setAppState, directory, setDirectory] = useContext(AppState);
-  const [isLoggedIn] = useContext(User);
+  const app = useContext(AppData);
+  const { isLoggedIn } = useContext(User);
 
   //Logo click sends user to home page
   const logoClickHandler = () => {
-    setAppState("0");
-    setDirectory("Main");
+    app.setAppState("0");
+    app.setDirectory("Main");
   };
 
   //Go Back Button
   const prevClickHandler = () => {
     //Find parent folder & setAppState to it's parents ID
-    const parentFolder = data.find((folder) => folder._id === appState);
-    parentFolder ? setAppState(parentFolder.parent_id) : setAppState(0);
+    const parentFolder = app.data.find((folder) => folder._id === app.appState);
+    parentFolder ? app.setAppState(parentFolder.parent_id) : app.setAppState(0);
 
     //Find the new directory title based on parentFolder
-    const newDirectory = data.find(
+    const newDirectory = app.data.find(
       (folder) => parentFolder.parent_id === folder._id
     );
-    newDirectory ? setDirectory(newDirectory.title) : setDirectory("Main");
+    newDirectory
+      ? app.setDirectory(newDirectory.title)
+      : app.setDirectory("Main");
   };
 
   return (
@@ -103,7 +104,7 @@ function Header() {
           >
             <Grid item>
               <Grid container alignItems="center">
-                {directory !== "Main" && (
+                {app.directory !== "Main" && (
                   // Back Icon
                   <IconButton
                     edge="start"
@@ -124,7 +125,7 @@ function Header() {
                   variant="h6"
                   sx={{ marginLeft: "1rem", userSelect: "none" }}
                 >
-                  {directory}
+                  {app.directory}
                 </Typography>
               </Grid>
             </Grid>

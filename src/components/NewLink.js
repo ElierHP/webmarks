@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AppData, AppState } from "../context/AppDataProvider";
+import { AppData } from "../context/AppDataProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/link";
@@ -10,8 +10,7 @@ import { Navigate } from "react-router-dom";
 
 function NewLink({ isNewLink, handleLinkClose }) {
   //Context
-  const [, dispatch] = useContext(AppData);
-  const [appState] = useContext(AppState);
+  const { dispatch, appState } = useContext(AppData);
 
   const {
     register,

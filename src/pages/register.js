@@ -18,16 +18,7 @@ import TestUser from "../components/TestUser";
 
 function Register() {
   //User Context
-  const [
-    isLoggedIn,
-    setIsLoggedIn,
-    ,
-    setUser,
-    isLoading,
-    setIsLoading,
-    isError,
-    setIsError,
-  ] = useContext(User);
+  const user = useContext(User);
 
   //React Hook Form
   const {
@@ -39,20 +30,13 @@ function Register() {
   });
 
   const onSubmit = async ({ username, password }) => {
-    setIsLoading(true);
-    setIsError(false);
+    user.setIsLoading(true);
+    user.setIsError(false);
     //Register new user
-    registerUser(
-      username,
-      password,
-      setUser,
-      setIsLoggedIn,
-      setIsError,
-      setIsLoading
-    );
+    registerUser(username, password, user);
   };
 
-  if (isLoggedIn) return <Navigate to="/" />;
+  if (user.isLoggedIn) return <Navigate to="/" />;
   return (
     <Container
       sx={{
@@ -82,7 +66,7 @@ function Register() {
           </Typography>
 
           {/* Register Error */}
-          {isError && (
+          {user.isError && (
             <Typography
               variant="body2"
               color="error"
@@ -155,7 +139,7 @@ function Register() {
             color="primary"
             sx={{ padding: ".8rem" }}
           >
-            {isLoading ? " Loading..." : "Submit"}
+            {user.isLoading ? " Loading..." : "Submit"}
           </Button>
 
           {/* Login Link */}
@@ -166,7 +150,7 @@ function Register() {
               color="primary.light"
               underline="none"
               sx={{ textDecoration: "none", marginTop: "-1rem" }}
-              onClick={() => setIsError(false)}
+              onClick={() => user.setIsError(false)}
             >
               Login
             </MuiLink>
