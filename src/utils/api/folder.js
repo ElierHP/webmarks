@@ -1,6 +1,8 @@
 import axios from "axios";
 import { baseUrl } from "./index";
 
+export const getFolders = async () => await axios.get(`${baseUrl}/folders`);
+
 export const createNewFolder = async (title, appState, dispatch) => {
   const res = await axios.post(`${baseUrl}/folders/new`, {
     title: title,

@@ -9,12 +9,12 @@ import { Navigate } from "react-router-dom";
 
 export default function UserIcon() {
   //User Context
-  const { isLoggedIn, setIsLoggedIn } = useContext(User);
+  const { user, setUser } = useContext(User);
 
   //Submit
   const logout = async () => {
     try {
-      userLogout(setIsLoggedIn);
+      userLogout(setUser);
     } catch (error) {
       return <Navigate to="/404" />;
     }
@@ -22,7 +22,7 @@ export default function UserIcon() {
   return (
     <Box>
       <Grid container alignItems="center">
-        {isLoggedIn ? (
+        {user ? (
           // User Icon
           <Link to="/">
             <IconButton onClick={logout} sx={{ color: "common.white" }}>

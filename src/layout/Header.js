@@ -20,7 +20,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
 function Header() {
   const app = useContext(AppData);
-  const { isLoggedIn } = useContext(User);
+  const { user } = useContext(User);
 
   //Logo click sends user to home page
   const logoClickHandler = () => {
@@ -66,7 +66,7 @@ function Header() {
             {/* Logo */}
             <MuiLink
               component={Link}
-              to={isLoggedIn ? "/" : "/login"}
+              to={user ? "/" : "/login"}
               onClick={logoClickHandler}
               color="common.white"
               underline="none"
@@ -132,9 +132,9 @@ function Header() {
             <Grid item>
               <Grid container alignItems="center">
                 {/* Sort Icon : sorts folders/links alphabetically*/}
-                {isLoggedIn && <SortIcon />}
+                {user && <SortIcon />}
                 {/* Open New Menu*/}
-                {isLoggedIn && <NewMenu />}
+                {user && <NewMenu />}
               </Grid>
             </Grid>
           </Grid>

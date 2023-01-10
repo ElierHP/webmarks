@@ -17,6 +17,7 @@ function TestUser() {
     user.setIsError(false);
     //Logs in the user
     await userLogin(username, password, user);
+    user.setIsLoading(false);
   };
   return (
     <MuiLink

@@ -34,9 +34,10 @@ function Register() {
     user.setIsError(false);
     //Register new user
     registerUser(username, password, user);
+    user.setIsLoading(false);
   };
 
-  if (user.isLoggedIn) return <Navigate to="/" />;
+  if (user.user) return <Navigate to="/" />;
   return (
     <Container
       sx={{

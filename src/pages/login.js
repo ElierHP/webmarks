@@ -34,9 +34,11 @@ function Login() {
     user.setIsError(false);
     //Logs in the user
     await userLogin(username, password, user);
+    user.setIsLoading(false);
   };
 
-  if (user.isLoggedIn) return <Navigate to="/" />;
+  // If a user exists, navigate to home.
+  if (user.user) return <Navigate to="/" />;
   return (
     <Container
       sx={{
