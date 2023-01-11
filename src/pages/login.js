@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { userLogin } from "../utils/api/user";
 import TestUser from "../components/TestUser";
+import Spinner from "../assets/spinner/Spinner";
 
 function Login() {
   //User Context
@@ -50,98 +51,104 @@ function Login() {
         alignItems: "center",
       }}
     >
-      <form id="login" onSubmit={handleSubmit(onSubmit)}>
-        <FormControl
-          sx={{
-            paddingTop: "5rem",
-            paddingBottom: "5rem",
-            gap: "2rem",
-            width: {
-              xs: "100%",
-              sm: "450px",
-            },
-          }}
-        >
-          {/* Title */}
-          <Typography variant="h5" align="center">
-            Login
-          </Typography>
-
-          {/* Login Error */}
-          {user.isError && (
-            <Typography
-              variant="body2"
-              color="error"
-              sx={{ marginBottom: "-1rem" }}
-            >
-              Username or password is incorrect.
-            </Typography>
-          )}
-
-          {/* Username */}
-          {!errors.username ? (
-            <TextField
-              id="username"
-              label="username"
-              variant="outlined"
-              color="primary"
-              {...register("username")}
-            />
-          ) : (
-            // Username Error
-            <TextField
-              id="username-error"
-              label="username"
-              error
-              helperText={errors.username.message}
-              {...register("username")}
-            />
-          )}
-
-          {/* Password */}
-          {!errors.password ? (
-            <TextField
-              label="password"
-              variant="outlined"
-              color="primary"
-              {...register("password")}
-            />
-          ) : (
-            // Password Error
-            <TextField
-              id="password-error"
-              label="password"
-              error
-              helperText={errors.password.message}
-              {...register("password")}
-            />
-          )}
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ padding: ".8rem" }}
+      {user.isLoading ? (
+        <Box sx={{ marginTop: "2rem" }}>
+          <Spinner />
+        </Box>
+      ) : (
+        <form id="login" onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
+            sx={{
+              paddingTop: "5rem",
+              paddingBottom: "5rem",
+              gap: "2rem",
+              width: {
+                xs: "100%",
+                sm: "450px",
+              },
+            }}
           >
-            {user.isLoading ? " Loading..." : "Submit"}
-          </Button>
+            {/* Title */}
+            <Typography variant="h5" align="center">
+              Login
+            </Typography>
 
-          {/* Register Link */}
-          <Box sx={{ display: "flex", gridGap: "3rem" }}>
-            <MuiLink
-              component={Link}
-              to="/register"
-              color="primary.light"
-              underline="none"
-              sx={{ textDecoration: "none", marginTop: "-1rem" }}
-              onClick={() => user.setIsError(false)}
+            {/* Login Error */}
+            {user.isError && (
+              <Typography
+                variant="body2"
+                color="error"
+                sx={{ marginBottom: "-1rem" }}
+              >
+                Username or password is incorrect.
+              </Typography>
+            )}
+
+            {/* Username */}
+            {!errors.username ? (
+              <TextField
+                id="username"
+                label="username"
+                variant="outlined"
+                color="primary"
+                {...register("username")}
+              />
+            ) : (
+              // Username Error
+              <TextField
+                id="username-error"
+                label="username"
+                error
+                helperText={errors.username.message}
+                {...register("username")}
+              />
+            )}
+
+            {/* Password */}
+            {!errors.password ? (
+              <TextField
+                label="password"
+                variant="outlined"
+                color="primary"
+                {...register("password")}
+              />
+            ) : (
+              // Password Error
+              <TextField
+                id="password-error"
+                label="password"
+                error
+                helperText={errors.password.message}
+                {...register("password")}
+              />
+            )}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ padding: ".8rem" }}
             >
-              Register
-            </MuiLink>
-            {/* Login as Test User */}
-            <TestUser />
-          </Box>
-        </FormControl>
-      </form>
+              Submit
+            </Button>
+
+            {/* Register Link */}
+            <Box sx={{ display: "flex", gridGap: "3rem" }}>
+              <MuiLink
+                component={Link}
+                to="/register"
+                color="primary.light"
+                underline="none"
+                sx={{ textDecoration: "none", marginTop: "-1rem" }}
+                onClick={() => user.setIsError(false)}
+              >
+                Register
+              </MuiLink>
+              {/* Login as Test User */}
+              <TestUser />
+            </Box>
+          </FormControl>
+        </form>
+      )}
     </Container>
   );
 }

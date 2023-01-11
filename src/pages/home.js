@@ -5,7 +5,8 @@ import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { Grid, Typography } from "@mui/material";
+import { Grid, Box } from "@mui/material";
+import Spinner from "../assets/spinner/Spinner";
 
 function Home() {
   //Context Providers
@@ -25,9 +26,9 @@ function Home() {
     <Grid container>
       {/* Loading Data*/}
       {user.isLoading ? (
-        <Typography variant="h5" sx={{ margin: "auto", paddingTop: "2rem" }}>
-          Loading...
-        </Typography>
+        <Box sx={{ margin: "auto", marginTop: "2rem" }}>
+          <Spinner />
+        </Box>
       ) : (
         // Render Data
         app.data

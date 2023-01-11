@@ -15,6 +15,7 @@ import {
 } from "@mui/material";
 import { registerUser } from "../utils/api/user";
 import TestUser from "../components/TestUser";
+import Spinner from "../assets/spinner/Spinner";
 
 function Register() {
   //User Context
@@ -33,7 +34,7 @@ function Register() {
     user.setIsLoading(true);
     user.setIsError(false);
     //Register new user
-    registerUser(username, password, user);
+    await registerUser(username, password, user);
     user.setIsLoading(false);
   };
 
@@ -49,116 +50,122 @@ function Register() {
         alignItems: "center",
       }}
     >
-      <form id="register" onSubmit={handleSubmit(onSubmit)}>
-        <FormControl
-          sx={{
-            paddingTop: "5rem",
-            paddingBottom: "5rem",
-            gap: "2rem",
-            width: {
-              xs: "100%",
-              sm: "450px",
-            },
-          }}
-        >
-          {/* Title */}
-          <Typography variant="h5" align="center">
-            Register
-          </Typography>
-
-          {/* Register Error */}
-          {user.isError && (
-            <Typography
-              variant="body2"
-              color="error"
-              sx={{ marginBottom: "-1rem" }}
-            >
-              Username already exists.
-            </Typography>
-          )}
-          {/* Username */}
-          {!errors.username ? (
-            <TextField
-              id="username"
-              label="username"
-              variant="outlined"
-              color="primary"
-              {...register("username")}
-            />
-          ) : (
-            // Username Error
-            <TextField
-              id="username-error"
-              label="username"
-              error
-              helperText={errors.username.message}
-              {...register("username")}
-            />
-          )}
-
-          {/* Password */}
-          {!errors.password ? (
-            <TextField
-              label="password"
-              variant="outlined"
-              color="primary"
-              {...register("password")}
-            />
-          ) : (
-            // Password Error
-            <TextField
-              id="password-error"
-              label="password"
-              error
-              helperText={errors.password.message}
-              {...register("password")}
-            />
-          )}
-
-          {/* Confirm Password */}
-          {!errors.confirmPassword ? (
-            <TextField
-              label="confirm password"
-              variant="outlined"
-              color="primary"
-              {...register("confirmPassword")}
-            />
-          ) : (
-            // Confirm Password Error
-            <TextField
-              id="confirmPassword-error"
-              label="confirm password"
-              error
-              helperText={errors.confirmPassword.message}
-              {...register("confirmPassword")}
-            />
-          )}
-
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            sx={{ padding: ".8rem" }}
+      {user.isLoading ? (
+        <Box sx={{ marginTop: "2rem" }}>
+          <Spinner />
+        </Box>
+      ) : (
+        <form id="register" onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
+            sx={{
+              paddingTop: "5rem",
+              paddingBottom: "5rem",
+              gap: "2rem",
+              width: {
+                xs: "100%",
+                sm: "450px",
+              },
+            }}
           >
-            {user.isLoading ? " Loading..." : "Submit"}
-          </Button>
+            {/* Title */}
+            <Typography variant="h5" align="center">
+              Register
+            </Typography>
 
-          {/* Login Link */}
-          <Box sx={{ display: "flex", gridGap: "3rem" }}>
-            <MuiLink
-              component={Link}
-              to="/login"
-              color="primary.light"
-              underline="none"
-              sx={{ textDecoration: "none", marginTop: "-1rem" }}
-              onClick={() => user.setIsError(false)}
+            {/* Register Error */}
+            {user.isError && (
+              <Typography
+                variant="body2"
+                color="error"
+                sx={{ marginBottom: "-1rem" }}
+              >
+                Username already exists.
+              </Typography>
+            )}
+            {/* Username */}
+            {!errors.username ? (
+              <TextField
+                id="username"
+                label="username"
+                variant="outlined"
+                color="primary"
+                {...register("username")}
+              />
+            ) : (
+              // Username Error
+              <TextField
+                id="username-error"
+                label="username"
+                error
+                helperText={errors.username.message}
+                {...register("username")}
+              />
+            )}
+
+            {/* Password */}
+            {!errors.password ? (
+              <TextField
+                label="password"
+                variant="outlined"
+                color="primary"
+                {...register("password")}
+              />
+            ) : (
+              // Password Error
+              <TextField
+                id="password-error"
+                label="password"
+                error
+                helperText={errors.password.message}
+                {...register("password")}
+              />
+            )}
+
+            {/* Confirm Password */}
+            {!errors.confirmPassword ? (
+              <TextField
+                label="confirm password"
+                variant="outlined"
+                color="primary"
+                {...register("confirmPassword")}
+              />
+            ) : (
+              // Confirm Password Error
+              <TextField
+                id="confirmPassword-error"
+                label="confirm password"
+                error
+                helperText={errors.confirmPassword.message}
+                {...register("confirmPassword")}
+              />
+            )}
+
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              sx={{ padding: ".8rem" }}
             >
-              Login
-            </MuiLink>
-            <TestUser />
-          </Box>
-        </FormControl>
-      </form>
+              Submit
+            </Button>
+
+            {/* Login Link */}
+            <Box sx={{ display: "flex", gridGap: "3rem" }}>
+              <MuiLink
+                component={Link}
+                to="/login"
+                color="primary.light"
+                underline="none"
+                sx={{ textDecoration: "none", marginTop: "-1rem" }}
+                onClick={() => user.setIsError(false)}
+              >
+                Login
+              </MuiLink>
+              <TestUser />
+            </Box>
+          </FormControl>
+        </form>
+      )}
     </Container>
   );
 }
