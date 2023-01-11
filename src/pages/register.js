@@ -50,11 +50,11 @@ function Register() {
         alignItems: "center",
       }}
     >
+      {/* Loading Data */}
       {user.isLoading ? (
-        <Box sx={{ marginTop: "2rem" }}>
-          <Spinner />
-        </Box>
+        <Spinner />
       ) : (
+        // Render Form
         <form id="register" onSubmit={handleSubmit(onSubmit)}>
           <FormControl
             sx={{

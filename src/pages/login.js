@@ -51,11 +51,11 @@ function Login() {
         alignItems: "center",
       }}
     >
+      {/* Loading Data */}
       {user.isLoading ? (
-        <Box sx={{ marginTop: "2rem" }}>
-          <Spinner />
-        </Box>
+        <Spinner />
       ) : (
+        // Render Form
         <form id="login" onSubmit={handleSubmit(onSubmit)}>
           <FormControl
             sx={{
