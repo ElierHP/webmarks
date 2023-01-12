@@ -16,6 +16,11 @@ export const AppDataProvider = ({ children }) => {
   const [data, dispatch] = useReducer(dataReducer, []);
   const [appState, setAppState] = useState("0");
   const [directory, setDirectory] = useState("Main");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState({
+    status: 200,
+    message: "ok",
+  });
 
   const { user } = useContext(User);
 
@@ -23,21 +28,42 @@ export const AppDataProvider = ({ children }) => {
   useEffect(() => {
     const getData = async () => {
       if (user) {
-        //fetch folder data
-        const folders = await getFolders();
-        //fetch link data
-        const links = await getLinks();
-        //load data onto the app
-        dispatch({ type: "load", payload: [...folders.data, ...links.data] });
+        try {
+          setIsLoading(true);
+          //fetch folder data
+          const folders = await getFolders();
+          //fetch link data
+          const links = await getLinks();
+          //load data onto the app
+          dispatch({ type: "load", payload: [...folders.data, ...links.data] });
+        } catch (error) {
+          setError({
+            status: 500,
+            message:
+              "Server is currently offline. Please try again at a later time.",
+          });
+        }
       }
     };
 
     getData();
+    setIsLoading(false);
   }, [user]);
 
   return (
     <AppData.Provider
-      value={{ data, dispatch, appState, setAppState, directory, setDirectory }}
+      value={{
+        data,
+        dispatch,
+        appState,
+        setAppState,
+        directory,
+        setDirectory,
+        isLoading,
+        setIsLoading,
+        error,
+        setError,
+      }}
     >
       {children}
     </AppData.Provider>

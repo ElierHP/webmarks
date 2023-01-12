@@ -5,7 +5,7 @@ import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import Spinner from "../assets/spinner/Spinner";
 
 function Home() {
@@ -21,10 +21,23 @@ function Home() {
 
   //Route to /login if user is not logged in
   if (!user.user) return <Navigate to="/login" />;
+
+  // Display error message if data wasn't fetched correctly.
+  if (app.error.status === 500)
+    return (
+      <Typography
+        variant="body1"
+        color="error"
+        align="center"
+        sx={{ marginTop: "2rem" }}
+      >
+        {app.error.message}
+      </Typography>
+    );
   return (
     <Grid container>
       {/* Loading Data*/}
-      {user.isLoading ? (
+      {app.isLoading ? (
         <Spinner />
       ) : (
         // Render Data

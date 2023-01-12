@@ -24,6 +24,7 @@ function Link({ title, url, clickHandler, _id }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(editSchema),
@@ -48,29 +49,45 @@ function Link({ title, url, clickHandler, _id }) {
       sx={{
         cursor: "pointer",
         borderRadius: "0.2rem",
-        padding: {
-          xs: "0.5rem 0",
-          sm: "1rem",
-        },
         "&:hover": {
           backgroundColor: "secondary.light",
         },
+        paddingRight: {
+          xs: "1rem",
+          sm: "2rem",
+        },
       }}
     >
-      <Grid item xs={8} onClick={() => !isEditing && clickHandler()}>
+      <Grid
+        item
+        xs={8}
+        onClick={() => !isEditing && clickHandler()}
+        sx={{ padding: "1rem 0" }}
+      >
         <Grid container alignItems="center">
           {/* Favicons */}
-          <Grid item>
-            <img
-              src={`https://www.google.com/s2/favicons?domain_url=${url}`}
-              style={{
-                marginRight: "0.5rem",
-                marginLeft: "1.4rem",
-                marginTop: "0.2rem",
+          {!isEditing && (
+            <Grid
+              item
+              sx={{
+                paddingLeft: {
+                  xs: "1rem",
+                  sm: "2rem",
+                },
               }}
-              alt="external site's favicon"
-            />
-          </Grid>
+            >
+              <img
+                src={`https://www.google.com/s2/favicons?domain_url=${url}`}
+                style={{
+                  marginRight: "0.5rem",
+                  marginTop: "0.2rem",
+                  marginLeft: "0.5rem",
+                }}
+                alt="external site's favicon"
+              />
+            </Grid>
+          )}
+
           <Grid item>
             {!isEditing ? (
               // Title
@@ -92,6 +109,7 @@ function Link({ title, url, clickHandler, _id }) {
                         xs: "50px",
                         sm: "80%",
                       },
+                      marginLeft: "1rem",
                     }}
                   />
                 ) : (
@@ -100,13 +118,15 @@ function Link({ title, url, clickHandler, _id }) {
                     label="Link Title"
                     variant="standard"
                     error
-                    helperText={errors.newTitle.message}
+                    helperText={"Title is a required field."}
                     {...register("newTitle")}
+                    sx={{ marginLeft: "1rem" }}
                   />
                 )}
               </form>
             )}
           </Grid>
+
           <Grid item>
             {!isEditing ? (
               // URL
@@ -128,8 +148,8 @@ function Link({ title, url, clickHandler, _id }) {
                     verticalAlign: "middle",
                     width: {
                       xs: "100px",
-                      sm: "300px",
-                      md: "500px",
+                      sm: "200px",
+                      md: "400px",
                     },
                     textOverflow: "ellipsis",
                     whiteSpace: "nowrap",
@@ -156,6 +176,10 @@ function Link({ title, url, clickHandler, _id }) {
                         xs: "100px",
                         sm: "400px",
                       },
+                      marginTop: {
+                        xs: "0",
+                        sm: "0.7rem",
+                      },
                       marginLeft: "1rem",
                     }}
                   />
@@ -165,8 +189,9 @@ function Link({ title, url, clickHandler, _id }) {
                     label="URL"
                     variant="standard"
                     error
-                    helperText={errors.newUrl.message}
+                    helperText={"URL is a required field."}
                     {...register("newUrl")}
+                    sx={{ marginLeft: "1rem" }}
                   />
                 )}
               </form>
@@ -217,7 +242,10 @@ function Link({ title, url, clickHandler, _id }) {
             {/* Close Edit Icon */}
             <IconButton
               color="error"
-              onClick={() => setIsEditing(false)}
+              onClick={() => {
+                setIsEditing(false);
+                reset();
+              }}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",

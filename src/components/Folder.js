@@ -19,6 +19,7 @@ function Folder({ title, clickHandler, _id }) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(editSchema),
@@ -41,20 +42,27 @@ function Folder({ title, clickHandler, _id }) {
       alignItems="center"
       sx={{
         cursor: "pointer",
-        padding: {
-          xs: "0.5rem 0",
-          sm: "1rem",
-        },
         borderRadius: "0.2rem",
         "&:hover": {
           backgroundColor: "secondary.light",
+        },
+        paddingRight: {
+          xs: "1rem",
+          sm: "2rem",
         },
       }}
     >
       <Grid
         item
         onClick={() => !isEditing && clickHandler()}
-        sx={{ flexGrow: 1 }}
+        sx={{
+          flexGrow: 1,
+          padding: "1rem 0",
+          paddingLeft: {
+            xs: "1rem",
+            sm: "2rem",
+          },
+        }}
       >
         <Grid container alignItems="center">
           {/* Folder Icon */}
@@ -62,7 +70,6 @@ function Folder({ title, clickHandler, _id }) {
             fontSize="large"
             sx={{
               marginRight: "0.5rem",
-              marginLeft: "1rem",
               color: "folder.main",
             }}
           />
@@ -108,7 +115,7 @@ function Folder({ title, clickHandler, _id }) {
                   variant="standard"
                   label="Folder Title"
                   error
-                  helperText={errors.newTitle.message}
+                  helperText={"Title is a required field."}
                   {...register("newTitle")}
                 />
               )}
@@ -159,7 +166,10 @@ function Folder({ title, clickHandler, _id }) {
             {/* Close Edit Icon */}
             <IconButton
               color="error"
-              onClick={() => setIsEditing(false)}
+              onClick={() => {
+                setIsEditing(false);
+                reset();
+              }}
               sx={{
                 "&:hover": {
                   backgroundColor: "secondary.dark",
