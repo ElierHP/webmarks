@@ -28,7 +28,7 @@ export const AppDataProvider = ({ children }) => {
         //fetch link data
         const links = await getLinks();
         //load data onto the app
-        dispatch({ type: "load", data: [...folders.data, ...links.data] });
+        dispatch({ type: "load", payload: [...folders.data, ...links.data] });
       }
     };
 

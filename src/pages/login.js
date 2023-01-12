@@ -32,7 +32,7 @@ function Login() {
 
   const onSubmit = async ({ username, password }) => {
     user.setIsLoading(true);
-    user.setIsError(false);
+    user.setError({ status: 200, message: "ok" });
     //Logs in the user
     await userLogin(username, password, user);
     user.setIsLoading(false);
@@ -74,13 +74,13 @@ function Login() {
             </Typography>
 
             {/* Login Error */}
-            {user.isError && (
+            {user.error.status !== 200 && (
               <Typography
                 variant="body2"
                 color="error"
                 sx={{ marginBottom: "-1rem" }}
               >
-                Username or password is incorrect.
+                {user.error.message}
               </Typography>
             )}
 
@@ -139,7 +139,7 @@ function Login() {
                 color="primary.light"
                 underline="none"
                 sx={{ textDecoration: "none", marginTop: "-1rem" }}
-                onClick={() => user.setIsError(false)}
+                onClick={() => user.setError({ status: 200, message: "ok" })}
               >
                 Register
               </MuiLink>

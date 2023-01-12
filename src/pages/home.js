@@ -19,7 +19,6 @@ function Home() {
     app.setDirectory(title);
   };
 
-  if (user.isError) return <Navigate to="/404" />;
   //Route to /login if user is not logged in
   if (!user.user) return <Navigate to="/login" />;
   return (

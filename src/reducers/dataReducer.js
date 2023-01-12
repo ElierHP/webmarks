@@ -4,7 +4,8 @@ import { sortByName } from "../utils/sort";
 const dataReducer = (state, action) => {
   switch (action.type) {
     case "load":
-      return [...action.data];
+      return [...action.payload];
+
     case "newFolder":
       const folder = {
         _id: action._id,

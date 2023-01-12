@@ -6,24 +6,32 @@ export const User = createContext();
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [error, setError] = useState({ status: 200, message: "ok" });
 
   //Check if user is logged in
   useEffect(() => {
     const userAsync = async () => {
       setIsLoading(true);
-      setIsError(false);
 
-      //Get current User data
-      const res = await getUser();
+      try {
+        //Get current User data
+        const res = await getUser();
 
-      // res is undefined if server is down
-      if (res !== undefined) {
-        // if user exists, set the states
-        if (res.data.user) {
-          setUser({ ...res.data.user });
+        // res is undefined if server is down
+        if (res !== undefined) {
+          // if user exists, set the states
+          if (res.data.user) {
+            setUser({ ...res.data.user });
+          }
         }
+      } catch (error) {
+        setError({
+          status: 500,
+          message:
+            "Server is currently offline. Please try again at a later time.",
+        });
       }
+
       setIsLoading(false);
     };
 
@@ -37,8 +45,8 @@ export const UserProvider = ({ children }) => {
         setUser,
         isLoading,
         setIsLoading,
-        isError,
-        setIsError,
+        error,
+        setError,
       }}
     >
       {children}

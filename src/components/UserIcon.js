@@ -5,19 +5,16 @@ import { Link } from "react-router-dom";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { userLogout } from "../utils/api/user";
-import { Navigate } from "react-router-dom";
+import { AppData } from "../context/AppDataProvider";
 
 export default function UserIcon() {
   //User Context
   const { user, setUser } = useContext(User);
+  const app = useContext(AppData);
 
   //Submit
-  const logout = async () => {
-    try {
-      userLogout(setUser);
-    } catch (error) {
-      return <Navigate to="/404" />;
-    }
+  const logout = () => {
+    userLogout(setUser, app);
   };
   return (
     <Box>

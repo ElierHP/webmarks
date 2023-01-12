@@ -14,7 +14,7 @@ function TestUser() {
     password = "testuser1234",
   }) => {
     user.setIsLoading(true);
-    user.setIsError(false);
+    user.setError({ status: 200, message: "ok" });
     //Logs in the user
     await userLogin(username, password, user);
     user.setIsLoading(false);

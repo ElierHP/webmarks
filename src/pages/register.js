@@ -32,7 +32,7 @@ function Register() {
 
   const onSubmit = async ({ username, password }) => {
     user.setIsLoading(true);
-    user.setIsError(false);
+    user.setError({ status: 200, message: "ok" });
     //Register new user
     await registerUser(username, password, user);
     user.setIsLoading(false);
@@ -157,7 +157,7 @@ function Register() {
                 color="primary.light"
                 underline="none"
                 sx={{ textDecoration: "none", marginTop: "-1rem" }}
-                onClick={() => user.setIsError(false)}
+                onClick={() => user.setError({ status: 200, message: "ok" })}
               >
                 Login
               </MuiLink>

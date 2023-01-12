@@ -11,6 +11,7 @@ export const palette = {
     secondaryLight: "#E1E5E9",
     secondaryDark: "#C7CDD4",
     folder: "#FFA724",
+    error: "#EB2424",
   },
   darkThemeColors: {
     primary: "#0E1B26",
@@ -19,6 +20,7 @@ export const palette = {
     secondaryLight: "#707F8D",
     secondaryDark: "#455463",
     folder: "#FFA724",
+    error: "#FF8A8A",
   },
 };
 
@@ -40,6 +42,9 @@ function Theme({ children }) {
       folder: {
         main: palette.colors.folder,
       },
+      error: {
+        main: palette.colors.error,
+      },
     },
   });
 
@@ -60,6 +65,9 @@ function Theme({ children }) {
       },
       folder: {
         main: palette.darkThemeColors.folder,
+      },
+      error: {
+        main: palette.darkThemeColors.error,
       },
     },
   });

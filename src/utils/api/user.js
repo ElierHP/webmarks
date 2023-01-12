@@ -15,8 +15,25 @@ export const userLogin = async (username, password, user) => {
       user.setUser({ ...res.data.user });
     }
   } catch (error) {
+    // If user is unauthorized, set error status to 401.
+    if (error.response) {
+      const { status } = error.response;
+      if (status === 401) {
+        user.setError({
+          status,
+          message: "Invalid username or password.",
+        });
+      }
+
+      // Else, set error status to 500.
+    } else {
+      user.setError({
+        status: 500,
+        message:
+          "Server is currently offline. Please try again at a later time.",
+      });
+    }
     user.setIsLoading(false);
-    user.setIsError(true);
   }
 };
 
@@ -38,8 +55,26 @@ export const registerUser = async (username, password, user) => {
       user.setUser({ ...res.data.user });
     }
   } catch (error) {
+    // If user is already registered, set error status to 409.
+    if (error.response) {
+      const { status, message } = error.response;
+      if (status === 409) {
+        user.setError({
+          status,
+          message,
+        });
+      }
+
+      // Else, set error status to 500.
+    } else {
+      user.setError({
+        status: 500,
+        message:
+          "Server is currently offline. Please try again at a later time.",
+      });
+    }
+
     user.setIsLoading(false);
-    user.setIsError(true);
   }
 };
 
@@ -47,9 +82,18 @@ export const registerUser = async (username, password, user) => {
 export const getUser = async () => await axios.get(`${baseUrl}/users`);
 
 //User logout
-export const userLogout = async (setUser) => {
-  const res = await axios.delete(`${baseUrl}/users/logout`);
-  if (res.status === 200) {
-    setUser(null);
+export const userLogout = async (setUser, app) => {
+  try {
+    const res = await axios.delete(`${baseUrl}/users/logout`);
+    if (res.status === 200) {
+      setUser(null);
+
+      // Reset app states after logout.
+      app.dispatch({ type: "load", payload: [] });
+      app.setAppState("0");
+      app.setDirectory("Main");
+    }
+  } catch (error) {
+    window.location.href = "/404";
   }
 };
