@@ -6,7 +6,7 @@ import { Box } from "@mui/material";
 export default function Spinner() {
   const [isDarkMode] = useContext(DarkModeContext);
   return (
-    <Box sx={{ margin: "auto", marginTop: "2rem" }}>
+    <Box sx={{ display: "flex", justifyContent: "center", marginTop: "2rem" }}>
       <div
         className={`${
           isDarkMode

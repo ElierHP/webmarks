@@ -80,7 +80,7 @@ function Folder({ title, clickHandler, _id }) {
               sx={{
                 userSelect: "none",
                 maxWidth: {
-                  xs: "120px",
+                  xs: "140px",
                   sm: "100%",
                 },
                 textOverflow: "ellipsis",
