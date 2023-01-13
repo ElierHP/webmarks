@@ -4,22 +4,62 @@ import { User } from "../context/UserProvider";
 import Folder from "../components/Folder";
 import Link from "../components/Link";
 import { Navigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
 import { Grid, Typography } from "@mui/material";
 import Spinner from "../assets/spinner/Spinner";
+import Note from "../components/Note";
 
 function Home() {
-  //Context Providers
+  // Context Providers
   const app = useContext(AppData);
   const user = useContext(User);
 
-  //Click Handlers
+  // Click Handlers
   const folderClickHandler = (id, title) => {
     app.setAppState(id);
     app.setDirectory(title);
   };
 
-  //Route to /login if user is not logged in
+  // Used to display the app's data on the home page.
+  const renderData = () => {
+    const mapData = app.data
+      .filter((data) => data.parent_id === app.appState)
+      .map((item) => {
+        if (item.type === "folder") {
+          return (
+            <Folder
+              key={item._id}
+              _id={item._id}
+              title={item.title}
+              clickHandler={() => folderClickHandler(item._id, item.title)}
+            />
+          );
+        } else if (item.type === "link") {
+          return (
+            <Link
+              key={item._id}
+              _id={item._id}
+              title={item.title}
+              url={item.url}
+              clickHandler={() => (window.location = item.url)}
+            />
+          );
+        } else {
+          return (
+            <Note
+              key={item._id}
+              _id={item._id}
+              title={item.title}
+              body={item.body}
+              clickHandler={() => console.log("click note")}
+            />
+          );
+        }
+      });
+
+    return mapData;
+  };
+
+  // Route to /login if user is not logged in
   if (!user.user) return <Navigate to="/login" />;
 
   // Display error message if data wasn't fetched correctly.
@@ -34,38 +74,11 @@ function Home() {
         {app.error.message}
       </Typography>
     );
+
   return (
     <Grid container>
-      {/* Loading Data*/}
-      {app.isLoading ? (
-        <Spinner />
-      ) : (
-        // Render Data
-        app.data
-          .filter((idFilter) => idFilter.parent_id === app.appState)
-          .map((item) =>
-            item.type === "folder" ? (
-              // Render Folders
-              <Folder
-                title={item.title}
-                url={item.url}
-                key={uuidv4()}
-                _id={item._id}
-                parent_id={item.parent_id}
-                clickHandler={() => folderClickHandler(item._id, item.title)}
-              />
-            ) : (
-              // Render Links
-              <Link
-                title={item.title}
-                url={item.url}
-                key={uuidv4()}
-                _id={item._id}
-                clickHandler={() => (window.location = item.url)}
-              />
-            )
-          )
-      )}
+      {/* Render the app's data, or loading spinner. */}
+      {!app.isLoading ? <>{renderData()}</> : <Spinner />}
     </Grid>
   );
 }

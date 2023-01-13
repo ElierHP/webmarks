@@ -34,7 +34,8 @@ function Link({ title, url, clickHandler, _id }) {
 
   const handleEdit = async ({ newTitle, newUrl }) => {
     try {
-      editLink(newTitle, newUrl, _id, dispatch);
+      await editLink(newTitle, newUrl, _id, dispatch);
+      setIsEditing(false);
     } catch (error) {
       return <Navigate to="/404" />;
     }
@@ -81,7 +82,7 @@ function Link({ title, url, clickHandler, _id }) {
                 style={{
                   marginRight: "0.5rem",
                   marginTop: "0.2rem",
-                  marginLeft: "0.5rem",
+                  marginLeft: "0.2rem",
                 }}
                 alt="external site's favicon"
               />

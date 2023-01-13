@@ -31,7 +31,8 @@ function Folder({ title, clickHandler, _id }) {
 
   const handleEdit = async ({ newTitle }) => {
     try {
-      editFolder(newTitle, _id, dispatch);
+      await editFolder(newTitle, _id, dispatch);
+      setIsEditing(false);
     } catch (error) {
       return <Navigate to="/404" />;
     }

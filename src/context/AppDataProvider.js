@@ -8,6 +8,7 @@ import React, {
 import dataReducer from "../reducers/dataReducer";
 import { getFolders } from "../utils/api/folder";
 import { getLinks } from "../utils/api/link";
+import { getNotes } from "../utils/api/note";
 import { User } from "./UserProvider";
 
 export const AppData = createContext();
@@ -32,10 +33,18 @@ export const AppDataProvider = ({ children }) => {
           setIsLoading(true);
           //fetch folder data
           const folders = await getFolders();
+
           //fetch link data
           const links = await getLinks();
+
+          //fetch note data
+          const notes = await getNotes();
+
           //load data onto the app
-          dispatch({ type: "load", payload: [...folders.data, ...links.data] });
+          dispatch({
+            type: "load",
+            payload: [...folders.data, ...links.data, ...notes.data],
+          });
         } catch (error) {
           setError({
             status: 500,
