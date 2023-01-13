@@ -7,6 +7,7 @@ import { Navigate } from "react-router-dom";
 import { Grid, Typography } from "@mui/material";
 import Spinner from "../assets/spinner/Spinner";
 import Note from "../components/Note";
+import NoteView from "../components/NoteView";
 
 function Home() {
   // Context Providers
@@ -40,7 +41,7 @@ function Home() {
               _id={item._id}
               title={item.title}
               url={item.url}
-              clickHandler={() => (window.location = item.url)}
+              clickHandler={() => window.open(item.url, "_blank")}
             />
           );
         } else {
@@ -78,7 +79,11 @@ function Home() {
   return (
     <Grid container>
       {/* Render the app's data, or loading spinner. */}
-      {!app.isLoading ? <>{renderData()}</> : <Spinner />}
+      {!app.isLoading ? (
+        <>{app.note.isOpen ? <NoteView /> : renderData()}</>
+      ) : (
+        <Spinner />
+      )}
     </Grid>
   );
 }

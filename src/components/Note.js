@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import useEdit from "../hooks/useEdit";
+import { AppData } from "../context/AppDataProvider";
 
 export default function Note({ _id, title, body, clickHandler }) {
+  const app = useContext(AppData);
   const [isEditing, setIsEditing, handleDelete] = useEdit({
     _id,
   });
+
+  const noteClick = () => {
+    app.setNote({
+      isOpen: true,
+      _id,
+      title,
+      body,
+    });
+  };
   return (
     <Grid
       container
@@ -27,6 +38,7 @@ export default function Note({ _id, title, body, clickHandler }) {
     >
       <Grid
         item
+        onClick={noteClick}
         sx={{
           flexGrow: 1,
           padding: "1rem 0",

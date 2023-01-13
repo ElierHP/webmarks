@@ -22,7 +22,7 @@ export const AppDataProvider = ({ children }) => {
     status: 200,
     message: "ok",
   });
-
+  const [note, setNote] = useState({ isOpen: false });
   const { user } = useContext(User);
 
   // Load folders & links data.
@@ -72,6 +72,8 @@ export const AppDataProvider = ({ children }) => {
         setIsLoading,
         error,
         setError,
+        note,
+        setNote,
       }}
     >
       {children}

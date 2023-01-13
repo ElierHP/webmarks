@@ -242,7 +242,6 @@ function Link({ title, url, clickHandler, _id }) {
             </IconButton>
             {/* Close Edit Icon */}
             <IconButton
-              color="error"
               onClick={() => {
                 setIsEditing(false);
                 reset();
@@ -253,7 +252,7 @@ function Link({ title, url, clickHandler, _id }) {
                 },
               }}
             >
-              <CloseIcon />
+              <CloseIcon color="error" />
             </IconButton>
           </>
         )}

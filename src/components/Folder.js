@@ -166,7 +166,6 @@ function Folder({ title, clickHandler, _id }) {
             </IconButton>
             {/* Close Edit Icon */}
             <IconButton
-              color="error"
               onClick={() => {
                 setIsEditing(false);
                 reset();
