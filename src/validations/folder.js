@@ -5,5 +5,8 @@ export const schema = yup.object().shape({
 });
 
 export const editSchema = yup.object().shape({
-  newTitle: yup.string().required().max("20"),
+  newTitle: yup
+    .string()
+    .required("title is a required field")
+    .max("20", "title must be at most 20 characters"),
 });

@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
 
 export default function NoteView() {
-  const { note, setNote } = useContext(AppData);
+  const { note, setDirectory } = useContext(AppData);
   return (
     <Box
       sx={{
@@ -17,7 +17,7 @@ export default function NoteView() {
       }}
     >
       <IconButton
-        onClick={() => setNote({ isOpen: false })}
+        onClick={() => setDirectory("Main")}
         sx={{
           position: "absolute",
           right: "1rem",
@@ -27,7 +27,7 @@ export default function NoteView() {
           },
         }}
       >
-        <CloseIcon color="error" sx={{ fontSize: "40px" }} />
+        <CloseIcon color="error" sx={{ fontSize: "30px" }} />
       </IconButton>
       <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
         {note.title}

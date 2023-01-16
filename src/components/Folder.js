@@ -116,7 +116,7 @@ function Folder({ title, clickHandler, _id }) {
                   variant="standard"
                   label="Folder Title"
                   error
-                  helperText={"Title is a required field."}
+                  helperText={errors.newTitle.message}
                   {...register("newTitle")}
                 />
               )}

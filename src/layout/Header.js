@@ -30,17 +30,25 @@ function Header() {
 
   //Go Back Button
   const prevClickHandler = () => {
-    //Find parent folder & setAppState to it's parents ID
-    const parentFolder = app.data.find((folder) => folder._id === app.appState);
-    parentFolder ? app.setAppState(parentFolder.parent_id) : app.setAppState(0);
+    if (app.directory !== "Note" && app.directory !== "New Note") {
+      //Find parent folder & setAppState to it's parents ID
+      const parentFolder = app.data.find(
+        (folder) => folder._id === app.appState
+      );
+      parentFolder
+        ? app.setAppState(parentFolder.parent_id)
+        : app.setAppState(0);
 
-    //Find the new directory title based on parentFolder
-    const newDirectory = app.data.find(
-      (folder) => parentFolder.parent_id === folder._id
-    );
-    newDirectory
-      ? app.setDirectory(newDirectory.title)
-      : app.setDirectory("Main");
+      //Find the new directory title based on parentFolder
+      const newDirectory = app.data.find(
+        (folder) => parentFolder.parent_id === folder._id
+      );
+      newDirectory
+        ? app.setDirectory(newDirectory.title)
+        : app.setDirectory("Main");
+    } else {
+      app.setDirectory("Main");
+    }
   };
 
   return (
@@ -120,6 +128,7 @@ function Header() {
                     <ArrowBackIcon />
                   </IconButton>
                 )}
+
                 {/* Current directory title */}
                 <Typography
                   variant="h6"

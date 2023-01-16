@@ -8,6 +8,7 @@ import { Grid, Typography } from "@mui/material";
 import Spinner from "../assets/spinner/Spinner";
 import Note from "../components/Note";
 import NoteView from "../components/NoteView";
+import NewNote from "../components/NewNote";
 
 function Home() {
   // Context Providers
@@ -60,6 +61,20 @@ function Home() {
     return mapData;
   };
 
+  // Returns the render for the home page.
+  const appDisplay = () => {
+    if (app.directory === "Note") {
+      // Render the current note that was clicked on.
+      return <NoteView />;
+    } else if (app.directory === "New Note") {
+      // Render the new note form.
+      return <NewNote />;
+    } else {
+      // Render the app data displaying all folders, links, notes.
+      return renderData();
+    }
+  };
+
   // Route to /login if user is not logged in
   if (!user.user) return <Navigate to="/login" />;
 
@@ -79,11 +94,7 @@ function Home() {
   return (
     <Grid container>
       {/* Render the app's data, or loading spinner. */}
-      {!app.isLoading ? (
-        <>{app.note.isOpen ? <NoteView /> : renderData()}</>
-      ) : (
-        <Spinner />
-      )}
+      {!app.isLoading ? <>{appDisplay()}</> : <Spinner />}
     </Grid>
   );
 }

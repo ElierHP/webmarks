@@ -22,7 +22,9 @@ export const AppDataProvider = ({ children }) => {
     status: 200,
     message: "ok",
   });
-  const [note, setNote] = useState({ isOpen: false });
+  const [note, setNote] = useState();
+
+  // User Context
   const { user } = useContext(User);
 
   // Load folders & links data.

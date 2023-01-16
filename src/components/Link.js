@@ -119,7 +119,7 @@ function Link({ title, url, clickHandler, _id }) {
                     label="Link Title"
                     variant="standard"
                     error
-                    helperText={"Title is a required field."}
+                    helperText={errors.newTitle.message}
                     {...register("newTitle")}
                     sx={{ marginLeft: "1rem" }}
                   />
@@ -190,7 +190,7 @@ function Link({ title, url, clickHandler, _id }) {
                     label="URL"
                     variant="standard"
                     error
-                    helperText={"URL is a required field."}
+                    helperText={errors.newUrl.message}
                     {...register("newUrl")}
                     sx={{ marginLeft: "1rem" }}
                   />

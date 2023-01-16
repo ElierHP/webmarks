@@ -14,11 +14,12 @@ export default function Note({ _id, title, body, clickHandler }) {
 
   const noteClick = () => {
     app.setNote({
-      isOpen: true,
       _id,
       title,
       body,
     });
+
+    app.setDirectory("Note");
   };
   return (
     <Grid

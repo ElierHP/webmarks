@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import useNewMenu from "../hooks/useNewMenu";
 import NewFolder from "./NewFolder";
 import NewLink from "./NewLink";
 import { Box, Menu, MenuItem, IconButton } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import { AppData } from "../context/AppDataProvider";
 
 function NewMenu() {
-  //Material UI Menu handlers
+  // App Context
+  const { setDirectory } = useContext(AppData);
+
+  // Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -15,12 +19,12 @@ function NewMenu() {
     setAnchorEl(null);
   };
 
-  //Folder Menu Handlers
+  // Folder Menu Handlers
   const [isNewFolder, handleFolderClick, handleFolderClose] = useNewMenu({
     setAnchorEl,
   });
 
-  //Link Menu Handlers
+  // Link Menu Handlers
   const [isNewLink, handleLinkClick, handleLinkClose] = useNewMenu({
     setAnchorEl,
   });
@@ -50,6 +54,14 @@ function NewMenu() {
       >
         <MenuItem onClick={handleFolderClick}>New Folder</MenuItem>
         <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
+        <MenuItem
+          onClick={() => {
+            setDirectory("New Note");
+            setAnchorEl(null);
+          }}
+        >
+          New Note
+        </MenuItem>
       </Menu>
 
       {/* New Folder Menu */}
