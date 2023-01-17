@@ -3,11 +3,13 @@ import { AppData } from "../context/AppDataProvider";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/note";
-import { FormControl, TextField, Button, Typography, Box } from "@mui/material";
+import { FormControl, TextField, Button, Typography } from "@mui/material";
 import { editNote } from "../utils/api/note";
+import useAppState from "../hooks/useAppState";
 
 export default function EditNote() {
   const app = useContext(AppData);
+  const findAppState = useAppState();
 
   const {
     register,
@@ -19,13 +21,9 @@ export default function EditNote() {
 
   //Submit
   const onSubmit = async ({ title, body }) => {
-    editNote(title, body, app);
+    await editNote(title, body, app);
 
-    if (app.directory === "0") {
-      app.setDirectory("Main");
-    } else {
-      app.setDirectory(app.appState);
-    }
+    findAppState();
   };
 
   return (

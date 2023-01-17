@@ -16,15 +16,14 @@ function Home() {
   const user = useContext(User);
 
   // Click Handlers
-  const folderClickHandler = (id, title) => {
-    app.setAppState(id);
-    app.setDirectory(title);
+  const folderClickHandler = (id, title, parentId) => {
+    app.setAppState({ id, title, parentId });
   };
 
   // Used to display the app's data on the home page.
   const renderData = () => {
     const mapData = app.data
-      .filter((data) => data.parent_id === app.appState)
+      .filter((data) => data.parent_id === app.appState.id)
       .map((item) => {
         if (item.type === "folder") {
           return (
@@ -32,7 +31,9 @@ function Home() {
               key={item._id}
               _id={item._id}
               title={item.title}
-              clickHandler={() => folderClickHandler(item._id, item.title)}
+              clickHandler={() =>
+                folderClickHandler(item._id, item.title, item.parent_id)
+              }
             />
           );
         } else if (item.type === "link") {
@@ -62,10 +63,12 @@ function Home() {
 
   // Returns the render for the home page.
   const appDisplay = () => {
-    if (app.directory === "Note" || app.directory === "Edit Note") {
+    const { title } = app.appState;
+
+    if (title === "Note" || title === "Edit Note") {
       // Render the current note that was clicked on.
       return <NoteView />;
-    } else if (app.directory === "New Note") {
+    } else if (title === "New Note") {
       // Render the new note form.
       return <NewNote />;
     } else {

@@ -8,7 +8,7 @@ import { AppData } from "../context/AppDataProvider";
 
 function NewMenu() {
   // App Context
-  const { setDirectory } = useContext(AppData);
+  const { appState, setAppState } = useContext(AppData);
 
   // Material UI Menu handlers
   const [anchorEl, setAnchorEl] = useState(null);
@@ -56,7 +56,7 @@ function NewMenu() {
         <MenuItem onClick={handleLinkClick}>New Link</MenuItem>
         <MenuItem
           onClick={() => {
-            setDirectory("New Note");
+            setAppState({ ...appState, title: "New Note" });
             setAnchorEl(null);
           }}
         >

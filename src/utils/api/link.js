@@ -6,7 +6,7 @@ export const getLinks = async () => await axios.get(`${baseUrl}/links`);
 export const createNewLink = async (title, url, appState, dispatch) => {
   const res = await axios.post(`${baseUrl}/links/new`, {
     title: title,
-    parent_id: appState,
+    parent_id: appState.id,
     url: url,
   });
   dispatch({

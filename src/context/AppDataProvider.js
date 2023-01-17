@@ -15,8 +15,11 @@ export const AppData = createContext();
 
 export const AppDataProvider = ({ children }) => {
   const [data, dispatch] = useReducer(dataReducer, []);
-  const [appState, setAppState] = useState("0");
-  const [directory, setDirectory] = useState("Main");
+  const [appState, setAppState] = useState({
+    id: "0",
+    title: "Main",
+    parentId: null,
+  });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState({
     status: 200,
@@ -68,8 +71,6 @@ export const AppDataProvider = ({ children }) => {
         dispatch,
         appState,
         setAppState,
-        directory,
-        setDirectory,
         isLoading,
         setIsLoading,
         error,

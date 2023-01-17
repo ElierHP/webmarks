@@ -1,6 +1,5 @@
 import { useState, useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
-import { Navigate } from "react-router-dom";
 import { deleteItem } from "../utils/api";
 
 const useEdit = ({ _id }) => {

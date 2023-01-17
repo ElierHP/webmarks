@@ -7,7 +7,7 @@ import useEdit from "../hooks/useEdit";
 import { AppData } from "../context/AppDataProvider";
 
 export default function Note({ _id, title, body }) {
-  const { note, setNote, setDirectory } = useContext(AppData);
+  const { setNote, appState, setAppState } = useContext(AppData);
   const { handleDelete } = useEdit({
     _id,
   });
@@ -20,7 +20,7 @@ export default function Note({ _id, title, body }) {
       body,
     });
 
-    setDirectory("Note");
+    setAppState({ ...appState, title: "Note" });
   };
 
   const handleEdit = () => {
@@ -31,7 +31,7 @@ export default function Note({ _id, title, body }) {
       body,
     });
 
-    setDirectory("Edit Note");
+    setAppState({ ...appState, title: "Edit Note" });
   };
   return (
     <Grid

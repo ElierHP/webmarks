@@ -5,9 +5,11 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/note";
 import { FormControl, TextField, Button, Typography, Box } from "@mui/material";
 import { createNewNote } from "../utils/api/note";
+import useAppState from "../hooks/useAppState";
 
 export default function NewNote() {
   const app = useContext(AppData);
+  const findAppState = useAppState();
 
   const {
     register,
@@ -19,7 +21,10 @@ export default function NewNote() {
 
   //Submit
   const onSubmit = async ({ title, body }) => {
-    createNewNote(title, body, app);
+    await createNewNote(title, body, app);
+
+    // Go back to the correct display after submitting.
+    findAppState();
   };
 
   return (

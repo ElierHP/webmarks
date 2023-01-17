@@ -17,37 +17,22 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import useDirectory from "../hooks/useDirectory";
+import useAppState from "../hooks/useAppState";
 
 function Header() {
   const app = useContext(AppData);
   const { user } = useContext(User);
-  const findDirectory = useDirectory();
+  const findAppState = useAppState();
 
   //Logo click sends user to home page
   const logoClickHandler = () => {
-    app.setAppState("0");
-    app.setDirectory("Main");
+    app.setAppState({ title: "Main", id: "0", parentId: null });
   };
 
   //Go Back Button
   const prevClickHandler = () => {
-    const appView =
-      app.directory !== "Note" &&
-      app.directory !== "New Note" &&
-      app.directory !== "Edit Note";
-
-    if (appView) {
-      findDirectory();
-    } else {
-      // Set directory to Main
-      app.setDirectory("Main");
-      app.setAppState("0");
-      // If note is editing, reset it back to false.
-      if (app.note.isEditing) {
-        app.note.isEditing = false;
-      }
-    }
+    // Finds the correct folder and sets the appState to that folder.
+    findAppState();
   };
 
   return (
@@ -111,7 +96,7 @@ function Header() {
           >
             <Grid item>
               <Grid container alignItems="center">
-                {app.directory !== "Main" && (
+                {app.appState.title !== "Main" && (
                   // Back Icon
                   <IconButton
                     edge="start"
@@ -128,12 +113,12 @@ function Header() {
                   </IconButton>
                 )}
 
-                {/* Current directory title */}
+                {/* Current app state title */}
                 <Typography
                   variant="h6"
                   sx={{ marginLeft: "1rem", userSelect: "none" }}
                 >
-                  {app.directory}
+                  {app.appState.title}
                 </Typography>
               </Grid>
             </Grid>

@@ -6,7 +6,7 @@ export const getFolders = async () => await axios.get(`${baseUrl}/folders`);
 export const createNewFolder = async (title, appState, dispatch) => {
   const res = await axios.post(`${baseUrl}/folders/new`, {
     title: title,
-    parent_id: appState,
+    parent_id: appState.id,
   });
   dispatch({
     type: "newFolder",

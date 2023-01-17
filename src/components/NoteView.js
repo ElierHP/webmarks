@@ -3,20 +3,15 @@ import { Typography, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { AppData } from "../context/AppDataProvider";
 import NoteEdit from "./NoteEdit";
+import useAppState from "../hooks/useAppState";
 
 export default function NoteView() {
-  const { note, directory, setDirectory, appState } = useContext(AppData);
+  const { note } = useContext(AppData);
+  const findAppState = useAppState();
 
   const handleClose = () => {
-    if (directory === "0") {
-      setDirectory("Main");
-    } else {
-      setDirectory(appState);
-    }
-
-    if (note.isEditing) {
-      note.isEditing = false;
-    }
+    // Go back to the correct folder after closing.
+    findAppState();
   };
 
   return (

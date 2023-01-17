@@ -11,7 +11,7 @@ export const createNewNote = async (title, body, app) => {
     const res = await axios.post(`${baseUrl}/notes/new`, {
       title,
       body,
-      parent_id: app.appState,
+      parent_id: app.appState.id,
     });
 
     app.dispatch({
@@ -24,8 +24,6 @@ export const createNewNote = async (title, body, app) => {
         parent_id: res.data.parent_id,
       },
     });
-
-    app.setDirectory("Main");
   } catch (error) {
     app.setError({
       status: 500,
@@ -38,8 +36,9 @@ export const createNewNote = async (title, body, app) => {
 
 // PATCH /notes/edit
 export const editNote = async (title, body, app) => {
-  const { note, dispatch, setError } = app;
+  const { note, dispatch, setError, setIsLoading } = app;
 
+  setIsLoading(true);
   try {
     const res = await axios.patch(`${baseUrl}/notes/edit`, {
       _id: note._id,
@@ -48,7 +47,7 @@ export const editNote = async (title, body, app) => {
     });
 
     dispatch({
-      type: "edit",
+      type: "editNote",
       payload: {
         _id: res.data._id,
         title: res.data.title,
@@ -62,4 +61,5 @@ export const editNote = async (title, body, app) => {
         "Server is currently offline. Please refresh the page or try again at a later time.",
     });
   }
+  setIsLoading(false);
 };

@@ -90,8 +90,7 @@ export const userLogout = async (setUser, app) => {
 
       // Reset app states after logout.
       app.dispatch({ type: "load", payload: [] });
-      app.setAppState("0");
-      app.setDirectory("Main");
+      app.setAppState({ id: "0", title: "Main", parentId: null });
     }
   } catch (error) {
     window.location.href = "/404";
