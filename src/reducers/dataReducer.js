@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from "uuid";
 import { sortByName } from "../utils/sort";
 
 const dataReducer = (state, action) => {
@@ -12,7 +11,7 @@ const dataReducer = (state, action) => {
         type: action.dataType,
         title: action.title,
         parent_id: action.parent_id,
-        key: uuidv4(),
+        key: action._id,
       };
       return [...state, folder];
     case "newLink":
@@ -22,9 +21,12 @@ const dataReducer = (state, action) => {
         title: action.title,
         parent_id: action.parent_id,
         url: action.url,
-        key: uuidv4(),
+        key: action._id,
       };
       return [...state, link];
+    case "newNote":
+      const note = action.payload;
+      return [...state, note];
     case "delete":
       //Filter out the deleted item and all of it's children
       return state.filter(

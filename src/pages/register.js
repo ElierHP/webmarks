@@ -105,6 +105,8 @@ function Register() {
             {/* Password */}
             {!errors.password ? (
               <TextField
+                id="password"
+                type="password"
                 label="password"
                 variant="outlined"
                 color="primary"
@@ -114,6 +116,7 @@ function Register() {
               // Password Error
               <TextField
                 id="password-error"
+                type="password"
                 label="password"
                 error
                 helperText={errors.password.message}
@@ -124,6 +127,8 @@ function Register() {
             {/* Confirm Password */}
             {!errors.confirmPassword ? (
               <TextField
+                id="confirmPassword"
+                type="password"
                 label="confirm password"
                 variant="outlined"
                 color="primary"
@@ -133,6 +138,7 @@ function Register() {
               // Confirm Password Error
               <TextField
                 id="confirmPassword-error"
+                type="password"
                 label="confirm password"
                 error
                 helperText={errors.confirmPassword.message}

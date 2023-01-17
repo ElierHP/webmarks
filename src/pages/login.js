@@ -107,6 +107,8 @@ function Login() {
             {/* Password */}
             {!errors.password ? (
               <TextField
+                id="password"
+                type="password"
                 label="password"
                 variant="outlined"
                 color="primary"
@@ -116,6 +118,7 @@ function Login() {
               // Password Error
               <TextField
                 id="password-error"
+                type="password"
                 label="password"
                 error
                 helperText={errors.password.message}

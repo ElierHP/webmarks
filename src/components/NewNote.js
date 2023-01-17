@@ -4,10 +4,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { schema } from "../validations/note";
 import { FormControl, TextField, Button, Typography, Box } from "@mui/material";
-import { Navigate } from "react-router-dom";
+import { createNewNote } from "../utils/api/note";
 
 export default function NewNote() {
-  const { dispatch, appState } = useContext(AppData);
+  const app = useContext(AppData);
 
   const {
     register,
@@ -18,12 +18,8 @@ export default function NewNote() {
   });
 
   //Submit
-  const onSubmit = async ({ title }) => {
-    try {
-      // createNewFolder(title, appState, dispatch);
-    } catch (error) {
-      return <Navigate to="/404" />;
-    }
+  const onSubmit = async ({ title, body }) => {
+    createNewNote(title, body, app);
   };
 
   return (
