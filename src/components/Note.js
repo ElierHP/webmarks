@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { Grid, IconButton, Typography } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -6,20 +6,32 @@ import StickyNote2Icon from "@mui/icons-material/StickyNote2";
 import useEdit from "../hooks/useEdit";
 import { AppData } from "../context/AppDataProvider";
 
-export default function Note({ _id, title, body, clickHandler }) {
-  const app = useContext(AppData);
-  const [isEditing, setIsEditing, handleDelete] = useEdit({
+export default function Note({ _id, title, body }) {
+  const { note, setNote, setDirectory } = useContext(AppData);
+  const { handleDelete } = useEdit({
     _id,
   });
 
   const noteClick = () => {
-    app.setNote({
+    setNote({
+      isEditing: false,
       _id,
       title,
       body,
     });
 
-    app.setDirectory("Note");
+    setDirectory("Note");
+  };
+
+  const handleEdit = () => {
+    setNote({
+      isEditing: true,
+      _id,
+      title,
+      body,
+    });
+
+    setDirectory("Edit Note");
   };
   return (
     <Grid
@@ -79,7 +91,7 @@ export default function Note({ _id, title, body, clickHandler }) {
       <Grid>
         {/* Edit Icon */}
         <IconButton
-          onClick={() => setIsEditing(true)}
+          onClick={handleEdit}
           sx={{
             "&:hover": {
               backgroundColor: "secondary.dark",
@@ -91,7 +103,7 @@ export default function Note({ _id, title, body, clickHandler }) {
 
         {/* Delete Icon */}
         <IconButton
-          onClick={() => console.log("deleted note")}
+          onClick={() => handleDelete("notes")}
           sx={{
             "&:hover": {
               backgroundColor: "secondary.dark",

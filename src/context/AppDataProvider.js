@@ -22,7 +22,7 @@ export const AppDataProvider = ({ children }) => {
     status: 200,
     message: "ok",
   });
-  const [note, setNote] = useState();
+  const [note, setNote] = useState({ isEditing: false });
 
   // User Context
   const { user } = useContext(User);

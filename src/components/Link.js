@@ -30,7 +30,7 @@ function Link({ title, url, clickHandler, _id }) {
     resolver: yupResolver(editSchema),
   });
 
-  const [isEditing, setIsEditing, handleDelete] = useEdit({ _id });
+  const { isEditing, setIsEditing, handleDelete } = useEdit({ _id });
 
   const handleEdit = async ({ newTitle, newUrl }) => {
     try {

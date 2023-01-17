@@ -38,6 +38,12 @@ const dataReducer = (state, action) => {
           ? { ...item, title: action.newTitle, url: action.url }
           : item
       );
+    case "editNote":
+      const { _id, title, body } = action.payload;
+
+      return state.map((item) =>
+        item._id === _id ? { ...item, title, body } : item
+      );
     case "sort":
       const ascArray = sortByName(state, action.order);
       return [...ascArray];

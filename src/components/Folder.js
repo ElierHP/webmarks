@@ -25,7 +25,7 @@ function Folder({ title, clickHandler, _id }) {
     resolver: yupResolver(editSchema),
   });
 
-  const [isEditing, setIsEditing, handleDelete] = useEdit({
+  const { isEditing, setIsEditing, handleDelete } = useEdit({
     _id,
   });
 

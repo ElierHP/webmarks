@@ -17,10 +17,12 @@ import {
   Link as MuiLink,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import useDirectory from "../hooks/useDirectory";
 
 function Header() {
   const app = useContext(AppData);
   const { user } = useContext(User);
+  const findDirectory = useDirectory();
 
   //Logo click sends user to home page
   const logoClickHandler = () => {
@@ -30,24 +32,21 @@ function Header() {
 
   //Go Back Button
   const prevClickHandler = () => {
-    if (app.directory !== "Note" && app.directory !== "New Note") {
-      //Find parent folder & setAppState to it's parents ID
-      const parentFolder = app.data.find(
-        (folder) => folder._id === app.appState
-      );
-      parentFolder
-        ? app.setAppState(parentFolder.parent_id)
-        : app.setAppState(0);
+    const appView =
+      app.directory !== "Note" &&
+      app.directory !== "New Note" &&
+      app.directory !== "Edit Note";
 
-      //Find the new directory title based on parentFolder
-      const newDirectory = app.data.find(
-        (folder) => parentFolder.parent_id === folder._id
-      );
-      newDirectory
-        ? app.setDirectory(newDirectory.title)
-        : app.setDirectory("Main");
+    if (appView) {
+      findDirectory();
     } else {
+      // Set directory to Main
       app.setDirectory("Main");
+      app.setAppState("0");
+      // If note is editing, reset it back to false.
+      if (app.note.isEditing) {
+        app.note.isEditing = false;
+      }
     }
   };
 

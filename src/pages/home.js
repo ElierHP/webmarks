@@ -52,7 +52,6 @@ function Home() {
               _id={item._id}
               title={item.title}
               body={item.body}
-              clickHandler={() => console.log("click note")}
             />
           );
         }
@@ -63,7 +62,7 @@ function Home() {
 
   // Returns the render for the home page.
   const appDisplay = () => {
-    if (app.directory === "Note") {
+    if (app.directory === "Note" || app.directory === "Edit Note") {
       // Render the current note that was clicked on.
       return <NoteView />;
     } else if (app.directory === "New Note") {

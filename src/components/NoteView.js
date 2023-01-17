@@ -1,10 +1,24 @@
+import React, { useContext } from "react";
 import { Typography, IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
+import NoteEdit from "./NoteEdit";
 
 export default function NoteView() {
-  const { note, setDirectory } = useContext(AppData);
+  const { note, directory, setDirectory, appState } = useContext(AppData);
+
+  const handleClose = () => {
+    if (directory === "0") {
+      setDirectory("Main");
+    } else {
+      setDirectory(appState);
+    }
+
+    if (note.isEditing) {
+      note.isEditing = false;
+    }
+  };
+
   return (
     <Box
       sx={{
@@ -17,11 +31,12 @@ export default function NoteView() {
       }}
     >
       <IconButton
-        onClick={() => setDirectory("Main")}
+        onClick={handleClose}
         sx={{
           position: "absolute",
           right: "1rem",
           top: "1rem",
+          zIndex: "1",
           "&:hover": {
             backgroundColor: "secondary.dark",
           },
@@ -29,10 +44,20 @@ export default function NoteView() {
       >
         <CloseIcon color="error" sx={{ fontSize: "30px" }} />
       </IconButton>
-      <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
-        {note.title}
-      </Typography>
-      <Typography variant="body1">{note.body}</Typography>
+      {!note.isEditing ? (
+        <>
+          <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
+            {note.title}
+          </Typography>
+          <pre>
+            <Typography variant="body1" paragraph={true}>
+              {note.body}
+            </Typography>
+          </pre>
+        </>
+      ) : (
+        <NoteEdit />
+      )}
     </Box>
   );
 }
