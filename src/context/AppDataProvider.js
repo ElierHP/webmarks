@@ -38,10 +38,8 @@ export const AppDataProvider = ({ children }) => {
           setIsLoading(true);
           //fetch folder data
           const folders = await getFolders();
-
           //fetch link data
           const links = await getLinks();
-
           //fetch note data
           const notes = await getNotes();
 

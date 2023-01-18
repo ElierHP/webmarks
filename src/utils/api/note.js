@@ -2,7 +2,8 @@ import axios from "axios";
 import { baseUrl } from "./index";
 
 // GET /notes
-export const getNotes = async () => await axios.get(`${baseUrl}/notes`);
+export const getNotes = async (sort = "asc") =>
+  await axios.get(`${baseUrl}/notes?sort=${sort}`);
 
 // POST /notes/new
 export const createNewNote = async (title, body, app) => {

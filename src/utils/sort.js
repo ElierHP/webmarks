@@ -1,27 +1,29 @@
-//Sort state by name - ascending order
-export const sortByName = (state, order) => {
-  const newArray = state.sort((a, b) => {
-    //Sort array: folders first, links second
-    let typeA = a.type === "folder" ? 1 : -1;
-    let typeB = b.type === "folder" ? 1 : -1;
-    if (typeA < typeB) return +1;
-    if (typeA > typeB) return -1;
+import { getFolders } from "./api/folder";
+import { getLinks } from "./api/link";
+import { getNotes } from "./api/note";
 
-    let nameA = a.title.toUpperCase();
-    let nameB = b.title.toUpperCase();
-    //Sort array: ascending order
-    if (order === "asc") {
-      if (nameA < nameB) return -1;
-      if (nameA > nameB) return 1;
-      return 0;
-    }
-    //Sort array: descending order
-    else if (order === "desc") {
-      if (nameA < nameB) return 1;
-      if (nameA > nameB) return -1;
-      return 0;
-    }
-    return newArray;
-  });
-  return newArray;
+export const sortByTitle = async (sort, dispatch, setIsLoading, setError) => {
+  setIsLoading(true);
+  try {
+    //fetch folder data
+    const folders = await getFolders(sort);
+    //fetch link data
+    const links = await getLinks(sort);
+    //fetch note data
+    const notes = await getNotes(sort);
+
+    // Load data onto the app
+    dispatch({
+      type: "load",
+      payload: [...folders.data, ...links.data, ...notes.data],
+    });
+  } catch (error) {
+    setError({
+      status: 500,
+      message:
+        "Server is currently offline. Please refresh the page or try again at a later time.",
+    });
+  }
+
+  setIsLoading(false);
 };

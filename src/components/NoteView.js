@@ -18,7 +18,10 @@ export default function NoteView() {
     <Box
       sx={{
         boxShadow: "-3px 3px 15px rgba(0, 0, 0, 0.3)",
-        padding: "2rem",
+        padding: {
+          xs: "1.5rem",
+          sm: "2rem",
+        },
         width: "100%",
         margin: "1rem",
         minHeight: "500px",
@@ -41,13 +44,14 @@ export default function NoteView() {
       </IconButton>
       {!note.isEditing ? (
         <>
-          <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
+          <Typography
+            variant="h4"
+            sx={{ marginBottom: "1rem", maxWidth: "80%" }}
+          >
             {note.title}
           </Typography>
-          <pre>
-            <Typography variant="body1" paragraph={true}>
-              {note.body}
-            </Typography>
+          <pre style={{ whiteSpace: "pre-wrap" }}>
+            <Typography variant="body1">{note.body}</Typography>
           </pre>
         </>
       ) : (

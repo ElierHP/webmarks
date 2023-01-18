@@ -1,7 +1,8 @@
 import axios from "axios";
 import { baseUrl } from "./index";
 
-export const getLinks = async () => await axios.get(`${baseUrl}/links`);
+export const getLinks = async (sort = "asc") =>
+  await axios.get(`${baseUrl}/links?sort=${sort}`);
 
 export const createNewLink = async (title, url, appState, dispatch) => {
   const res = await axios.post(`${baseUrl}/links/new`, {

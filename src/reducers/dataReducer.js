@@ -1,5 +1,3 @@
-import { sortByName } from "../utils/sort";
-
 const dataReducer = (state, action) => {
   switch (action.type) {
     case "load":
@@ -44,9 +42,6 @@ const dataReducer = (state, action) => {
       return state.map((item) =>
         item._id === _id ? { ...item, title, body } : item
       );
-    case "sort":
-      const ascArray = sortByName(state, action.order);
-      return [...ascArray];
     default:
       return state;
   }

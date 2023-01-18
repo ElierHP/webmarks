@@ -79,6 +79,7 @@ function Theme({ children }) {
       },
     },
   });
+
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : theme}>
       {children}

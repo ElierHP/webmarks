@@ -2,20 +2,16 @@ import React, { useState, useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
 import { IconButton } from "@mui/material";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";
+import { sortByTitle } from "../utils/sort";
 
 function SortIcon() {
-  const { dispatch } = useContext(AppData);
-  const [sort, setSort] = useState("asc");
+  const { dispatch, setIsLoading, setError } = useContext(AppData);
+  const [sort, setSort] = useState("desc");
 
   // Sort the folders and links
-  const handleClick = () => {
-    if (sort === "asc") {
-      dispatch({ type: "sort", order: "asc" });
-      setSort("desc");
-    } else if (sort === "desc") {
-      dispatch({ type: "sort", order: "desc" });
-      setSort("asc");
-    }
+  const handleClick = async () => {
+    sort === "asc" ? setSort("desc") : setSort("asc");
+    sortByTitle(sort, dispatch, setIsLoading, setError);
   };
   return (
     <IconButton

@@ -82,7 +82,7 @@ function Link({ title, url, clickHandler, _id }) {
                 style={{
                   marginRight: "0.5rem",
                   marginTop: "0.2rem",
-                  marginLeft: "0.2rem",
+                  marginLeft: "0.28rem",
                 }}
                 alt="external site's favicon"
               />
