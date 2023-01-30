@@ -6,10 +6,9 @@ import { schema } from "../validations/folder";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { createNewFolder } from "../utils/api/folder";
-import { Navigate } from "react-router-dom";
 
 function NewFolder({ isNewFolder, handleFolderClose }) {
-  const { dispatch, appState } = useContext(AppData);
+  const app = useContext(AppData);
 
   const {
     register,
@@ -21,12 +20,8 @@ function NewFolder({ isNewFolder, handleFolderClose }) {
 
   //Submit
   const onSubmit = async ({ title }) => {
-    try {
-      createNewFolder(title, appState, dispatch);
-      handleFolderClose();
-    } catch (error) {
-      return <Navigate to="/404" />;
-    }
+    handleFolderClose();
+    await createNewFolder(title, app);
   };
   return (
     <form

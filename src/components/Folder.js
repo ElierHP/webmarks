@@ -14,7 +14,7 @@ import { editFolder } from "../utils/api/folder";
 import { Navigate } from "react-router-dom";
 
 function Folder({ title, clickHandler, _id }) {
-  const { dispatch } = useContext(AppData);
+  const app = useContext(AppData);
 
   const {
     register,
@@ -31,7 +31,7 @@ function Folder({ title, clickHandler, _id }) {
 
   const handleEdit = async ({ newTitle }) => {
     try {
-      await editFolder(newTitle, _id, dispatch);
+      await editFolder(newTitle, _id, app);
       setIsEditing(false);
     } catch (error) {
       return <Navigate to="/404" />;

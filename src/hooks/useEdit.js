@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AppData } from "../context/AppDataProvider";
 import { deleteItem } from "../utils/api";
+import { serverErrorMsg } from "../utils/serverErrorMsg";
 
 const useEdit = ({ _id }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,8 +14,7 @@ const useEdit = ({ _id }) => {
     } catch (error) {
       setError({
         status: 500,
-        message:
-          "Server is currently offline. Please refresh the page or try again at a later time.",
+        message: serverErrorMsg,
       });
     }
     setIsLoading(false);
