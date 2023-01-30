@@ -6,11 +6,10 @@ import { schema } from "../validations/link";
 import { FormControl, TextField, Button, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { createNewLink } from "../utils/api/link";
-import { Navigate } from "react-router-dom";
 
 function NewLink({ isNewLink, handleLinkClose }) {
   //Context
-  const { dispatch, appState } = useContext(AppData);
+  const app = useContext(AppData);
 
   const {
     register,
@@ -22,12 +21,8 @@ function NewLink({ isNewLink, handleLinkClose }) {
 
   //Submit
   const onSubmit = async ({ title, url }) => {
-    try {
-      createNewLink(title, url, appState, dispatch);
-      handleLinkClose();
-    } catch (error) {
-      return <Navigate to="/404" />;
-    }
+    handleLinkClose();
+    await createNewLink(title, url, app);
   };
   return (
     <form

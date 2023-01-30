@@ -31,11 +31,8 @@ function Login() {
   });
 
   const onSubmit = async ({ username, password }) => {
-    user.setIsLoading(true);
-    user.setError({ status: 200, message: "ok" });
     //Logs in the user
     await userLogin(username, password, user);
-    user.setIsLoading(false);
   };
 
   // If a user exists, navigate to home.
@@ -91,6 +88,7 @@ function Login() {
                 label="username"
                 variant="outlined"
                 color="primary"
+                autoComplete="username"
                 {...register("username")}
               />
             ) : (
@@ -98,6 +96,7 @@ function Login() {
               <TextField
                 id="username-error"
                 label="username"
+                autoComplete="username"
                 error
                 helperText={errors.username.message}
                 {...register("username")}
@@ -112,6 +111,7 @@ function Login() {
                 label="password"
                 variant="outlined"
                 color="primary"
+                autoComplete="current-password"
                 {...register("password")}
               />
             ) : (
@@ -120,6 +120,7 @@ function Login() {
                 id="password-error"
                 type="password"
                 label="password"
+                autoComplete="current-password"
                 error
                 helperText={errors.password.message}
                 {...register("password")}

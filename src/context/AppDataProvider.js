@@ -9,6 +9,7 @@ import dataReducer from "../reducers/dataReducer";
 import { getFolders } from "../utils/api/folder";
 import { getLinks } from "../utils/api/link";
 import { getNotes } from "../utils/api/note";
+import { serverErrorMsg } from "../utils/serverErrorMsg";
 import { User } from "./UserProvider";
 
 export const AppData = createContext();
@@ -51,8 +52,7 @@ export const AppDataProvider = ({ children }) => {
         } catch (error) {
           setError({
             status: 500,
-            message:
-              "Server is currently offline. Please try again at a later time.",
+            message: serverErrorMsg,
           });
         }
       }

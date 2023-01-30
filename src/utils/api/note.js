@@ -1,5 +1,6 @@
 import axios from "axios";
 import { baseUrl } from "./index";
+import { serverErrorMsg } from "../serverErrorMsg";
 
 // GET /notes
 export const getNotes = async (sort = "asc") =>
@@ -28,8 +29,7 @@ export const createNewNote = async (title, body, app) => {
   } catch (error) {
     app.setError({
       status: 500,
-      message:
-        "Server is currently offline. Please refresh the page or try again at a later time.",
+      message: serverErrorMsg,
     });
   }
   app.setIsLoading(false);
@@ -58,8 +58,7 @@ export const editNote = async (title, body, app) => {
   } catch (error) {
     setError({
       status: 500,
-      message:
-        "Server is currently offline. Please refresh the page or try again at a later time.",
+      message: serverErrorMsg,
     });
   }
   setIsLoading(false);

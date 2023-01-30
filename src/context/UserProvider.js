@@ -1,5 +1,6 @@
 import React, { useState, createContext, useEffect } from "react";
 import { getUser } from "../utils/api/user";
+import { serverErrorMsg } from "../utils/serverErrorMsg";
 
 export const User = createContext();
 
@@ -27,8 +28,7 @@ export const UserProvider = ({ children }) => {
       } catch (error) {
         setError({
           status: 500,
-          message:
-            "Server is currently offline. Please try again at a later time.",
+          message: serverErrorMsg,
         });
       }
 

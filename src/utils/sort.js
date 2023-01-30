@@ -1,6 +1,7 @@
 import { getFolders } from "./api/folder";
 import { getLinks } from "./api/link";
 import { getNotes } from "./api/note";
+import { serverErrorMsg } from "./serverErrorMsg";
 
 export const sortByTitle = async (sort, dispatch, setIsLoading, setError) => {
   setIsLoading(true);
@@ -20,8 +21,7 @@ export const sortByTitle = async (sort, dispatch, setIsLoading, setError) => {
   } catch (error) {
     setError({
       status: 500,
-      message:
-        "Server is currently offline. Please refresh the page or try again at a later time.",
+      message: serverErrorMsg,
     });
   }
 

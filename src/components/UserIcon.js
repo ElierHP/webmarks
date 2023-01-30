@@ -13,8 +13,8 @@ export default function UserIcon() {
   const app = useContext(AppData);
 
   //Submit
-  const logout = () => {
-    userLogout(setUser, app);
+  const logout = async () => {
+    await userLogout(setUser, app);
   };
   return (
     <Box>

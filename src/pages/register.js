@@ -31,11 +31,8 @@ function Register() {
   });
 
   const onSubmit = async ({ username, password }) => {
-    user.setIsLoading(true);
-    user.setError({ status: 200, message: "ok" });
     //Register new user
     await registerUser(username, password, user);
-    user.setIsLoading(false);
   };
 
   if (user.user) return <Navigate to="/" />;
@@ -87,6 +84,7 @@ function Register() {
               <TextField
                 id="username"
                 label="username"
+                autoComplete="username"
                 variant="outlined"
                 color="primary"
                 {...register("username")}
@@ -96,6 +94,7 @@ function Register() {
               <TextField
                 id="username-error"
                 label="username"
+                autoComplete="username"
                 error
                 helperText={errors.username.message}
                 {...register("username")}
@@ -108,6 +107,7 @@ function Register() {
                 id="password"
                 type="password"
                 label="password"
+                autoComplete="new-password"
                 variant="outlined"
                 color="primary"
                 {...register("password")}
@@ -118,6 +118,7 @@ function Register() {
                 id="password-error"
                 type="password"
                 label="password"
+                autoComplete="new-password"
                 error
                 helperText={errors.password.message}
                 {...register("password")}
@@ -130,6 +131,7 @@ function Register() {
                 id="confirmPassword"
                 type="password"
                 label="confirm password"
+                autoComplete="new-password"
                 variant="outlined"
                 color="primary"
                 {...register("confirmPassword")}
@@ -140,6 +142,7 @@ function Register() {
                 id="confirmPassword-error"
                 type="password"
                 label="confirm password"
+                autoComplete="new-password"
                 error
                 helperText={errors.confirmPassword.message}
                 {...register("confirmPassword")}

@@ -16,10 +16,9 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import DoneIcon from "@mui/icons-material/Done";
 import CloseIcon from "@mui/icons-material/Close";
 import { editLink } from "../utils/api/link";
-import { Navigate } from "react-router-dom";
 
 function Link({ title, url, clickHandler, _id }) {
-  const { dispatch } = useContext(AppData);
+  const app = useContext(AppData);
 
   const {
     register,
@@ -33,12 +32,8 @@ function Link({ title, url, clickHandler, _id }) {
   const { isEditing, setIsEditing, handleDelete } = useEdit({ _id });
 
   const handleEdit = async ({ newTitle, newUrl }) => {
-    try {
-      await editLink(newTitle, newUrl, _id, dispatch);
-      setIsEditing(false);
-    } catch (error) {
-      return <Navigate to="/404" />;
-    }
+    await editLink(newTitle, newUrl, _id, app);
+    setIsEditing(false);
   };
 
   return (
